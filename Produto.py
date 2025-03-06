@@ -79,8 +79,11 @@ NomeProdutoLabel.place (x=45 , y=250)
 NomeProdutoEntry =ttk.Entry(width=30)
 NomeProdutoEntry.place (x=170 , y=250)
 
+# Botão de cadastrar
 Cadastrar = Button(text="CADASTRAR", width=15)
 Cadastrar.place(x=80, y=320)
+
+# Botão de limpar campos
 
 LimparCampos = Button(text="LIMPAR", width=15, command=LimparCampos)
 LimparCampos.place(x=250 , y=320)
