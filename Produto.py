@@ -1,35 +1,39 @@
 from tkinter import * #Importa todos os mudulos do tkinter
 from tkinter import messagebox # Importar o mudulo de widgets tematicos do tkinter
 from tkinter import ttk
-#from DataBase import DataBase
+from DatabaseProduto import DataBase
 
 def LimparCampos():
-    NomeProdutoEntry.delete(0 ,END)
+    tipoProdutoEntry.delete(0 ,END)
     VoltagemEntry.delete(0 ,END)
     MarcaEntry.delete(0 ,END)
     QuantidadeEntry.delete(0 ,END)
     PrecoEntry.delete(0 ,END)
+    dataProdutoEntry.delete (0, END)
 
 def RegistrarNoBanco():
-        nome = NomeProdutoEntry.get() # Obtém o valor do campo de entrada do nome
-        Voltagem = VoltagemEntry.get() # Obtém o valor do campo de entrada do email
-        Marca = MarcaEntry.get() # Obtém o valor do campo de entrada do usuario
-        Quantidade = QuantidadeEntry.get() # Obtém o valordo campo de entrada da senha
-        Preco = PrecoEntry.get() # Obtém o valordo campo de entrada da senha
+    tipo = tipoProdutoEntry.get() # Obtém o valor do campo de entrada do tipo do produto
+    Voltagem = VoltagemEntry.get() # Obtém o valor do campo de entrada da voltagem do produto
+    Marca = MarcaEntry.get() # Obtém o valor do campo de entrada da marca do produto
+    Quantidade = QuantidadeEntry.get() # Obtém o valor do campo de entrada da quantidade do produto
+    Preco = PrecoEntry.get() #Obtém o valor do campo de entrada da quantidade do produto
+    Data = dataProdutoEntry.get() # Obtém o valor do campo de entrada da quantidade do produto
 
-        if nome == "" or Voltagem == "" or Marca == "" or Quantidade == "" or Preco == "":
-            messagebox.showerror(title="Erro no Registro",message="PREENCHA TODOS OS CAMPOS") # Exibe mensagm de erro
-        else:
-           # db = DataBase() # Cria uma instância da classe Database
-            #db.RegistrarNoBanco(nome, Voltagem, Marca, Quantidade, Preco) # Chama o método para registrar no banco de dados
-            messagebox.showinfo("Sucesso","Usuário registrado com sucesso!") # Exibe mensagem de Sucesso
+    if tipo == "" or Voltagem == "" or Marca == "" or Quantidade == "" or Preco == "" or Data == "":
+         messagebox.showerror(title="Erro no Registro",message="PREENCHA TODOS OS CAMPOS") # Exibe mensagm de erro
+    else:
+        db = DataBase() # Cria uma instância da classe Database
+        db.RegistrarNoBanco(tipo, Voltagem, Marca, Quantidade, Preco, Data) # Chama o método para registrar no banco de dados
+        messagebox.showinfo("Sucesso","Usuário registrado com sucesso!") # Exibe mensagem de Sucesso
 
             # Limpar os campos após o registro
-            NomeProdutoEntry.delete(0, END) # Limpa o campo de entrada do nome
-            VoltagemEntry.delete(0, END) # Limpa o campo de entrada do email
-            MarcaEntry.delete(0, END) # Limpa o campo de entrada do usuario
-            QuantidadeEntry.delete(0, END) # Limpa o campo de entrada do senha
-            PrecoEntry.delete(0, END) # Limpa o campo de entrada do senha
+        tipoProdutoEntry.delete(0, END) # Limpa o campo de entrada do tipo
+        VoltagemEntry.delete(0, END) # Limpa o campo de entrada da voltagem
+        MarcaEntry.delete(0, END) # Limpa o campo de entrada da marca
+        QuantidadeEntry.delete(0, END) # Limpa o campo de entrada da quantidade
+        PrecoEntry.delete(0, END) # Limpa o campo de entrada do preço
+        dataProdutoEntry.delete(0, END) # Limpa o campo de entrada da data
+
 
 # Criar a janela
 jan = Tk()
@@ -49,10 +53,10 @@ Cadastrotitulo.place(x=230 , y=10) # Posiciona o titulo
 # CRIAÇÃO DOS LABELS E CAMPOS DE ENTRADAS
 # POSIONAMENTO DOS LABELS E DOS CAMPOS DE ENTRADAS
 
-NomeProdutoLabel = Label (text="TIPO DA BATERIA :", bg="#002333", fg="white")
-NomeProdutoLabel.place (x=55 , y=50)
-NomeProdutoEntry =ttk.Entry(width=30)
-NomeProdutoEntry.place (x=170 , y=50)
+tipoProdutoLabel = Label (text="TIPO DA BATERIA :", bg="#002333", fg="white")
+tipoProdutoLabel.place (x=55 , y=50)
+tipoProdutoEntry =ttk.Entry(width=30)
+tipoProdutoEntry.place (x=170 , y=50)
 
 VoltagemLabel = Label (text="VOLTAGEM DA BATERIA :", bg="#002333", fg="white")
 VoltagemLabel.place (x=20 , y=90)
@@ -74,23 +78,18 @@ PrecoLabel.place (x=45 , y=210)
 PrecoEntry =ttk.Entry(width=30)
 PrecoEntry.place (x=170 , y=210)
 
-NomeProdutoLabel = Label (text="DATA DE VALIDADE :", bg="#002333", fg="white")
-NomeProdutoLabel.place (x=45 , y=250)
-NomeProdutoEntry =ttk.Entry(width=30)
-NomeProdutoEntry.place (x=170 , y=250)
+dataProdutoLabel = Label (text="DATA DE VALIDADE :", bg="#002333", fg="white")
+dataProdutoLabel.place (x=45 , y=250)
+dataProdutoEntry =ttk.Entry(width=30)
+dataProdutoEntry.place (x=170 , y=250)
 
 # Botão de cadastrar
-Cadastrar = Button(text="CADASTRAR", width=15)
+Cadastrar = Button(text="CADASTRAR", width=15, command=RegistrarNoBanco)
 Cadastrar.place(x=80, y=320)
 
 # Botão de limpar campos
 
 LimparCampos = Button(text="LIMPAR", width=15, command=LimparCampos)
 LimparCampos.place(x=250 , y=320)
-
-
-
-
-
 
 jan.mainloop()
