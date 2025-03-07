@@ -3,7 +3,6 @@ from tkinter import messagebox # Importar o mudulo de widgets tematicos do tkint
 from tkinter import ttk
 from DatabaseProduto import DataBase
 
-
 def LimparCampos():
     tipoProdutoEntry.delete(0 ,END)
     VoltagemEntry.delete(0 ,END)
@@ -92,12 +91,5 @@ Cadastrar.place(x=80, y=320)
 
 LimparCampos = Button(text="LIMPAR", width=15, command=LimparCampos)
 LimparCampos.place(x=250 , y=320)
-
-#Continuar = Button(text="CONTINUAR", width=15, command=)
-
-
-
-
-
 
 jan.mainloop()
