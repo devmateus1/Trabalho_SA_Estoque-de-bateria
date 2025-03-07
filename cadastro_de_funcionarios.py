@@ -44,10 +44,15 @@ class CRUDApp:
         # Botões
         tk.Button(self.root, text="Cadastrar", command=self.create_user, font=("Arial", 12)).place(x=80, y=370, width=160, height=35)
         tk.Button(self.root, text="Limpar", command=self.limpar_campos, font=("Arial", 12)).place(x=260, y=370, width=160, height=35)
+        tk.Button(self.root, text="alterar", command=self.limpar_campos, font=("Arial", 12)).place(x=80, y=410, width=160, height=35)
+        tk.Button(self.root, text="Listar", command=self.limpar_campos, font=("Arial", 12)).place(x=260, y=410, width=160, height=35)
+
 
     def create_user(self):
-        # Placeholder para a funcionalidade de criação de usuário
-        messagebox.showinfo("Info", "Usuário cadastrado com sucesso!")
+        if all(entry.get().strip() for entry in [self.id_func_entry, self.nome_entry, self.telefone_entry, self.email_entry, self.cargo_entry, self.salario_entry, self.cidade_entry, self.bairro_entry]):
+            messagebox.showinfo("Info", "Usuário cadastrado com sucesso!")
+        else:
+            messagebox.showerror("Erro", "Todos os campos devem estar preenchidos!")
 
     def limpar_campos(self):
         self.id_func_entry.delete(0, END)
@@ -62,7 +67,6 @@ class CRUDApp:
 root = tk.Tk()
 app = CRUDApp(root)
 root.mainloop()
-
 
 
 
