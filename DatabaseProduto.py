@@ -1,7 +1,7 @@
 import mysql.connector # Importa o modulo mysql.connector para conectar ao banco de dados MYSQL
 
 class DataBase:
-    def __init__(self):
+    def get_connection(self):
         # Conecta ao banco de dados MySQL com as credencias fornecidas
         self.conn = mysql.connector.connect(
             host = "localhost",
@@ -42,10 +42,15 @@ class DataBase:
         self.conn.commit() # Confirma a exclusão dos dados
 
     # Metodo para buscar os dados de um usuario no banco de dados
-    def buscar(self, tipo):
-        self.cursor = self.conn.cursor()
-        self.cursor.execute("SELECT * FROM produto WHERE tipo= %s", (tipo,)) # Seleciona os dados do usuario com o id fornecido
-        return self.cursor.fetchall() # Retorna os dados do usuario encontrado
+    def read_users():
+        conn = get_connection()
+        cursor = conn.cursor()
+        query = "SELECT * FROM usuario)"
+        cursor.execute(query)
+        result = cursor.fetchall()
+        cursor.close()
+        conn.close()
+        return result
     
     # Metodo chama quando a instancia da classe é destruida
     def __del__(self):

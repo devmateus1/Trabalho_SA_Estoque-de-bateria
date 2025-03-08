@@ -1,23 +1,20 @@
-import tkinter as tk
+def buscar_produto(nome_produto):
+    conn = sqlite3.connect("produtos.db")
+    cursor = conn.cursor()
 
-# Criar a janela principal
-janela = tk.Tk()
-janela.title("Exemplo de Text Area")
-janela.geometry("400x300")
+    cursor.execute("SELECT * FROM produtos WHERE nome LIKE ?", ('%' + nome_produto + '%',))
+    resultados = cursor.fetchall()
 
-# Criar o widget Text (Área de Texto)
-text_area = tk.Text(janela, height=10, width=40)
-text_area.pack(pady=10)
+    conn.close()
 
-# Função para obter o conteúdo do Text
-def obter_texto():
-    conteudo = text_area.get("1.0", tk.END) # Obtém texto a partir da linha 1, coluna 0 até o fim
-    print("Conteúdo digitado:")
-    print(conteudo)
+    return resultados
 
-# Botão para exibir o conteúdo digitado
-botao = tk.Button(janela, text="Obter Texto", command=obter_texto)
-botao.pack(pady=10)
+    # Exemplo de busca
+nome = input("Digite o nome do produto: ")
+produtos_encontrados = buscar_produto(nome)
 
-# Iniciar o loop da interface gráfica
-janela.mainloop()
+if produtos_encontrados:
+    for produto in produtos_encontrados:
+        print(f"ID: {produto[0]}, Nome: {produto[1]}, Preço: R${produto[2]:.2f}")
+    else:
+        print("Nenhum produto encontrado.")
