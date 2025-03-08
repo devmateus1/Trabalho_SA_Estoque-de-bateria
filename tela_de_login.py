@@ -36,6 +36,10 @@ def FazerLogin():
 
     if VerifyLogin:
         messagebox.showinfo(title = "INFO LOGIN", message = "Acesso Confirmado, Bem Vindo!")
+
+        from tela_de_adm import  TeldACASTRO
+        TeldACASTRO()
+        
     else:
         messagebox.showinfo(title = "INFO LOGIN", message = "Acesso Negado. Verifique se esta cadastrado no sistema!")
 
