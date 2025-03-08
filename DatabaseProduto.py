@@ -7,7 +7,7 @@ class DataBase:
             host = "localhost",
             user = "root",
             password = "",
-            database = "produto_db"
+            database = "trabalho_sa"
 
         )
         self.cursor = self.conn.cursor() # Cria um cursor para exucutar comando SQL
@@ -27,24 +27,24 @@ class DataBase:
 
     # Metódo para registrar um novo usuario no banco de dados
     def RegistrarNoBanco(self, tipo, voltagem, marca, quantidade, preco, data):
-        self.cursor.execute("INSERT INTO usuario (tipo, voltagem, marca, quantidade, preco, data) VALUES (%s ,%s ,%s ,%s, %s, %s)",
+        self.cursor.execute("INSERT INTO produto (tipo, voltagem, marca, quantidade, preco, data) VALUES (%s ,%s ,%s ,%s, %s, %s)",
                             (tipo, voltagem, marca, quantidade, preco, data)) # Insere os dados do usuario na tabela
         self.conn.commit() # Confirma a inseção dos dados
 
     # Metodo para alterar os dados de um usuario existente no banco de dados
     def alterar (self, tipo, voltagem, marca, quantidade, preco, data):
-        self.conn.execute("UPDATE usuario SET tipo=%s, voltagem=%s, ,marca=%s, quantidade=%s, preco=%s, data=%s",(tipo, voltagem, marca, quantidade, preco, data)) # Atualiza os dados do usuario com o id fornecido
+        self.conn.execute("UPDATE produto SET tipo=%s, voltagem=%s, ,marca=%s, quantidade=%s, preco=%s, data=%s",(tipo, voltagem, marca, quantidade, preco, data)) # Atualiza os dados do usuario com o id fornecido
         self.conn.commit() # Confirma a atualização dos dados
 
     # Metodo para excluir um usuario do banco de dados
     def excluir (self, tipo) :
-        self.cursor.execute ("DELETE FROM usuario WHERE tipo = %s", (tipo,)) # Excluir o usuario com idusuario
+        self.cursor.execute ("DELETE FROM produto WHERE tipo = %s", (tipo,)) # Excluir o usuario com idusuario
         self.conn.commit() # Confirma a exclusão dos dados
 
     # Metodo para buscar os dados de um usuario no banco de dados
     def buscar(self, tipo):
         self.cursor = self.conn.cursor()
-        self.cursor.execute("SELECT * FROM usuario WHERE tipo= %s", (tipo,)) # Seleciona os dados do usuario com o id fornecido
+        self.cursor.execute("SELECT * FROM produto WHERE tipo= %s", (tipo,)) # Seleciona os dados do usuario com o id fornecido
         return self.cursor.fetchall() # Retorna os dados do usuario encontrado
     
     # Metodo chama quando a instancia da classe é destruida
