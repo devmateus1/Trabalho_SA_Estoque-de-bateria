@@ -14,17 +14,21 @@ jan.resizable(width=False,height=False) #Impede que a janela seja redimensionad
 
 tituloLabel = Label(text="FORNECEDORES:",bg="white") #Coloca um titulo para a janela
 tituloLabel.place(x=160,y=10)
-def create_widgets(self):
-    self.text_area = tk.Text(self,height=10,width=80)
-    self.text_area.grid(row=10,column=0,columnspan=4)
 
-
-def read_users(self):
-    users =read_users()
-    self.text_area.delete(1.0,ttk.END)
-    for user in users:
-        self.text_area.insert(ttk.END,f"ID: {user[0]}, Nome: {user[1]}, Telefone: {user[2]}, Email: {user[3]}\n")
-
+text_area = tk.Text(jan, height=10, width=40)
+text_area.pack(pady=10)
+text_area.place (x=200, y=200)
+QuantidadeFornecedorEntry = ttk.Entry(width=30) #Cria um campo para colocar a quantidade de produto fornecido
+QuantidadeFornecedorEntry.place(x=150,y=280)
+id = QuantidadeFornecedorEntry.get()
+def read_users(idfornecedor):
+    db=Database
+    db.buscar(idfornecedor)
+    
+    text_area.delete(1.0,ttk)
+    
+    text_area.insert(ttk,f"ID: {idfornecedor[0]}\n")
+tk.Button(jan,text="Listar Usuario",command=read_users).grid(row=6,column=1,columnspan=1)
 jan.mainloop()
 
 

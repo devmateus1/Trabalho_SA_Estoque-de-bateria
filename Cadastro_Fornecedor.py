@@ -5,19 +5,14 @@ from tkinter import ttk #Importa a classe Database do modulo DataBase
 from DataBaseFornecedor import Database
 import tkinter as tk
 
-class CRUDApp:
+class Abrir_Fornecedor:
     def __init__(self,root):
-        self.root = root
-        self.root.title("CRUD USUARIOS")
+       
+
         
 
         #CRIAR A JANELA
-        jan=Tk() # Cria uma instancia da janela principal
-        jan.title("ADM - Fornecedores") #Define o titulo da janela
-        jan .geometry("500x500") #Define o tamanho da janela
-        jan.configure(background="white") #Configura a cor de fundo da janela
-        jan.resizable(width=False,height=False) #Impede que a janela seja redimensionad
-
+        
         #CRIA OS LABELS NECESSARIOS
 
         tituloLabel = Label(text="CADASTRO DE FORNECEDORES:",bg="white") #Coloca um titulo para a janela
@@ -93,6 +88,10 @@ class CRUDApp:
         LimparButton.place(x=280,y=350)
     
 if __name__=="__main__":
-    root = tk.Tk()
-    app = CRUDApp(root)
-    root.mainloop()
+    jan=Tk() # Cria uma instancia da janela principal
+    jan.title("ADM - Fornecedores") #Define o titulo da janela
+    jan .geometry("500x500") #Define o tamanho da janela
+    jan.configure(background="white") #Configura a cor de fundo da janela
+    jan.resizable(width=False,height=False) #Impede que a janela seja redimensionad
+    app = CRUDApp(jan)
+    jan.mainloop()
