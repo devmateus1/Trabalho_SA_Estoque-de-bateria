@@ -1,53 +1,25 @@
-<<<<<<< HEAD
-from tkinter import *
-from tkinter import messagebox
+from tkinter import * #Importa todos os mudulos do tkinter
+from tkinter import messagebox # Importar o mudulo de widgets tematicos do tkinter
 from tkinter import ttk
 
-class TelaLoginCadastro:
-    def __init__(self, root):
-        self.root = root
-        self.root.title("Tela de login e cadastro")
-        self.root.geometry("1550x900")
-        self.root.configure(background="#f6f3ec")
-        self.root.resizable(width=False, height=False)
+#from DataBase import DataBase
 
-        # Botões de navegação
-        self.ProdutosButton = ttk.Button(self.root, text = "Produtos", width = 40, command = self.TelaProdutos)
-        self.ProdutosButton.place(x=100, y=35)
+# Criar a janela
+class TeldACASTRO:
+    jan = Tk()
+    jan.title("Tela de usuario - Painel de Acesso")
+    jan.geometry("600x300")
+    jan.configure(background="#002333")
+    jan.resizable(width=False, height=False)
 
-        self.FuncionariosButton = ttk.Button(self.root, text = "Funcionarios", width = 40, command = self.TelaFuncionarios)
-        self.FuncionariosButton.place(x=450, y=35)
+    Produto = Button (text="PRODUTO", width=10)
+    Produto.place (x=100 ,y=30)
 
-        self.FornecedoresButton = ttk.Button(self.root, text = "Fornecedores", width = 40, command = self.TelaFornecedores)
-        self.FornecedoresButton.place(x=800, y=35)
-
-        self.VoltarButton = ttk.Button(self.root, text = "Voltar", width = 40, command = self.Voltar)
-        self.VoltarButton.place(x=1150, y=35)
-
-    def TelaProdutos(self):
-        from produto import TelaProdutos
-        TelaProdutos()
-
-    def TelaFuncionarios(self):
-        self.ProdutosButton.place(x=5000)
-        self.FuncionariosButton.place(x=5000)
-        self.FornecedoresButton.place(x=5000)
-        self.VoltarButton.place(x=5000)
-
-    def TelaFornecedores(self):
-        self.ProdutosButton.place(x=5000)
-        self.FuncionariosButton.place(x=5000)
-        self.FornecedoresButton.place(x=5000)
-        self.VoltarButton.place(x=5000)
-
-    def Voltar(self):
-        # Aqui você pode adicionar o código para voltar à tela de login
-        jan.deiconify()  # Caso você tenha a janela de login oculta (como o código original sugeria)
+    Fornecedor = Button (text="FORNECEDOR", width=15)
+    Fornecedor.place (x=200 ,y= 30)
 
 
-jan = Tk()
-tela = TelaLoginCadastro(jan)
-jan.mainloop()
-=======
-#max é burro
->>>>>>> 19c6f4ec84424d2548a003eadedb012cc2cf0645
+    Funcionario = Button (text="FUNCIONARIO", width=15)
+    Funcionario .place (x=350 ,y=30)
+   
+    jan.mainloop()
