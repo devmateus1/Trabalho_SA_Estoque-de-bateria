@@ -1,6 +1,6 @@
 import mysql.connector # Importa o modulo mysql.connector para conectar ao banco de dados MYSQL
 
-class DataBase:
+class db_produto:
     def get_connection(self):
         # Conecta ao banco de dados MySQL com as credencias fornecidas
         self.conn = mysql.connector.connect(
@@ -14,11 +14,11 @@ class DataBase:
 
 
     # Metódo para registrar um novo usuario no banco de dados
-    def RegistrarNoBanco(self, tipo, voltagem, marca, quantidade, preco, data):
+    def RegistrarNoBanco_Produto(self, tipo, voltagem, marca, quantidade, preco, data):
         self.cursor.execute("INSERT INTO produto (tipo, voltagem, marca, quantidade, preco, data) VALUES (%s ,%s ,%s ,%s, %s, %s)",(tipo, voltagem, marca, quantidade, preco, data)) # Insere os dados do usuario na tabela
         self.conn.commit() # Confirma a inseção dos dados
 
     # Metodo para buscar os dados de um usuario no banco de dados
-    def ListarProduto(self, idproduto):
+    def Listar_Produto(self, idproduto):
         self.cursor.execute("SELECT * FROM produto WHERE idproduto = %s", (idproduto)) 
         return self.cursor.fetchone() 

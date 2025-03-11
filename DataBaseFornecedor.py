@@ -32,3 +32,14 @@ class Database:
     def buscar(self,idfornecedor):
         self.cursor.execute("SELECT * FROM fornecedor WHERE idfornecedor=%s",(idfornecedor,)) #Seleciona os dados do usuario com o id fornecido
         return self.cursor.fetchone() #Retorna oos dados do usuario encontrado
+    
+
+        # Metódo para registrar um novo usuario no banco de dados
+    def RegistrarNoBanco_Produto(self, tipo, voltagem, marca, quantidade, preco, data):
+        self.cursor.execute("INSERT INTO produto (tipo, voltagem, marca, quantidade, preco, data) VALUES (%s ,%s ,%s ,%s, %s, %s)",(tipo, voltagem, marca, quantidade, preco, data)) # Insere os dados do usuario na tabela
+        self.conn.commit() # Confirma a inseção dos dados
+
+    # Metodo para buscar os dados de um usuario no banco de dados
+    def Listar_Produto(self, idproduto):
+        self.cursor.execute("SELECT * FROM produto WHERE idproduto = %s", (idproduto)) 
+        return self.cursor.fetchone() 

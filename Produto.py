@@ -1,7 +1,7 @@
 from tkinter import * #Importa todos os mudulos do tkinter
 from tkinter import messagebox # Importar o mudulo de widgets tematicos do tkinter
 from tkinter import ttk
-from DatabaseProduto import DataBase
+from DatabaseProduto import db_produto
 class AbrirProduto:
     def __init__(self,root):
 
@@ -13,7 +13,7 @@ class AbrirProduto:
             PrecoEntry.delete(0 ,END)
             DataProdutoEntry.delete (0, END)
 
-        def RegistrarNoBanco():
+        def RegistrarNoBanco_Produto():
             tipo = TipoProdutoEntry.get() # Obtém o valor do campo de entrada do tipo do produto
             voltagem = VoltagemEntry.get() # Obtém o valor do campo de entrada da voltagem do produto
             marca = MarcaEntry.get() # Obtém o valor do campo de entrada da marca do produto
@@ -24,8 +24,8 @@ class AbrirProduto:
             if tipo == "" or voltagem == "" or marca == "" or quantidade == "" or preco == "" or data == "":
                 messagebox.showerror(title="Erro no Registro",message="PREENCHA TODOS OS CAMPOS") # Exibe mensagm de erro
             else:
-                db = DataBase() # Cria uma instância da classe Database
-                db.RegistrarNoBanco(tipo, voltagem, marca, quantidade, preco, data) # Chama o método para registrar no banco de dados
+                db = db_produto() # Cria uma instância da classe Database
+                db.RegistrarNoBanco_Produto(tipo, voltagem, marca, quantidade, preco, data) # Chama o método para registrar no banco de dados
                 messagebox.showinfo("Sucesso","Usuário registrado com sucesso!") # Exibe mensagem de Sucesso
 
                     # Limpar os campos após o registro
@@ -75,7 +75,7 @@ class AbrirProduto:
         DataProdutoEntry.place (x=170 , y=250)
 
         # Botão de cadastrar
-        Cadastrar = Button(text="CADASTRAR", width=15, command=RegistrarNoBanco)
+        Cadastrar = Button(text="CADASTRAR", width=15, command=RegistrarNoBanco_Produto)
         Cadastrar.place(x=80, y=320)
 
         # Botão de limpar campos
