@@ -11,18 +11,6 @@ class DataBase:
 
         )
         self.cursor = self.conn.cursor() # Cria um cursor para exucutar comando SQL
-        # Cria a tabela "Usuario" se ela não existir
-        self.cursor.execute ('''CREATE TABLE IF NOT EXISTS produto(
-                             idproduto int(11) NOT NULL,
-                             tipo TEXT (255),
-                             voltagem TEXT (255),
-                             marca TEXT (255),
-                             quantidade TEXT (255),
-                             preco TEXT (255),
-                             data TEXT (255)
-                             );''')
-        self.conn.commit() # Confirma a criação da tabela 
-        print ("Conectado ao Banco de Dados") # Imprime uma mensagem de confirmação
 
 
     # Metódo para registrar um novo usuario no banco de dados
