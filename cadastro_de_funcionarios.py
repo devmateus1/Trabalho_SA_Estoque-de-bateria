@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 from tkinter.constants import END
-from DataBaseFornecedor import Database
+from DataBase import Database
 
 
 class CRUDApp:
