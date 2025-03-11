@@ -1,7 +1,7 @@
 from tkinter import * #Importa todos os mudulos do tkinter
 from tkinter import messagebox # Importar o mudulo de widgets tematicos do tkinter
 from tkinter import ttk
-from DatabaseProduto import db_produto
+from DataBase import Database
 class AbrirProduto:
     def __init__(self,root):
 
@@ -24,7 +24,7 @@ class AbrirProduto:
             if tipo == "" or voltagem == "" or marca == "" or quantidade == "" or preco == "" or data == "":
                 messagebox.showerror(title="Erro no Registro",message="PREENCHA TODOS OS CAMPOS") # Exibe mensagm de erro
             else:
-                db = db_produto() # Cria uma instância da classe Database
+                db = Database() # Cria uma instância da classe Database
                 db.RegistrarNoBanco_Produto(tipo, voltagem, marca, quantidade, preco, data) # Chama o método para registrar no banco de dados
                 messagebox.showinfo("Sucesso","Usuário registrado com sucesso!") # Exibe mensagem de Sucesso
 
@@ -75,11 +75,7 @@ class AbrirProduto:
         DataProdutoEntry.place (x=170 , y=250)
 
         # Botão de cadastrar
-<<<<<<< HEAD
         Cadastrar = Button(text="CADASTRAR", width=15, command=RegistrarNoBanco_Produto)
-=======
-        Cadastrar = Button(text="CADASTRAR", width=15, command=RegistrarNoBancos)
->>>>>>> 2e6e29aeeaba69f942a761f050e74876738513be
         Cadastrar.place(x=80, y=320)
 
         # Botão de limpar campos
