@@ -2,7 +2,7 @@
 from tkinter import * #IMporta todos os modulos do tkinter
 from tkinter import messagebox #importa o modulo de caixas de de mensagens do tkinter 
 from tkinter import ttk #Importa a classe Database do modulo DataBase
-from DataBaseFornecedor import Database
+from DataBase import Database
 import tkinter as tk
 
 class Abrir_Fornecedor:
