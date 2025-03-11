@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
@@ -47,3 +48,6 @@ class TelaLoginCadastro:
 jan = Tk()
 tela = TelaLoginCadastro(jan)
 jan.mainloop()
+=======
+#max é burro
+>>>>>>> 19c6f4ec84424d2548a003eadedb012cc2cf0645
