@@ -16,7 +16,7 @@ class Database:
                         `telefone` text DEFAULT NULL,
                         `email` text DEFAULT NULL,
                         `endereco` text DEFAULT NULL,
-                        `produto` text DEFAULT NULL,
+                        `produto` text DEFAULT NULL, 
                         `quantidade` int(11) DEFAULT NULL
 
         );''')
@@ -25,10 +25,8 @@ class Database:
     def RegistrarNoBanco(self,fornecedores,cpf,telefone,email,endereco,produto,quantidade):
         self.cursor.execute("INSERT INTO fornecedor(fornecedores, cpf, telefone, email, endereco, produto, quantidade) VALUES(%s, %s, %s, %s, %s, %s, %s)",(fornecedores, cpf, telefone, email, endereco, produto, quantidade)) #Insere os dados do usuario na tabela
         self.conn.commit() #Confirma a inserção dos dados
-    # def buscar(self,idfornecedor):
-    #     self.cursor.execute("SELECT * FROM fornecedor WHERE idfornecedor=%s",(idfornecedor,)) #Seleciona os dados do usuario com o id fornecido
-    #     return self.cursor.fetchone() #Retorna oos dados do usuario encontrado
 
+                        
     def buscar(self,idfornecedor):
         self.cursor.execute("SELECT * FROM fornecedor WHERE idfornecedor=%s",(idfornecedor,)) #Seleciona os dados do usuario com o id fornecido
         return self.cursor.fetchone() #Retorna oos dados do usuario encontrado

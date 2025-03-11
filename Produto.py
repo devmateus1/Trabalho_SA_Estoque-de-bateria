@@ -13,7 +13,7 @@ class AbrirProduto:
             PrecoEntry.delete(0 ,END)
             DataProdutoEntry.delete (0, END)
 
-        def RegistrarNoBanco():
+        def RegistrarNoBancos():
             tipo = TipoProdutoEntry.get() # Obtém o valor do campo de entrada do tipo do produto
             voltagem = VoltagemEntry.get() # Obtém o valor do campo de entrada da voltagem do produto
             marca = MarcaEntry.get() # Obtém o valor do campo de entrada da marca do produto
@@ -75,7 +75,7 @@ class AbrirProduto:
         DataProdutoEntry.place (x=170 , y=250)
 
         # Botão de cadastrar
-        Cadastrar = Button(text="CADASTRAR", width=15, command=RegistrarNoBanco)
+        Cadastrar = Button(text="CADASTRAR", width=15, command=RegistrarNoBancos)
         Cadastrar.place(x=80, y=320)
 
         # Botão de limpar campos

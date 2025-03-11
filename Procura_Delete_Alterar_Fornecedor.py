@@ -27,7 +27,7 @@ def read_users(idfornecedor):
     
     text_area.delete(1.0,ttk)
     
-    text_area.insert(ttk,f"ID: {idfornecedor[0]}\n")
+    text_area.insert(ttk,f"ID: {idfornecedor[1]}\n")
 tk.Button(jan,text="Listar Usuario",command=read_users).grid(row=6,column=1,columnspan=1)
 jan.mainloop()
 
