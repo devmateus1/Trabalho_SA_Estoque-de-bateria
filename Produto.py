@@ -75,7 +75,11 @@ class AbrirProduto:
         DataProdutoEntry.place (x=170 , y=250)
 
         # Botão de cadastrar
+<<<<<<< HEAD
         Cadastrar = Button(text="CADASTRAR", width=15, command=RegistrarNoBanco_Produto)
+=======
+        Cadastrar = Button(text="CADASTRAR", width=15, command=RegistrarNoBancos)
+>>>>>>> 2e6e29aeeaba69f942a761f050e74876738513be
         Cadastrar.place(x=80, y=320)
 
         # Botão de limpar campos
