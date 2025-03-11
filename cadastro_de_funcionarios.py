@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import messagebox
 from tkinter.constants import END
+from DataBaseFornecedor import Database
+
 
 class CRUDApp:
     def __init__(self, root):
@@ -42,17 +44,30 @@ class CRUDApp:
         self.bairro_entry.place(x=120, y=315)
 
         # Botões
-        tk.Button(self.root, text="Cadastrar", command=self.create_user, font=("Arial", 12)).place(x=80, y=370, width=160, height=35)
-        tk.Button(self.root, text="Limpar", command=self.limpar_campos, font=("Arial", 12)).place(x=260, y=370, width=160, height=35)
-        tk.Button(self.root, text="alterar", command=self.limpar_campos, font=("Arial", 12)).place(x=80, y=410, width=160, height=35)
-        tk.Button(self.root, text="Listar", command=self.limpar_campos, font=("Arial", 12)).place(x=260, y=410, width=160, height=35)
+        tk.Button(self.root, text="Cadastrar", command=self.RegistrarNoBancoFuncionario, font=("Arial", 12)).place(x=80, y=370, width=160, height=35)
+        tk.Button(self.root, text="Limpar", command=self.limpar_campos, font=("Arial", 12)).place(x=80, y=400, width=160, height=35)
+        
+
+    def RegistrarNoBancoFuncionario(self): #Registra os dados no banco de dados
+            #Transforma os campos de textos em variaveis
+            id_func=self.id_func_entry.get()
+            nome=self.nome_entry.get()
+            telefone= self.telefone_entry.get()
+            email= self.email_entry.get()
+            cargo=self.cargo_entry.get()
+            salario=self.salario_entry.get()
+            cidade=self.cidade_entry.get()
+            bairro=self.bairro_entry.get()
 
 
-    def create_user(self):
-        if all(entry.get().strip() for entry in [self.id_func_entry, self.nome_entry, self.telefone_entry, self.email_entry, self.cargo_entry, self.salario_entry, self.cidade_entry, self.bairro_entry]):
-            messagebox.showinfo("Info", "Usuário cadastrado com sucesso!")
-        else:
-            messagebox.showerror("Erro", "Todos os campos devem estar preenchidos!")
+            if id_func == "" or nome == "" or telefone == "" or email == "" or cargo == "" or salario == "" or cidade == "" or bairro == "" : #Verifica se os campos de textos estão vazios
+                messagebox.showerror(title="Erro de Cadastro", message="PREENCHA TODOS OS CAMPOS") #Exibe a mensagem de erro
+            else:
+                db = Database() #Cria uma instancia da classe Database
+                db.RegistrarNoBanco(id_func,nome,telefone,email, cargo,salario, cidade,bairro) #Chama o metodo para registrar no banco de dados 
+                messagebox.showinfo("Sucesso","Funcionario registrado com sucesso!") #Exibe a mensagem de sucesso
+       
+    
 
     def limpar_campos(self):
         self.id_func_entry.delete(0, END)
