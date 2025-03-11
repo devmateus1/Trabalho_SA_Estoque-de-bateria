@@ -93,5 +93,5 @@ if __name__=="__main__":
     jan .geometry("500x500") #Define o tamanho da janela
     jan.configure(background="white") #Configura a cor de fundo da janela
     jan.resizable(width=False,height=False) #Impede que a janela seja redimensionad
-    app = CRUDApp(jan)
+    app = Abrir_Fornecedor(jan)
     jan.mainloop()
