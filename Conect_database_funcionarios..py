@@ -1,4 +1,4 @@
-import tkinter as tk
+'''import tkinter as tk
 from tkinter import messagebox
 from tkinter.constants import END
 import mysql.connector
@@ -8,8 +8,8 @@ def conectar_banco():
     return mysql.connector.connect(
         host="localhost",
         user="root",  # Substitua pelo seu usuário do MySQL
-        password="sua_senha",  # Substitua pela sua senha do MySQL
-        database="cadastro_funcionarios"
+        password="",  # Substitua pela sua senha do MySQL
+        database="trabalho_sa"
     )
 
 # Criar a tabela se não existir
@@ -117,4 +117,4 @@ class CRUDApp:
 
 root = tk.Tk()
 app = CRUDApp(root)
-root.mainloop()
+root.mainloop()'''
