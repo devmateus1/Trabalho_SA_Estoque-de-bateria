@@ -42,6 +42,15 @@ class Database:
         self.conn.commit() # Confirma a inseção dos dados
 
     # Metodo para buscar os dados de um usuario no banco de dados
-    def Listar_Produto(self, idproduto):
-        self.cursor.execute("SELECT * FROM produto WHERE idproduto = %s", (idproduto)) 
-        return self.cursor.fetchone() 
+    def selectUser(self, idproduto):
+        db = Database()
+        try:
+            c = db.conn.cursor()
+            c.execute("SELECT * FROM produto WHERE idproduto=%s", (idproduto,))
+            produto = c.fetchone()
+            if produto:
+                self.idusuario, self.tipo, self.voltagem, self.marca, self.quantidade, self.preco, self.data = produto
+            c.close()
+            return "Busca feita com sucesso!"
+        except Exception as e:
+            return f"Ocorreu um erro na busca do usuário: {e}"
