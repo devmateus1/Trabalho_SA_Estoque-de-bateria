@@ -1,4 +1,5 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 
 
@@ -53,6 +54,8 @@ if __name__ == "__main__":
     tela = TelaLoginCadastro(jan)
     jan.mainloop()
 =======
+=======
+>>>>>>> Stashed changes
 
 # Criar a janela
 
@@ -102,5 +105,9 @@ if __name__ == "__main__":
     tela = TelaLoginCadastro(jan)
     jan.mainloop()
 
+<<<<<<< Updated upstream
+   
+>>>>>>> Stashed changes
+=======
    
 >>>>>>> Stashed changes

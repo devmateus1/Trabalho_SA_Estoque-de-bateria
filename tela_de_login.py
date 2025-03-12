@@ -38,7 +38,11 @@ def FazerLogin():
         messagebox.showinfo(title = "INFO LOGIN", message = "Acesso Confirmado, Bem Vindo!")
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         from tela_de_adm import  TelaLoginCadastro
+=======
+        from tela_de_adm import TelaLoginCadastro
+>>>>>>> Stashed changes
 =======
         from tela_de_adm import TelaLoginCadastro
 >>>>>>> Stashed changes
