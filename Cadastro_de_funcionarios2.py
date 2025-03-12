@@ -1,7 +1,7 @@
 from tkinter import *  # Importa todos os módulos do Tkinter
 from tkinter import messagebox  # Importa o módulo de caixas de mensagens do Tkinter 
 from tkinter import ttk  # Importa o módulo ttk do Tkinter
-from DataBaseFunc import Database  # Importa a classe Database do módulo DataBase
+from DataBase import Database  # Importa a classe Database do módulo DataBase
 import tkinter as tk  # Importa o módulo tkinter como tk
 
 class Abrir_funcionario:
@@ -68,7 +68,7 @@ class Abrir_funcionario:
                 messagebox.showerror(title="Erro de cadastro!", message="Todos os campos devem estar preenchidos!")
             else:
                 db = Database()  # Cria uma instância do banco de dados
-                db.RegistrarNoBanco(cpf, nome, telefone, email, dataDeContratacao, cargo, salario, endereco)  # Registra os dados
+                db.RegistrarNoBancofuncionario(cpf, nome, telefone, email, dataDeContratacao, cargo, salario, endereco)  # Registra os dados
                 messagebox.showinfo("Sucesso", "Funcionário(a) cadastrado(a) com sucesso!")
         
         # Botão de Cadastro
