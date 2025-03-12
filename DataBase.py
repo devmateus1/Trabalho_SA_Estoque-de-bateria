@@ -45,3 +45,9 @@ class Database:
     def Listar_Produto(self, idproduto):
         self.cursor.execute("SELECT * FROM produto WHERE idproduto = %s", (idproduto)) 
         return self.cursor.fetchone() 
+    
+    def RegistrarNoBancofuncionario(self, cpf, nome, telefone, email, dataDeContratacao, cargo, salario, endereco):
+        # Insere um novo funcionário no banco de dados
+        self.cursor.execute("INSERT INTO funcionario(cpf, nome, telefone, email, dataDeContratacao, cargo, salario, endereco) VALUES(%s, %s, %s, %s, %s, %s, %s, %s)",
+                            (cpf, nome, telefone, email, dataDeContratacao, cargo, salario, endereco))
+        self.conn.commit()  # Confirma a inserção dos dados
