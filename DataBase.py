@@ -51,3 +51,10 @@ class Database:
         self.cursor.execute("INSERT INTO funcionario(cpf, nome, telefone, email, dataDeContratacao, cargo, salario, endereco) VALUES(%s, %s, %s, %s, %s, %s, %s, %s)",
                             (cpf, nome, telefone, email, dataDeContratacao, cargo, salario, endereco))
         self.conn.commit()  # Confirma a inserção dos dados
+    
+    
+        
+
+
+
+  
