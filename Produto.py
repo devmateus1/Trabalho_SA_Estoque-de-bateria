@@ -1,10 +1,21 @@
-from tkinter import * #Importa todos os mudulos do tkinter
-from tkinter import messagebox # Importar o mudulo de widgets tematicos do tkinter
+from tkinter import * # Importa todos os módulos do tkinter
+from tkinter import messagebox # Importa o módulo de widgets temáticos do tkinter
 from tkinter import ttk
+<<<<<<< Updated upstream
 from DataBase import Database
-class AbrirProduto:
-    def __init__(self,root):
+=======
+from DatabaseProduto import DataBase
 
+>>>>>>> Stashed changes
+class AbrirProduto:
+    def __init__(self, master):
+        self.master = master  # Armazena a referência para a janela principal
+        self.master.title("USUARIO - PRODUTO")
+        self.master.geometry("800x400")
+        self.master.configure(background="#002333")
+        self.master.resizable(width=False, height=False)
+
+<<<<<<< Updated upstream
         Cadastrotitulo = Label (text="CADASTRO DE PRODUTO :", bg="#002333", fg="white") # Cria o titulo
         Cadastrotitulo.place(x=230 , y=10) # Posiciona o titulo
 
@@ -41,6 +52,42 @@ class AbrirProduto:
         DataBaseataProdutoLabel.place (x=45 , y=250)
         DataProdutoEntry =ttk.Entry(width=30)
         DataProdutoEntry.place (x=170 , y=250)
+=======
+        # Criação do título
+        self.Cadastrotitulo = Label(self.master, text="CADASTRO DE PRODUTO :", bg="#002333", fg="white")
+        self.Cadastrotitulo.place(x=230, y=10)
+
+        # Criação dos Labels e campos de entrada
+        self.TipoProdutoLabel = Label(self.master, text="TIPO DA BATERIA :", bg="#002333", fg="white")
+        self.TipoProdutoLabel.place(x=55, y=50)
+        self.TipoProdutoEntry = ttk.Entry(self.master, width=30)
+        self.TipoProdutoEntry.place(x=170, y=50)
+
+        self.VoltagemLabel = Label(self.master, text="VOLTAGEM DA BATERIA :", bg="#002333", fg="white")
+        self.VoltagemLabel.place(x=20, y=90)
+        self.VoltagemEntry = ttk.Entry(self.master, width=30)
+        self.VoltagemEntry.place(x=170, y=90)
+
+        self.MarcaLabel = Label(self.master, text="MARCA DA BATERIA :", bg="#002333", fg="white")
+        self.MarcaLabel.place(x=40, y=130)
+        self.MarcaEntry = ttk.Entry(self.master, width=30)
+        self.MarcaEntry.place(x=170, y=130)
+
+        self.QuantidadeLabel = Label(self.master, text="QUANTIDADE DA BATERIA :", bg="#002333", fg="white")
+        self.QuantidadeLabel.place(x=8, y=170)
+        self.QuantidadeEntry = ttk.Entry(self.master, width=30)
+        self.QuantidadeEntry.place(x=170, y=170)
+
+        self.PrecoLabel = Label(self.master, text="PREÇO DA BATERIA :", bg="#002333", fg="white")
+        self.PrecoLabel.place(x=45, y=210)
+        self.PrecoEntry = ttk.Entry(self.master, width=30)
+        self.PrecoEntry.place(x=170, y=210)
+
+        self.DataProdutoLabel = Label(self.master, text="DATA DE VALIDADE :", bg="#002333", fg="white")
+        self.DataProdutoLabel.place(x=45, y=250)
+        self.DataProdutoEntry = ttk.Entry(self.master, width=30)
+        self.DataProdutoEntry.place(x=170, y=250)
+>>>>>>> Stashed changes
 
         def LimparCampos():
             TipoProdutoEntry.delete(0 ,END)
@@ -82,17 +129,56 @@ class AbrirProduto:
 
 
         # Botão de cadastrar
+<<<<<<< Updated upstream
         Cadastrar = Button(text="CADASTRAR", width=15, command=RegistrarNoBanco_Produto)
         Cadastrar.place(x=80, y=320)
+=======
+        self.Cadastrar = Button(self.master, text="CADASTRAR", width=15, command=self.RegistrarNoBancos)
+        self.Cadastrar.place(x=80, y=320)
+>>>>>>> Stashed changes
 
         # Botão de limpar campos
+        self.LimparCampos = Button(self.master, text="LIMPAR", width=15, command=self.LimparCampos)
+        self.LimparCampos.place(x=250, y=320)
 
-        LimparCampos = Button(text="LIMPAR", width=15, command=LimparCampos)
-        LimparCampos.place(x=250 , y=320)
+        # Carregar o logo
+        self.logo = PhotoImage(file="icon/_SLA_.png")  # Carrega a imagem do logo
+        self.LogoLabel = Label(self.master, image=self.logo, bg="#002333")  # Cria um label para a imagem do logo
+        self.LogoLabel.place(x=500, y=100)  # Posiciona o label no frame esquerdo
+
+    def LimparCampos(self):
+        """Limpa os campos de entrada"""
+        self.TipoProdutoEntry.delete(0, END)
+        self.VoltagemEntry.delete(0, END)
+        self.MarcaEntry.delete(0, END)
+        self.QuantidadeEntry.delete(0, END)
+        self.PrecoEntry.delete(0, END)
+        self.DataProdutoEntry.delete(0, END)
+
+    def RegistrarNoBancos(self):
+        """Registra o produto no banco de dados"""
+        tipo = self.TipoProdutoEntry.get()
+        voltagem = self.VoltagemEntry.get()
+        marca = self.MarcaEntry.get()
+        quantidade = self.QuantidadeEntry.get()
+        preco = self.PrecoEntry.get()
+        data = self.DataProdutoEntry.get()
+
+        # Verifica se todos os campos foram preenchidos
+        if tipo == "" or voltagem == "" or marca == "" or quantidade == "" or preco == "" or data == "":
+            messagebox.showerror(title="Erro no Registro", message="PREENCHA TODOS OS CAMPOS")
+        else:
+            db = DataBase()  # Cria uma instância da classe Database
+            db.RegistrarNoBanco(tipo, voltagem, marca, quantidade, preco, data)  # Registra no banco de dados
+            messagebox.showinfo("Sucesso", "Produto registrado com sucesso!")  # Exibe mensagem de sucesso
+
+            # Limpar os campos após o registro
+            self.LimparCampos()
 
 
 
 if __name__ == "__main__":
+<<<<<<< Updated upstream
         jan = Tk()
         jan.title("USUARIO - PRODUTO")
         jan.geometry("800x400")
@@ -103,3 +189,8 @@ if __name__ == "__main__":
         LogoLabel.place(x=500, y=150) # Posiciona o label no frame esquerdo
         app = AbrirProduto(jan)
         jan.mainloop()
+=======
+    jan = Tk()
+    app = AbrirProduto(jan)  # Cria uma instância da classe AbrirProduto
+    jan.mainloop()
+>>>>>>> Stashed changes

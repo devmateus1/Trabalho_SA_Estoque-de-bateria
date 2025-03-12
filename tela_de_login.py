@@ -1,7 +1,7 @@
 from tkinter import * 
 from tkinter import messagebox 
 from tkinter import ttk 
-
+from dataclasses import dataclass
 from teste2 import login
 
 #Criação da tela
@@ -31,13 +31,17 @@ def FazerLogin():
     senha = SenhaEntry.get()
 
     db = login() 
-    db.cursor.execute("""SELECT * FROM usuario WHERE usuario = %s AND senha = %s""", (usuario, senha))
+    db.cursor.execute("SELECT * FROM usuario WHERE usuario = %s AND senha = %s", (usuario, senha))
     VerifyLogin = db.cursor.fetchone()
 
     if VerifyLogin:
         messagebox.showinfo(title = "INFO LOGIN", message = "Acesso Confirmado, Bem Vindo!")
 
+<<<<<<< Updated upstream
         from tela_de_adm import  TelaLoginCadastro
+=======
+        from tela_de_adm import TelaLoginCadastro
+>>>>>>> Stashed changes
         TelaLoginCadastro()
         
     else:
@@ -49,5 +53,4 @@ LoginButton.place(x = 130, y = 335)
 #Registrar um novo usuario
 
 
- 
 jan.mainloop()

@@ -11,4 +11,4 @@ class login:
             password = "",
             database = "trabalho_sa"
         )
-        self.cursor = self.conn.cursor() 
+       
