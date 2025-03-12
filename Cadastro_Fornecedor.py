@@ -68,7 +68,7 @@ class Abrir_Fornecedor:
                 messagebox.showerror(title="Erro de Cadastro", message="PREENCHA TODOS OS CAMPOS") #Exibe a mensagem de erro
             else:
                 db = Database() #Cria uma instancia da classe Database
-                db.RegistrarNoBanco(fornecedores,cpf,telefone,email,endereco,produto,quantidade) #Chama o metodo para registrar no banco de dados 
+                db.RegistrarNoBancoFornecedor(fornecedores,cpf,telefone,email,endereco,produto,quantidade) #Chama o metodo para registrar no banco de dados 
                 messagebox.showinfo("Sucesso","Fornecedor registrado com sucesso!") #Exibe a mensagem de sucesso
         CadastrarButton =  ttk.Button(text="Cadastrar",width=15,command=RegistrarNoBancoFornecedor) #Cria o botão de cadastro
         CadastrarButton.place(x=70,y=350)
