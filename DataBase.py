@@ -41,8 +41,27 @@ class Database:
     def removerFornecedor(self,idfornecedor):
         self.cursor.execute("DELETE FROM fornecedor WHERE idfornecedor=%s", (idfornecedor,))
         self.conn.commit()
-        
-        
+    
+    def RegistrarNoBancofuncionario(self, cpf, nome, telefone, email, dataDeContratacao, cargo, salario, endereco):
+        # Insere um novo funcionário no banco de dados
+        self.cursor.execute("INSERT INTO funcionario(cpf, nome, telefone, email, dataDeContratacao, cargo, salario, endereco) VALUES(%s, %s, %s, %s, %s, %s, %s, %s)",
+                            (cpf, nome, telefone, email, dataDeContratacao, cargo, salario, endereco))
+        self.conn.commit()  # Confirma a inserção dos dados
+
+    def removerfuncionario(self,idfuncionario):
+        self.cursor.execute("DELETE FROM funcionario WHERE idfuncionario=%s",(idfuncionario))
+        self.conn.commit()
+
+    def alterarfuncionario(self, idfuncionario, cpf, nome, telefone, email, dataDeContratacao, cargo, salario, endereco):
+        self.cursor.execute("UPDATE funcionario SET cpf=%s, nome=%s, telefone=%s, email=%s, dataDeContratacao=%s, cargo=%s,salario=%s, endereco=%s WHERE idfuncionario=%s",
+                            (cpf, nome, telefone, email, dataDeContratacao, cargo, salario, endereco, idfuncionario)) #Atualiza os dados do usuario com id oferecido
+        self.conn.commit() #Confirma a atualização do dados 
+        self.conn.close()
+
+    def buscar_funcionario(self, id_funcionario):
+        query = "SELECT * FROM funcionario WHERE id = %s"
+        self.cursor.execute(query, (id_funcionario,))
+        return self.cursor.fetchone() 
     
 
         # Metódo para registrar um novo usuario no banco de dados

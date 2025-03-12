@@ -89,6 +89,7 @@ class Abrir_funcionario:
         # Botão de Limpar Campos
         LimparButton = ttk.Button(text="Limpar", width=15, command=LimparCampos)
         LimparButton.place(x=290, y=380)
+        
 
 # Verifica se o script está sendo executado diretamente
 if __name__ == "__main__":

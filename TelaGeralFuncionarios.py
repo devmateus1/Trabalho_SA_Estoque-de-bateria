@@ -1,7 +1,7 @@
 from tkinter import *  # Importa todos os módulos do Tkinter
 from tkinter import messagebox  # Importa o módulo de caixas de mensagens do Tkinter 
 from tkinter import ttk  # Importa o módulo ttk do Tkinter
-from DataBase import Database  # Importa a classe Database do módulo DataBase
+#from DataBase import Database  # Importa a classe Database do módulo DataBase
 import tkinter as tk  # Importa o módulo tkinter como tk
 
 class TelaGeral:
@@ -50,21 +50,84 @@ class TelaGeral:
         self.enderecoEntry.place(x=150, y=350)
 
         # Botões
-        excluirButton = ttk.Button(self.root, text="EXCLUIR", width=15, command=self.excluir_funcionario)
+        excluirButton = ttk.Button(self.root, text="EXCLUIR", width=15, command=self.combinarfuncoes)
         excluirButton.place(x=50, y=400)
 
-        alterarButton = ttk.Button(self.root, text="ALTERAR", width=15, command=self.alterar_funcionario)
+        alterarButton = ttk.Button(self.root, text="ALTERAR", width=15, command=self.alterarfuncionario)
         alterarButton.place(x=200, y=400)
 
         listarButton = ttk.Button(self.root, text="buscar", width=15, command=self.buscarfuncionario)
         listarButton.place(x=350, y=400)
 
     # Funções para os botões (ainda precisam ser implementadas)
-    def excluir_funcionario(self):
-        print("Excluir funcionário")
+    def excluirFuncionario(self):
+            idfuncionario=self.ID_funcionarioEntry.get()
+            if idfuncionario =="":
+                messagebox.showerror(title="Erro de Busca", message="PREENCHA O CAMPO DE ID") #Exibe a mensagem de erro
+            else:
+                db = Database()
+                db.removerfuncionario(idfuncionario)
+                messagebox.showinfo("Sucesso","funcionario excluido com sucesso com sucesso!") #Exibe a mensagem de sucesso
+    def buscar_funcionario(self):
+        id_funcionario = self.id_entry.get()
 
-    def alterar_funcionario(self):
-        print("Alterar funcionário")
+        if not id_funcionario:
+            messagebox.showerror("Erro", "Digite um ID para buscar")
+            return
+
+        funcionario = self.db.buscar_funcionario(id_funcionario)
+
+        if funcionario:
+
+            self.cpf_funcionarioEntry.delete(0, tk.END)
+            self.cpf_funcionarioEntry.insert(0, funcionario[1])  # CPF
+            
+            self.nome_funcionarioEntry.delete(0, tk.END)
+            self.nome_funcionarioEntry.insert(0, funcionario[2])  # Nome
+
+            self.telefoneEntry.delete(0, tk.END)
+            self.telefoneEntry.insert(0, funcionario[3])
+
+            self.emailEntry.delete(0, tk.END)
+            self.emailEntry.insert(0, funcionario[4])
+
+            self.data_da_contratacaoEntry.delete(0, tk.END)
+            self.data_da_contratacaoEntry.insert(0, funcionario[5])
+
+            self.cargoEntry.delete(0, tk.END)
+            self.cargoEntry.insert(0, funcionario[6])  # Cargo
+
+            self.salarioEntry.delete(0, tk.END)
+            self.salarioEntry.insert(0, funcionario[7])  # Salário
+
+            self.enderecoEntry.delete(0, tk.END)
+            self.enderecoEntry.insert(0, funcionario[8])  # Salário
+
+        else:
+            messagebox.showerror("Erro", "Funcionário não encontrado")
+
+
+    def alterarfuncionario(self):
+            idfuncionario = self.ID_funcionarioEntry.get()
+            cpf = self.cpf_funcionarioEntry.get()
+            nome = self.nome_funcionarioEntry.get()
+            telefone = self.telefoneEntry.get()
+            email = self.emailEntry.get()
+            dataDeContratacao = self.data_da_contratacaoEntry.get()
+            cargo = self.cargoEntry.get()
+            salario = self.salarioEntry.get()
+            endereco = self.enderecoEntry.get()
+            
+            # Verifica se todos os campos estão preenchidos
+            if  idfuncionario == "" or cpf == "" or nome == "" or telefone == "" or email == "" or dataDeContratacao == "" or cargo == "" or salario == "" or endereco == "":
+                messagebox.showerror(title="Erro!", message="Todos os campos devem estar preenchidos!")
+            else:
+                db = Database()  # Cria uma instância do banco de dados
+                db.alterarfuncionario(idfuncionario, cpf, nome, telefone, email, dataDeContratacao, cargo, salario, endereco)  # Registra os dados
+                messagebox.showinfo("Sucesso", "Funcionário(a) cadastrado(a) com sucesso!")
+        
+
+    
 
     def buscarfuncionario(self):
         ID_funcionarioEntry = self.ID_funcionarioEntry.get()
@@ -92,7 +155,10 @@ class TelaGeral:
             self.cargoEntry.delete(0, END)
             self.salarioEntry.delete(0, END)
             self.enderecoEntry.delete(0, END)
-        
+    
+    def combinarfuncoes(self):
+         self.excluirFuncionario()
+         self.LimparCampos()
 
 
 if __name__ == "__main__":
