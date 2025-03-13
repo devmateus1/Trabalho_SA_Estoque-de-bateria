@@ -8,6 +8,7 @@ class Database:
             password = '',
             database = 'trabalho_sa'
         )
+
         self.cursor = self.conn.cursor() #Cria um cursor para executar comandos MySQL
         self.cursor.execute('''CREATE TABLE IF NOT EXISTS `fornecedor` (
                         `idfornecedor` int(11) NOT NULL,
@@ -70,7 +71,12 @@ class Database:
         self.conn.commit() # Confirma a inseção dos dados
 
     # Metodo para buscar os dados de um usuario no banco de dados
-    def buscar_funcionario(self, id_produto):
-        query = "SELECT * FROM produto WHERE idproduto = %s"
-        self.cursor.execute(query, (id_produto,))
-        return self.cursor.fetchone() 
+    def buscar_produto(self, idproduto):
+        conn = get_connection()
+        cursor = conn.cursor()
+        query = "SELECT* FROM produto WHERE idproduto = %s"
+        self.cursor.execute(query, (idproduto,))
+        conn.close()
+        cursor.close()
+        return buscar_produto()
+    
