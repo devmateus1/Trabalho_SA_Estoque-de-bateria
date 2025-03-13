@@ -94,9 +94,12 @@ class TelaGeral:
     
 
     def buscarfuncionario(self):
-            idfuncionario = self.ID_funcionarioEntry.get()
-            self.cursor.execute("SELECT * FROM funcionario WHERE idfuncionario=%s", (idfuncionario,))
-            usuario = self.cursor.fetchone()
+        idfuncionario = self.ID_funcionarioEntry.get()
+        if idfuncionario == "":
+            messagebox.showerror(title="Erro", message="PREENCHA O CAMPO DE ID")
+        else:
+            db = Database()  # Crie uma instância do banco de dados
+            usuario = db.buscar_funcionario(idfuncionario)  # Supondo que exista um método para buscar por id
             if usuario:
                 self.cpf_funcionarioEntry.insert(0, usuario[1])
                 self.nome_funcionarioEntry.insert(0, usuario[2])
@@ -107,8 +110,8 @@ class TelaGeral:
                 self.salarioEntry.insert(0, usuario[7])
                 self.enderecoEntry.insert(0, usuario[8])
             else:
-                self.lblmsg["text"] = "Funcionario não encontrado"
-                self.limparCampos()
+                messagebox.showerror("Erro", "Funcionário não encontrado")
+                self.LimparCampos()
     
     def LimparCampos(self):
             self.cpf_funcionarioEntry.delete(0, END)
