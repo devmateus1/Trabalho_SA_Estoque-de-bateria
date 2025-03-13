@@ -71,7 +71,6 @@ class Database:
         self.conn.commit() # Confirma a inseção dos dados
 
     # Metodo para buscar os dados de um usuario no banco de dados
-<<<<<<< HEAD
     def selectUser(self, idproduto):
         db = Database()
         try:
@@ -112,14 +111,3 @@ class login:
 
 
     
-=======
-    def buscar_produto(self, idproduto):
-        conn = get_connection()
-        cursor = conn.cursor()
-        query = "SELECT* FROM produto WHERE idproduto = %s"
-        self.cursor.execute(query, (idproduto,))
-        conn.close()
-        cursor.close()
-        return buscar_produto()
-    
->>>>>>> aac7da5c3498a00930c55e60e20c4acabe341f58
