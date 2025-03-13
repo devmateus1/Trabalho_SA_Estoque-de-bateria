@@ -83,13 +83,17 @@ class Procura_DeleteEAlterarFornecedor():
                 db = Database()
                 db.buscarFornecedor(idfornecedor)
                 usuario=buscaFornecedor()
-                FornecedorEntry.insert(0, usuario[1])
-                CpfFornecedorEntry.insert(0, usuario[2])
-                TelefoneFornecedorEntry.insert(0, usuario[3])
-                EmailFornecedorEntry.insert(0, usuario[4])
-                EnderecoFornecedorEntry.insert(0, usuario[5])
-                ProdutoFornecedorEntry.insert(0, usuario[6])
-                QuantidadeFornecedorEntry.insert(0, usuario[7])
+                if usuario:
+                    FornecedorEntry.insert(0, usuario[1])
+                    CpfFornecedorEntry.insert(0, usuario[2])
+                    TelefoneFornecedorEntry.insert(0, usuario[3])
+                    EmailFornecedorEntry.insert(0, usuario[4])
+                    EnderecoFornecedorEntry.insert(0, usuario[5])
+                    ProdutoFornecedorEntry.insert(0, usuario[6])
+                    QuantidadeFornecedorEntry.insert(0, usuario[7])
+                else:
+                    messagebox.showerror(title="Erro de Busca", message="FORNECEDOR NÂO EXISTE") #Exibe a mensagem de erro
+
                 
         def excluirFornecedor():
             idfornecedor=idEntry.get()
