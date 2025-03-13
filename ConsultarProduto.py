@@ -3,20 +3,6 @@ from tkinter import messagebox # Importar o mudulo de widgets tematicos do tkint
 from tkinter import ttk
 from DataBase import Database
 import tkinter as tk
-import mysql.connector
-
-
-
-def __init__(self):
-        #Conecta ao banco de dados MySQL com as credenciais forncedas
-        self.conn = mysql.connector.connect(
-            host = 'localhost',
-            user = 'root',
-            password = '',
-            database = 'trabalho_sa'
-        )
-        self.cursor = self.conn.cursor()
-        self.cursor.execute()
 
 jan = Tk()
 jan.title("USUARIO - PRODUTO")
@@ -72,34 +58,26 @@ def LimparCampos():
     DataProdutoEntry.delete (0, END)
     IdProdutoEntry.delete (0, END)
 
-def selectUser(self, idproduto):
-        db = Database()
-        try:
-            c = db.conn.cursor()
-            c.execute("SELECT * FROM produto WHERE idproduto=%s", (idproduto,))
-            produto = c.fetchone()
-            if produto:
-                self.idusuario, self.tipo, self.voltagem, self.marca, self.quantidade, self.preco, self.data = produto
-            c.close()
-            return "Busca feita com sucesso!"
-        except Exception as e:
-            return f"Ocorreu um erro na busca do usuário: {e}"
 
-
-def buscarUsuario(self,idproduto):
-    idproduto = idproduto.get()
-    self.cnnexecute("SELECT * FROM produto WHERE idproduto=%s", (idproduto,))
-    produto = self.cursor.fetchone()
+def buscarUsuario(idproduto):
+    IdProdutoEntry.get()
+    db = Database()
+    db.buscarFornecedor(idproduto)
+    produto=buscarUsuario()
     if produto:
-        TipoProdutoEntry.insert(0, produto[1])
-        VoltagemEntry.insert(0, produto[2])
-        MarcaEntry.insert(0, produto[3])
-        QuantidadeEntry.insert(0, produto[4])
-        PrecoEntry.insert(0, produto[5])
-        DataProdutoEntry.insert(0, produto[6])
+            TipoProdutoEntry.insert(0, produto[1])
+            VoltagemEntry.insert(0, produto[2])
+            MarcaEntry.insert(0, produto[3])
+            QuantidadeEntry.insert(0, produto[4])
+            PrecoEntry.insert(0, produto[5])
+            DataProdutoEntry.insert(0, produto[6])
+
+    elif idproduto =="":
+                messagebox.showerror(title="Erro de Busca", message="PREENCHA O CAMPO DE ID") #Exibe a mensagem de erro
+
     else:
-        self.lblmsg["text"] = "Usuário não encontrado"
-    LimparCampos()
+    
+        LimparCampos()
 
 
 buscarbotao = Button(text="BUSCAR", width=15,command=buscarUsuario)
