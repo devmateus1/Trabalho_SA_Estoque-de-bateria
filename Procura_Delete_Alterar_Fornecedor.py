@@ -100,6 +100,15 @@ class Procura_DeleteEAlterarFornecedor():
                 db.removerFornecedor(idfornecedor)
                 messagebox.showinfo("Sucesso","Fornecedor atualizado com sucesso!") #Exibe a mensagem de sucesso
 
+        def LimparCampos():
+            FornecedorEntry.delete(0,END) #Limpa o campo de entrada do fornecedor
+            CpfFornecedorEntry.delete(0,END) #Limpa o campo de entrada do cpf
+            TelefoneFornecedorEntry.delete(0,END) #Limpa o campo de entrada do telefone
+            EmailFornecedorEntry.delete(0,END) #Limpa o campo de entrada do email
+            EnderecoFornecedorEntry.delete(0,END) #Limpa o campo de entrada do endereço
+            ProdutoFornecedorEntry.delete(0,END) #Limpa o campo de entrada do produto
+            QuantidadeFornecedorEntry.delete(0,END) #Limpa o campo de entrada da quantidade de produto
+            idEntry.delete(0,END)
 
         alterarButton =  ttk.Button(text="ALTERAR",width=15,command=alterarFornecedor) #Cria o botão de alterar
         alterarButton.place(x=470,y=80)
@@ -109,6 +118,9 @@ class Procura_DeleteEAlterarFornecedor():
 
         excluirButton =  ttk.Button(text="EXCLUIR",width=15,command=excluirFornecedor) #Cria o botão de alterar
         excluirButton.place(x=570,y=80)
+
+        limparButton =  ttk.Button(text="LIMPAR",width=15,command=LimparCampos) #Cria o botão de alterar
+        limparButton.place(x=670,y=80)
 
 if __name__=="__main__":
     jan=Tk() # Cria uma instancia da janela principal
