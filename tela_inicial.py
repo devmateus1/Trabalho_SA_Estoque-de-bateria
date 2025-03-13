@@ -1,5 +1,4 @@
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
 # from tkinter import * #Importa todos os mudulos do tkinter
 # from tkinter import messagebox # Importar o mudulo de widgets tematicos do tkinter
 # from tkinter import ttk
@@ -31,7 +30,44 @@
 # jan.mainloop()
 
 
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
+
+# from tkinter import *
+# from tkinter import messagebox
+# from tkinter import ttk
+# from teste2 import login
+
+# class TelaLoginCadastro:
+
+#     def __init__(self, root):
+#         self.root = root
+#         self.root.title("Menu")
+#         self.root.geometry("500x500")
+#         self.root.configure(background="#f6f3ec")
+#         self.root.resizable(width=False, height=False)
+
+#         # Botões de navegação
+     
+
+#         self.FornecedoresButton = ttk.Button(self.root, text = "Fornecedores", width = 40, command = self.TelaFornecedores)
+#         self.FornecedoresButton.place(x=800, y=435)
+
+       
+
+#         self.BV = Label(self.root, text = "BEM VINDO", font = ("Times New Roman", 20))
+#         self.BV.place(x = 675, y = 30)
+
+
+
+    
+
+#     def TelaFornecedores(self):
+#         from Cadastro_Fornecedor import Abrir_Fornecedor
+#         Abrir_Fornecedor(self.root)
+#         self.ProdutosButton.place(x=5000)
+
+
+
+# root = Tk()
+# tela = TelaLoginCadastro(root)
+# root.mainloop()

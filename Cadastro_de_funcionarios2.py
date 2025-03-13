@@ -6,50 +6,50 @@ import tkinter as tk  # Importa o módulo tkinter como tk
 
 class Abrir_funcionario:
     def __init__(self, root):
-
+        
         # Título da janela
-        tituloLabel = Label(jan, text="CADASTRO DE FUNCIONÁRIOS", bg="#002333", fg="white", font=("Arial", 12, "bold"))
+        tituloLabel = Label(text="CADASTRO DE FUNCIONÁRIOS", bg="#002333", fg="white", font=("Arial", 12, "bold"))
         tituloLabel.place(x=130, y=10)
 
         # Labels e Campos de Entrada para os dados do funcionário
-        cpf_funcionarioLabel = Label(jan, text="CPF:", bg="#002333", fg="white")
+        cpf_funcionarioLabel = Label(text="CPF:", bg="#002333", fg="white")
         cpf_funcionarioLabel.place(x=30, y=50)
-        cpf_funcionarioEntry = ttk.Entry(jan, width=40)
+        cpf_funcionarioEntry = ttk.Entry(width=40)
         cpf_funcionarioEntry.place(x=150, y=50)
 
-        nome_funcionarioLabel = Label(jan, text="Nome:", bg="#002333", fg="white")
+        nome_funcionarioLabel = Label(text="Nome:", bg="#002333", fg="white")
         nome_funcionarioLabel.place(x=30, y=90)
-        nome_funcionarioEntry = ttk.Entry(jan, width=40)
+        nome_funcionarioEntry = ttk.Entry(width=40)
         nome_funcionarioEntry.place(x=150, y=90)
 
-        telefoneLabel = Label(jan, text="Telefone:", bg="#002333", fg="white")
+        telefoneLabel = Label(text="Telefone:", bg="#002333", fg="white")
         telefoneLabel.place(x=30, y=130)
-        telefoneEntry = ttk.Entry(jan, width=40)
+        telefoneEntry = ttk.Entry(width=40)
         telefoneEntry.place(x=150, y=130)
 
-        emailLabel = Label(jan, text="E-mail:", bg="#002333", fg="white")
+        emailLabel = Label(text="E-mail:", bg="#002333", fg="white")
         emailLabel.place(x=30, y=170)
-        emailEntry = ttk.Entry(jan, width=40)
+        emailEntry = ttk.Entry(width=40)
         emailEntry.place(x=150, y=170)
 
-        data_da_contratacaoLabel = Label(jan, text="Data de Contratação:", bg="#002333", fg="white")
+        data_da_contratacaoLabel = Label(text="Data de Contratação:", bg="#002333", fg="white")
         data_da_contratacaoLabel.place(x=30, y=210)
-        data_da_contratacaoEntry = ttk.Entry(jan, width=40)
+        data_da_contratacaoEntry = ttk.Entry(width=40)
         data_da_contratacaoEntry.place(x=150, y=210)
 
-        cargoLabel = Label(jan, text="Cargo:", bg="#002333", fg="white")
+        cargoLabel = Label(text="Cargo:", bg="#002333", fg="white")
         cargoLabel.place(x=30, y=250)
-        cargoEntry = ttk.Entry(jan, width=40)
+        cargoEntry = ttk.Entry(width=40)
         cargoEntry.place(x=150, y=250)
 
-        salarioLabel = Label(jan, text="Salário:", bg="#002333", fg="white")
+        salarioLabel = Label(text="Salário:", bg="#002333", fg="white")
         salarioLabel.place(x=30, y=290)
-        salarioEntry = ttk.Entry(jan, width=40)
+        salarioEntry = ttk.Entry(width=40)
         salarioEntry.place(x=150, y=290)
 
-        enderecoLabel = Label(jan, text="Endereço:", bg="#002333", fg="white")
+        enderecoLabel = Label(text="Endereço:", bg="#002333", fg="white")
         enderecoLabel.place(x=30, y=330)
-        enderecoEntry = ttk.Entry(jan, width=40)
+        enderecoEntry = ttk.Entry(width=40)
         enderecoEntry.place(x=150, y=330)
 
         # Função para conectar ao banco de dados e cadastrar funcionário
@@ -72,7 +72,7 @@ class Abrir_funcionario:
                 messagebox.showinfo("Sucesso", "Funcionário(a) cadastrado(a) com sucesso!")
         
         # Botão de Cadastro
-        CadastrarButton = ttk.Button(jan, text="Cadastrar", width=15, command=conect_banco_funcionario)
+        CadastrarButton = ttk.Button(text="Cadastrar", width=15, command=conect_banco_funcionario)
         CadastrarButton.place(x=180, y=380)
 
         # Função para limpar os campos de entrada
