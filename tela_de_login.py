@@ -25,7 +25,7 @@ SenhaEntry = ttk.Entry(width = 30, show = "•")
 SenhaEntry.place(x = 155, y = 140)
 
 #Fazer login
-def FazerLogin():
+def FazerLogin(self):
 
     usuario = LoginEntry.get()
     senha = SenhaEntry.get()
