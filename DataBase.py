@@ -59,9 +59,9 @@ class Database:
         self.conn.commit() #Confirma a atualização do dados 
         self.conn.close()
 
-    def buscar_funcionario(self, id_funcionario):
-        query = "SELECT * FROM funcionario WHERE id = %s"
-        self.cursor.execute(query, (id_funcionario,))
+    def buscar_funcionario(self, idfuncionario):
+        query = "SELECT * FROM funcionario WHERE idfuncionario = %s"
+        self.cursor.execute(query, (idfuncionario,))
         return self.cursor.fetchone() 
     
 
