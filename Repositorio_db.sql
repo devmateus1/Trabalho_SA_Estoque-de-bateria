@@ -21,6 +21,14 @@ CREATE TABLE `fornecedor` (
   `quantidade` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `fornecedor`
+--
+
+INSERT INTO `fornecedor` (`idfornecedor`, `fornecedores`, `cpf`, `telefone`, `email`, `endereco`, `produto`, `quantidade`) VALUES
+(4, 'Sr. White', '123-321', '122-334', 'Srblack@gmail', 'Rua casqueiro', 'Bateria de carro verde', 100),
+(5, 'Robertinho', '123-321-543', '121-33332', 'robertao@gmail', 'Rua dos tucanos', 'Bateria de onibus', 25),
+(6, 'Sr Jeorge', '1444-1231', '314144-412', 'SrJeorgeBateras@gmail', 'Rua tranquilo', 'bateria de moto', 45);
 
 -- --------------------------------------------------------
 
@@ -34,11 +42,20 @@ CREATE TABLE `funcionario` (
   `cpf` text NOT NULL,
   `telefone` text DEFAULT NULL,
   `email` text DEFAULT NULL,
+  `dataDeContratacao` text DEFAULT NULL,
   `cargo` text DEFAULT NULL,
   `salario` text DEFAULT NULL,
-  `cidade` text DEFAULT NULL,
-  `bairro` text DEFAULT NULL
+  `endereco` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `funcionario`
+--
+
+INSERT INTO `funcionario` (`idfuncionario`, `nome`, `cpf`, `telefone`, `email`, `dataDeContratacao`, `cargo`, `salario`, `endereco`) VALUES
+(1, 'Gustavo', '123-123-123', '123=123', 'gustavinho@gmail', '12/03/18', 'gerente', '15.400', 'RUA ALBANO SCHIMITCH'),
+(2, 'Max', '123-123-123', '443-123', 'max@gmail', '30/04/', 'faxineiro', '19.020', 'RUA DOS TUCANOS'),
+(3, 'Antonio', '123-123-123', '4002-8922', 'ben10reidelas@gmail.com', '10/05/99', 'carteiro', '40.000', 'MANGUE');
 
 -- --------------------------------------------------------
 
@@ -55,6 +72,15 @@ CREATE TABLE `produto` (
   `preco` text DEFAULT NULL,
   `data` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `produto`
+--
+
+INSERT INTO `produto` (`idproduto`, `tipo`, `voltagem`, `marca`, `quantidade`, `preco`, `data`) VALUES
+(1, 'carro', '240', 'VGMPower', 100, '89', '14/06/28'),
+(2, 'Moto', '100', 'VGMPower', 200, '59', '31/09/27'),
+(3, 'Onibus', '400', 'VGMPower', 50, '199', '12/10/30');
 
 -- --------------------------------------------------------
 
@@ -111,19 +137,19 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de tabela `fornecedor`
 --
 ALTER TABLE `fornecedor`
-  MODIFY `idfornecedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idfornecedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `funcionario`
 --
 ALTER TABLE `funcionario`
-  MODIFY `idfuncionario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idfuncionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `idproduto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idproduto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
