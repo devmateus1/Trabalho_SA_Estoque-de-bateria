@@ -74,17 +74,23 @@ class TelaLoginCadastro:
      
 
         self.FornecedoresButton = ttk.Button(self.root, text = "Fornecedores", width = 30, command = self.TelaFornecedores)
-        self.FornecedoresButton.place(x=100, y=100)
+        self.FornecedoresButton.place(x=100, y=70)
 
         self.FornecedoresButton = ttk.Button(self.root, text = "Consulta Fornecedores", width = 30, command = self.TelaConsulta)
-        self.FornecedoresButton.place(x=100, y=140)
+        self.FornecedoresButton.place(x=100, y=120)
+
+
+
+        self.FornecedoresButton = ttk.Button(self.root, text = "Produto", width = 30, command = self.TelaProduto)
+        self.FornecedoresButton.place(x=100, y=190)
+
 
 
         self.FornecedoresButton = ttk.Button(self.root, text = "Funcionario", width = 30, command = self.TelaFuncionario)
-        self.FornecedoresButton.place(x=100, y=200)
+        self.FornecedoresButton.place(x=100, y=300)
 
-        self.BV = Label(self.root, text = "BEM VINDO", font = ("Times New Roman", 15))
-        self.BV.place(x = 100, y = 30)
+        self.BV = Label(self.root, text = "BEM VINDO ADM!!", font = ("Times New Roman", 15))
+        self.BV.place(x = 50, y = 15)
 
 
 
@@ -98,6 +104,11 @@ class TelaLoginCadastro:
     def TelaConsulta(self):
         from Procura_Delete_Alterar_Fornecedor import Procura_DeleteEAlterarFornecedor
         Procura_DeleteEAlterarFornecedor(self.root)
+        self.ProdutosButton.place(x=5000)
+
+    def TelaProduto(self):
+        from Produto import AbrirProduto
+        AbrirProduto(self.root)
         self.ProdutosButton.place(x=5000)
 
 
