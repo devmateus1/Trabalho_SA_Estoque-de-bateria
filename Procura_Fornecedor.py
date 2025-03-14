@@ -3,16 +3,19 @@ from tkinter import * #IMporta todos os modulos do tkinter
 from tkinter import messagebox #importa o modulo de caixas de de mensagens do tkinter 
 from tkinter import ttk #Importa a classe Database do modulo DataBase
 from DataBase import Database
-import tkinter as tk
-class Procura_DeleteEAlterarFornecedor():
+
+class Procura_Fornecedor():
     def __init__(self,root):
     
 
 
-        tituloLabel = Label(text="FORNECEDORES:",bg="white") #Coloca um titulo para a janela
+        tituloLabel = Label(text="FORNECEDORES PARA USUARIO:",bg="white") #Coloca um titulo para a janela
         tituloLabel.place(x=160,y=10)
 
-        alterarLabel = Label(text="Alterar forncedor:",bg="white") #Coloca um label
+        infoLabel = Label(text="Digite o ID do fornecedor para procurar:",bg="white") #Coloca um titulo para a janela
+        infoLabel.place(x=40,y=40)
+
+        alterarLabel = Label(text="Dados do forncedor procurado:",bg="white") #Coloca um label
         alterarLabel.place(x=40,y=110)
 
         idLabel = Label(text="ID do Fornecedor:",bg="White") #Cria label do ID
@@ -54,37 +57,26 @@ class Procura_DeleteEAlterarFornecedor():
         QuantidadeFornecedorLabel.place(x=10,y=390)
         QuantidadeFornecedorEntry = ttk.Entry(width=30) #Cria um campo para colocar a quantidade de produto fornecido
         QuantidadeFornecedorEntry.place(x=150,y=390)
-
-        def alterarFornecedor():
-
-            #Transforma os campos de textos em variaveis
+        
+        def LimparCampos():
+                    FornecedorEntry.delete(0,END) #Limpa o campo de entrada do fornecedor
+                    CpfFornecedorEntry.delete(0,END) #Limpa o campo de entrada do cpf
+                    TelefoneFornecedorEntry.delete(0,END) #Limpa o campo de entrada do telefone
+                    EmailFornecedorEntry.delete(0,END) #Limpa o campo de entrada do email
+                    EnderecoFornecedorEntry.delete(0,END) #Limpa o campo de entrada do endereço
+                    ProdutoFornecedorEntry.delete(0,END) #Limpa o campo de entrada do produto
+                    QuantidadeFornecedorEntry.delete(0,END) #Limpa o campo de entrada da quantidade de produto
+                    idEntry.delete(0,END)
+        
+        def buscaFornecedor():
             idfornecedor=idEntry.get()
-            fornecedores=FornecedorEntry.get()
-            cpf=CpfFornecedorEntry.get()
-            telefone=TelefoneFornecedorEntry.get()
-            email=EmailFornecedorEntry.get()
-            endereco=EnderecoFornecedorEntry.get()
-            produto=ProdutoFornecedorEntry.get()
-            quantidade=QuantidadeFornecedorEntry.get()
-
-
-            if idfornecedor =="" or fornecedores == "" or cpf == "" or telefone == "" or email == "" or endereco == "" or produto == "" or quantidade == "": #Verifica se os campos de textos estão vazios
-                messagebox.showerror(title="Erro de Atulização", message="PREENCHA TODOS OS CAMPOS") #Exibe a mensagem de erro
-            else:
-                db = Database() #Cria uma instancia da classe Database
-                db.alterarFornecedor(idfornecedor,fornecedores,cpf,telefone,email,endereco,produto,quantidade) #Chama o metodo para registrar no banco de dados 
-                messagebox.showinfo("Sucesso","Fornecedor atualizado com sucesso!") #Exibe a mensagem de sucesso
-
-        def buscaFornecedor(): #Busca fornecedor de acordo com o id
-            idfornecedor=idEntry.get()
-            if idfornecedor =="": #Verifica se a caixa de texto do id está vazia
+            if idfornecedor =="":
                 messagebox.showerror(title="Erro de Busca", message="PREENCHA O CAMPO DE ID") #Exibe a mensagem de erro
             else:
-                db = Database() #Cria uma instancia da classe Database
+                db = Database()
                 db.buscarFornecedor(idfornecedor)
                 usuario=buscaFornecedor()
                 if usuario:
-                    #Coloca as informações no campo de dados
                     FornecedorEntry.insert(0, usuario[1])
                     CpfFornecedorEntry.insert(0, usuario[2])
                     TelefoneFornecedorEntry.insert(0, usuario[3])
@@ -95,37 +87,15 @@ class Procura_DeleteEAlterarFornecedor():
                 else:
                     messagebox.showerror(title="Erro de Busca", message="FORNECEDOR NÂO EXISTE") #Exibe a mensagem de erro
 
-                
-        def excluirFornecedor():
-            idfornecedor=idEntry.get()
-            if idfornecedor =="": #Verifica se a caixa de texto do id está vazia
-                messagebox.showerror(title="Erro de Busca", message="PREENCHA O CAMPO DE ID") #Exibe a mensagem de erro
-            else:
-                db = Database() #Cria uma instancia da classe Database
-                db.removerFornecedor(idfornecedor)
-                messagebox.showinfo("Sucesso","Fornecedor atualizado com sucesso!") #Exibe a mensagem de sucesso
 
-        def LimparCampos():
-            FornecedorEntry.delete(0,END) #Limpa o campo de entrada do fornecedor
-            CpfFornecedorEntry.delete(0,END) #Limpa o campo de entrada do cpf
-            TelefoneFornecedorEntry.delete(0,END) #Limpa o campo de entrada do telefone
-            EmailFornecedorEntry.delete(0,END) #Limpa o campo de entrada do email
-            EnderecoFornecedorEntry.delete(0,END) #Limpa o campo de entrada do endereço
-            ProdutoFornecedorEntry.delete(0,END) #Limpa o campo de entrada do produto
-            QuantidadeFornecedorEntry.delete(0,END) #Limpa o campo de entrada da quantidade de produto
-            idEntry.delete(0,END)
-
-        alterarButton =  ttk.Button(text="ALTERAR",width=15,command=alterarFornecedor) #Cria o botão de alterar
-        alterarButton.place(x=470,y=80)
-
-        pesquisaButton =  ttk.Button(text="BUSCAR",width=15,command=buscaFornecedor) #Cria o botão de buscar
+        pesquisaButton =  ttk.Button(text="BUSCAR",width=15,command=buscaFornecedor) #Cria o botão de alterar
         pesquisaButton.place(x=370,y=80)
+        limparButton =  ttk.Button(text="LIMPAR",width=15,command=LimparCampos) #Cria o botão de alterar
+        limparButton.place(x=470,y=80)
 
-        excluirButton =  ttk.Button(text="EXCLUIR",width=15,command=excluirFornecedor) #Cria o botão de excluir
-        excluirButton.place(x=570,y=80)
 
-        limparButton =  ttk.Button(text="LIMPAR",width=15,command=LimparCampos) #Cria o botão de limpar
-        limparButton.place(x=670,y=80)
+
+
 
 if __name__=="__main__":
     jan=Tk() # Cria uma instancia da janela principal
@@ -133,5 +103,5 @@ if __name__=="__main__":
     jan .geometry("900x700") #Define o tamanho da janela
     jan.configure(background="white") #Configura a cor de fundo da janela
     jan.resizable(width=False,height=False) #Impede que a janela seja redimensionad
-    app=Procura_DeleteEAlterarFornecedor(jan)
+    app=Procura_Fornecedor(jan)
     jan.mainloop()
