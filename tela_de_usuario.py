@@ -13,7 +13,7 @@ class TeldACASTRO:
     jan.resizable(width=False, height=False)
 
     text1 = Label (text="Tela Usuario", width=49)
-    text1.place (x=100 ,y=10)
+    text1.place (x=100 ,y=20)
 
     Produto = Button (text="PRODUTO", width=10)
     Produto.place (x=100 ,y=50)
