@@ -62,7 +62,7 @@ def LimparCampos():
 def buscarUsuario(idproduto):
     IdProdutoEntry.get()
     db = Database()
-    db.buscarFornecedor(idproduto)
+    db.buscarFornecedor(idproduto) 
     produto=buscarUsuario()
     if produto:
             TipoProdutoEntry.insert(0, produto[1])

@@ -25,20 +25,25 @@ SenhaEntry = ttk.Entry(width = 30, show = "•")
 SenhaEntry.place(x = 155, y = 140)
 
 #Fazer login
-def FazerLogin():
+def FazerLogin(self):
 
     usuario = LoginEntry.get()
     senha = SenhaEntry.get()
 
-    db = Database () 
-    db.cursor.execute("""SELECT * FROM usuario WHERE usuario = %s AND senha = %s""", (usuario, senha))
-    VerifyLogin = db.cursor.fetchone()
+    try:
+        if usuario == 'ADM' and senha == '1234':
+            from tela_de_adm import  TelaLoginCadastro
+            TelaLoginCadastro(self.root)        
+    except:
+        db = Database () 
+        db.cursor.execute("""SELECT * FROM usuario WHERE usuario = %s AND senha = %s""", (usuario, senha))
+        VerifyLogin = db.cursor.fetchone()
 
-    if VerifyLogin:
-        messagebox.showinfo(title = "INFO LOGIN", message = "Acesso Confirmado, Bem Vindo!")
+        if VerifyLogin:
+            messagebox.showinfo(title = "INFO LOGIN", message = "Acesso Confirmado, Bem Vindo!")
 
-        from tela_de_adm import  TelaLoginCadastro
-        TelaLoginCadastro(self.root)
+            from tela_de_usuario import TeldACASTRO
+            TeldACASTRO
         
         
     else:

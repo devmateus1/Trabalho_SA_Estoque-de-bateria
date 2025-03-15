@@ -1,1 +1,0 @@
-# TrabalhoSA_Estoque-de-bateria

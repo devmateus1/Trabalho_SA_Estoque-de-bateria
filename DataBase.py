@@ -50,7 +50,7 @@ class Database:
         self.conn.commit()  # Confirma a inserção dos dados
 
     def removerfuncionario(self,idfuncionario):
-        self.cursor.execute("DELETE FROM funcionario WHERE idfuncionario=%s",(idfuncionario))
+        self.cursor.execute("DELETE FROM funcionario WHERE idfuncionario=%s",(idfuncionario,))
         self.conn.commit()
 
     def alterarfuncionario(self, idfuncionario, cpf, nome, telefone, email, dataDeContratacao, cargo, salario, endereco):
@@ -59,10 +59,24 @@ class Database:
         self.conn.commit() #Confirma a atualização do dados 
         self.conn.close()
 
+<<<<<<< HEAD
     def buscar_funcionario(self, id_funcionario):
-        query = "SELECT * FROM funcionario WHERE id = %s"
+         query = "SELECT * FROM funcionario WHERE id = %s"
+         query = "SELECT * FROM funcionario WHERE idfuncionario = %s"
+         self.cursor.execute(query, (id_funcionario,))
+         return self.cursor.fetchone() 
+=======
+<<<<<<< HEAD
+    def buscar_funcionario(self, id_funcionario):
+        query = "SELECT * FROM funcionario WHERE idfuncionario = %s"
         self.cursor.execute(query, (id_funcionario,))
+=======
+    def buscar_funcionario(self, idfuncionario):
+        query = "SELECT * FROM funcionario WHERE idfuncionario = %s"
+        self.cursor.execute(query, (idfuncionario,))
+>>>>>>> 9dc2c45879e30e3f3b740d2c287aca34510c37d9
         return self.cursor.fetchone() 
+>>>>>>> 304360b547b8cc0ceccee92fc1e8dfd9d0657c88
     
 
         # Metódo para registrar um novo usuario no banco de dados
