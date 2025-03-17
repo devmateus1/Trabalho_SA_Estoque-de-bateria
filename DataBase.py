@@ -23,6 +23,10 @@ class Database:
         );''')
     #DataBase Fornecedor
         self.conn.commit() #Confirma a criação da tabela
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------FORNECEDOR-----------------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     def RegistrarNoBancoFornecedor(self,fornecedores,cpf,telefone,email,endereco,produto,quantidade):
         self.cursor.execute("INSERT INTO fornecedor(fornecedores, cpf, telefone, email, endereco, produto, quantidade) VALUES(%s, %s, %s, %s, %s, %s, %s)",(fornecedores, cpf, telefone, email, endereco, produto, quantidade)) #Insere os dados do usuario na tabela
         self.conn.commit() #Confirma a inserção dos dados
@@ -33,6 +37,7 @@ class Database:
                             (fornecedores,cpf,telefone,email,endereco,produto,quantidade,idfornecedor)) #Atualiza os dados do usuario com id oferecido
         self.conn.commit() #Confirma a atualização do dados 
         self.conn.close()
+
     def buscar_fornecedor(self, idfornecedor):
         query = "SELECT * FROM fornecedor WHERE idfornecedor = %s"
         self.cursor.execute(query, (idfornecedor,))
@@ -41,7 +46,10 @@ class Database:
     def removerFornecedor(self,idfornecedor):
         self.cursor.execute("DELETE FROM fornecedor WHERE idfornecedor=%s", (idfornecedor,))
         self.conn.commit()
-    
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------FUNCIONARIOS-----------------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     def RegistrarNoBancofuncionario(self, cpf, nome, telefone, email, dataDeContratacao, cargo, salario, endereco):
         # Insere um novo funcionário no banco de dados
         self.cursor.execute("INSERT INTO funcionario(cpf, nome, telefone, email, dataDeContratacao, cargo, salario, endereco) VALUES(%s, %s, %s, %s, %s, %s, %s, %s)",
@@ -58,15 +66,14 @@ class Database:
         self.conn.commit() #Confirma a atualização do dados 
         self.conn.close()
 
-
-
-
     def buscar_funcionario(self, idfuncionario):
         query = "SELECT * FROM funcionario WHERE idfuncionario = %s"
         self.cursor.execute(query, (idfuncionario,))
         return self.cursor.fetchone() 
-
     
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------PRODUTO----------------------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
         # Metódo para registrar um novo usuario no banco de dados
     def RegistrarNoBanco_Produto(self, tipo, voltagem, marca, quantidade, preco, data):
@@ -92,6 +99,9 @@ class Database:
         self.cursor.execute("""SELECT * FROM usuario WHERE usuario = %s AND senha = %s""", (usuario, senha))
         self.conn.commit() # Confirma a inseção dos dados
         
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------LOGIN-----------------------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
      
 class login:

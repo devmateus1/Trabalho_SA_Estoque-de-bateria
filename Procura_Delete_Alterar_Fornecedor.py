@@ -90,6 +90,7 @@ class Procura_DeleteEAlterarFornecedor():
                     EnderecoFornecedorEntry.delete(0,END) #Limpa o campo de entrada do endereço
                     ProdutoFornecedorEntry.delete(0,END) #Limpa o campo de entrada do produto
                     QuantidadeFornecedorEntry.delete(0,END) #Limpa o campo de entrada da quantidade de produto
+                    #Coloca os dados obtidos no campo de texto
                     FornecedorEntry.insert(0, usuario[1])
                     CpfFornecedorEntry.insert(0, usuario[2])
                     TelefoneFornecedorEntry.insert(0, usuario[3])
