@@ -1,22 +1,13 @@
 from tkinter import *  # Importa todos os módulos do Tkinter
 from tkinter import messagebox  # Importa o módulo de caixas de mensagens do Tkinter 
 from tkinter import ttk  # Importa o módulo ttk do Tkinter
-<<<<<<< HEAD
-from DataBase import Database  # Importa a classe Database do módulo DataBase
-=======
 from DataBase import Database # Importa a classe Database do módulo DataBase
->>>>>>> 931b3141b5e5aeffd78627d28db5ca7fe1302722
 import tkinter as tk  # Importa o módulo tkinter como tk
 
 class TelaGeral:
     def __init__(self, root):
-<<<<<<< HEAD
-        self.root = root  
-        self.root.configure(bg="#002333")  # Fundo da janela principal
-=======
         
         self.root = root  # Referência da janela principal
->>>>>>> 931b3141b5e5aeffd78627d28db5ca7fe1302722
         
         # Título da janela
         tituloLabel = Label(self.root, text="TELA GERAL FUNCIONÁRIOS", bg="#002333", fg="white", font=("Arial", 13, "bold"))
@@ -66,14 +57,9 @@ class TelaGeral:
         button_bg = "#005577"  # Azul médio para botões
         button_fg = "white"
 
-<<<<<<< HEAD
-        excluirButton = ttk.Button(self.root, text="EXCLUIR", width=15, command=self.combinarfuncoes)
-        excluirButton.place(x=60, y=420)
-=======
         # Botões
         excluirButton = ttk.Button(self.root, text="EXCLUIR", width=15, command=self.excluirFuncionario)
         excluirButton.place(x=50, y=400)
->>>>>>> 931b3141b5e5aeffd78627d28db5ca7fe1302722
 
         alterarButton = ttk.Button(self.root, text="ALTERAR", width=15, command=self.alterarfuncionario)
         alterarButton.place(x=200, y=420)

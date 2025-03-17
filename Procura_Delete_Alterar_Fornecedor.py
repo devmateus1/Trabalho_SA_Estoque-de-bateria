@@ -9,48 +9,48 @@ class Procura_DeleteEAlterarFornecedor():
     
 
 
-        tituloLabel = Label(text="FORNECEDORES:",bg="white") #Coloca um titulo para a janela
+        tituloLabel = Label(text="FORNECEDORES | ADM :",bg="#002333", fg="white") #Coloca um titulo para a janela
         tituloLabel.place(x=160,y=10)
 
-        alterarLabel = Label(text="Alterar forncedor:",bg="white") #Coloca um label
+        alterarLabel = Label(text="Alterar forncedor:",bg="#002333", fg="white") #Coloca um label
         alterarLabel.place(x=40,y=110)
 
-        idLabel = Label(text="ID do Fornecedor:",bg="White") #Cria label do ID
+        idLabel = Label(text="ID do Fornecedor:",bg="#002333", fg="white") #Cria label do ID
         idLabel.place(x=10,y=80)
         idEntry=ttk.Entry(width=30) #Cria um campo do ID
         idEntry.place(x=150,y=80)   
 
-        FornecedorLabel = Label(text="Nome do Fornecedor:",bg="White") #Cria label do fornecedor
+        FornecedorLabel = Label(text="Nome do Fornecedor:",bg="#002333", fg="white") #Cria label do fornecedor
         FornecedorLabel.place(x=10,y=150)
         FornecedorEntry=ttk.Entry(width=30) #Cria um campo do forncedor
         FornecedorEntry.place(x=150,y=150)   
 
-        CpfFornecedorLabel = Label(text="CPF do Fornecedor:",bg="White") #Cria label do Cpf
+        CpfFornecedorLabel = Label(text="CPF do Fornecedor:",bg="#002333", fg="white") #Cria label do Cpf
         CpfFornecedorLabel.place(x=10,y=190)
         CpfFornecedorEntry = ttk.Entry(width=30) #Cria um campo do cpf
         CpfFornecedorEntry.place(x=150,y=190)
 
-        TelefoneFornecedorLabel = Label(text="Telefone do fornecedor:",bg="White") #Cria label do Telefone
+        TelefoneFornecedorLabel = Label(text="Telefone do fornecedor:",bg="#002333", fg="white") #Cria label do Telefone
         TelefoneFornecedorLabel.place(x=10,y=230)
         TelefoneFornecedorEntry = ttk.Entry(width=30) #Cria um campo do telefone
         TelefoneFornecedorEntry.place(x=150,y=230)
 
-        EmailFornecedorLabel = Label(text="Email do Fornecedor:",bg="White") #Cria label do email
+        EmailFornecedorLabel = Label(text="Email do Fornecedor:",bg="#002333", fg="white") #Cria label do email
         EmailFornecedorLabel.place(x=10,y=270)
         EmailFornecedorEntry = ttk.Entry(width=30) #Cria um campo do email
         EmailFornecedorEntry.place(x=150,y=270)
 
-        EnderecoFornecedorLabel = Label(text="Endereço do Fornecedor:",bg="White") #Cria label do endereço
+        EnderecoFornecedorLabel = Label(text="Endereço do Fornecedor:",bg="#002333", fg="white") #Cria label do endereço
         EnderecoFornecedorLabel.place(x=10,y=310)
         EnderecoFornecedorEntry = ttk.Entry(width=30) #Cria um campo do endereço
         EnderecoFornecedorEntry.place(x=150,y=310)
 
-        ProdutoFornecedorLabel = Label(text="Produto Fornecido:",bg="White") #Cria label do produto
+        ProdutoFornecedorLabel = Label(text="Produto Fornecido:",bg="#002333", fg="white") #Cria label do produto
         ProdutoFornecedorLabel.place(x=10,y=350)
         ProdutoFornecedorEntry = ttk.Entry(width=30) #Cria um campo do produto
         ProdutoFornecedorEntry.place(x=150,y=350)
 
-        QuantidadeFornecedorLabel = Label(text="Quantia de Produto:",bg="White") #Cria label da quantidade de produto fornecido 
+        QuantidadeFornecedorLabel = Label(text="Quantia de Produto:",bg="#002333", fg="white") #Cria label da quantidade de produto fornecido 
         QuantidadeFornecedorLabel.place(x=10,y=390)
         QuantidadeFornecedorEntry = ttk.Entry(width=30) #Cria um campo para colocar a quantidade de produto fornecido
         QuantidadeFornecedorEntry.place(x=150,y=390)
@@ -75,16 +75,21 @@ class Procura_DeleteEAlterarFornecedor():
                 db.alterarFornecedor(idfornecedor,fornecedores,cpf,telefone,email,endereco,produto,quantidade) #Chama o metodo para registrar no banco de dados 
                 messagebox.showinfo("Sucesso","Fornecedor atualizado com sucesso!") #Exibe a mensagem de sucesso
 
-        def buscaFornecedor(): #Busca fornecedor de acordo com o id
-            idfornecedor=idEntry.get()
-            if idfornecedor =="": #Verifica se a caixa de texto do id está vazia
-                messagebox.showerror(title="Erro de Busca", message="PREENCHA O CAMPO DE ID") #Exibe a mensagem de erro
+        def buscaFornecedor():
+            idfornecedor = idEntry.get()
+            if idfornecedor == "":
+                messagebox.showerror(title="Erro", message="PREENCHA O CAMPO DE ID")
             else:
-                db = Database() #Cria uma instancia da classe Database
-                db.buscarFornecedor(idfornecedor)
-                usuario=buscaFornecedor()
+                db = Database()  # Crie uma instância do banco de dados
+                usuario = db.buscar_funcionario(idfornecedor)  # Supondo que exista um método para buscar por id
                 if usuario:
-                    #Coloca as informações no campo de dados
+                    FornecedorEntry.delete(0,END) #Limpa o campo de entrada do fornecedor
+                    CpfFornecedorEntry.delete(0,END) #Limpa o campo de entrada do cpf
+                    TelefoneFornecedorEntry.delete(0,END) #Limpa o campo de entrada do telefone
+                    EmailFornecedorEntry.delete(0,END) #Limpa o campo de entrada do email
+                    EnderecoFornecedorEntry.delete(0,END) #Limpa o campo de entrada do endereço
+                    ProdutoFornecedorEntry.delete(0,END) #Limpa o campo de entrada do produto
+                    QuantidadeFornecedorEntry.delete(0,END) #Limpa o campo de entrada da quantidade de produto
                     FornecedorEntry.insert(0, usuario[1])
                     CpfFornecedorEntry.insert(0, usuario[2])
                     TelefoneFornecedorEntry.insert(0, usuario[3])
@@ -92,8 +97,10 @@ class Procura_DeleteEAlterarFornecedor():
                     EnderecoFornecedorEntry.insert(0, usuario[5])
                     ProdutoFornecedorEntry.insert(0, usuario[6])
                     QuantidadeFornecedorEntry.insert(0, usuario[7])
+                    
                 else:
-                    messagebox.showerror(title="Erro de Busca", message="FORNECEDOR NÂO EXISTE") #Exibe a mensagem de erro
+                    messagebox.showerror("Erro", "Funcionário não encontrado")
+                    LimparCampos()
 
                 
         def excluirFornecedor():
@@ -116,22 +123,25 @@ class Procura_DeleteEAlterarFornecedor():
             idEntry.delete(0,END)
 
         alterarButton =  ttk.Button(text="ALTERAR",width=15,command=alterarFornecedor) #Cria o botão de alterar
-        alterarButton.place(x=470,y=80)
+        alterarButton.place(x=500,y=80)
 
         pesquisaButton =  ttk.Button(text="BUSCAR",width=15,command=buscaFornecedor) #Cria o botão de buscar
         pesquisaButton.place(x=370,y=80)
 
         excluirButton =  ttk.Button(text="EXCLUIR",width=15,command=excluirFornecedor) #Cria o botão de excluir
-        excluirButton.place(x=570,y=80)
+        excluirButton.place(x=370,y=120)
 
         limparButton =  ttk.Button(text="LIMPAR",width=15,command=LimparCampos) #Cria o botão de limpar
-        limparButton.place(x=670,y=80)
+        limparButton.place(x=500,y=120)
 
 if __name__=="__main__":
     jan=Tk() # Cria uma instancia da janela principal
     jan.title("ADM - Leitor Fornecedor") #Define o titulo da janela
-    jan .geometry("900x700") #Define o tamanho da janela
-    jan.configure(background="white") #Configura a cor de fundo da janela
+    jan .geometry("700x500") #Define o tamanho da janela
+    jan.configure(bg="#002333") #Configura a cor de fundo da janela
     jan.resizable(width=False,height=False) #Impede que a janela seja redimensionad
+    logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
+    LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
+    LogoLabel.place(x=390, y=180) # Posiciona a imagem
     app=Procura_DeleteEAlterarFornecedor(jan)
     jan.mainloop()
