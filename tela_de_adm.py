@@ -107,7 +107,7 @@ class TelaLoginCadastro:
         self.ProdutosButton.place(x=5000)
 
     def TelaProduto(self):
-        from Produto import AbrirProduto
+        from Produto_adm import AbrirProduto
         AbrirProduto(self.root)
         self.ProdutosButton.place(x=5000)
 

@@ -23,6 +23,9 @@ class Database:
         );''')
     #DataBase Fornecedor
         self.conn.commit() #Confirma a criação da tabela
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------FORNECEDOR-----------------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     def RegistrarNoBancoFornecedor(self,fornecedores,cpf,telefone,email,endereco,produto,quantidade):
         self.cursor.execute("INSERT INTO fornecedor(fornecedores, cpf, telefone, email, endereco, produto, quantidade) VALUES(%s, %s, %s, %s, %s, %s, %s)",(fornecedores, cpf, telefone, email, endereco, produto, quantidade)) #Insere os dados do usuario na tabela
@@ -43,6 +46,9 @@ class Database:
     def removerFornecedor(self,idfornecedor):
         self.cursor.execute("DELETE FROM fornecedor WHERE idfornecedor=%s", (idfornecedor,))
         self.conn.commit()
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------FUNCIONARIOS-----------------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     def RegistrarNoBancofuncionario(self, cpf, nome, telefone, email, dataDeContratacao, cargo, salario, endereco):
         # Insere um novo funcionário no banco de dados
@@ -60,11 +66,22 @@ class Database:
         self.conn.commit() #Confirma a atualização do dados 
         self.conn.close()
 
+
+    def buscar_funcionario(self, id_funcionario):
+        query = "SELECT * FROM funcionario WHERE idfuncionario = %s"
+        self.cursor.execute(query, (id_funcionario,))
+
     def buscar_funcionario(self, id_funcionario):
          query = "SELECT * FROM funcionario WHERE id = %s"
          query = "SELECT * FROM funcionario WHERE idfuncionario = %s"
          self.cursor.execute(query, (id_funcionario,))
          return self.cursor.fetchone() 
+
+    
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------PRODUTO----------------------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
         # Metódo para registrar um novo usuario no banco de dados
     def RegistrarNoBanco_Produto(self, tipo, voltagem, marca, quantidade, preco, data):
@@ -72,24 +89,29 @@ class Database:
         self.conn.commit() # Confirma a inseção dos dados
 
     # Metodo para buscar os dados de um usuario no banco de dados
-    def selectUser(self, idproduto):
-        db = Database()
-        try:
-            c = db.conn.cursor()
-            c.execute("SELECT * FROM produto WHERE idproduto=%s", (idproduto,))
-            produto = c.fetchone()
-            if produto:
-                self.idusuario, self.tipo, self.voltagem, self.marca, self.quantidade, self.preco, self.data = produto
-            c.close()
-            return "Busca feita com sucesso!"
-        except Exception as e:
-            return f"Ocorreu um erro na busca do usuário: {e}"
+    def buscar_produto(self, id_produto):
+        query = "SELECT * FROM produto WHERE idproduto = %s"
+        self.cursor.execute(query, (id_produto,))
+        return self.cursor.fetchone()
+    
+    def removerproduto(self,idproduto):
+        self.cursor.execute("DELETE FROM produto WHERE idproduto=%s",(idproduto,))
+        self.conn.commit()
+
+    def alterarproduto(self, idproduto, tipo, voltagem, marca, quantidade, preco, data):
+        self.cursor.execute("UPDATE produto SET tipo=%s, voltagem=%s, marca=%s, quantidade=%s, preco=%s, data=%s WHERE idproduto=%s",
+                            (tipo, voltagem, marca, quantidade, preco, data, idproduto)) #Atualiza os dados do usuario com id oferecido
+        self.conn.commit() #Confirma a atualização do dados 
+        self.conn.close()
         
     #Fazer login
     def FazerLogin(self, usuario, senha):
         self.cursor.execute("""SELECT * FROM usuario WHERE usuario = %s AND senha = %s""", (usuario, senha))
         self.conn.commit() # Confirma a inseção dos dados
         
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------LOGIN-----------------------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
      
 class login:
