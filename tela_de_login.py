@@ -26,7 +26,6 @@ def FazerLogin():
     usuario = LoginEntry.get()
     senha = SenhaEntry.get()
 
-<<<<<<< HEAD
     try:
         # Verificando login do usuário 'ADM'
         if usuario == 'ADM' and senha == '1234':
@@ -52,21 +51,6 @@ def FazerLogin():
 # Botão de login
 LoginButton = ttk.Button(text="LOGIN", width=15, command=FazerLogin)
 LoginButton.place(x=130, y=335)
-=======
-    
-    db = Database () 
-    db.cursor.execute("""SELECT * FROM usuario WHERE usuario = %s AND senha = %s""", (usuario, senha))
-    VerifyLogin = db.cursor.fetchone()
-
-    if VerifyLogin:
-            messagebox.showinfo(title = "INFO LOGIN", message = "Acesso Confirmado, Bem Vindo!")
-            self.root.destroy()
-        #puxa no banco
-    
-        
-    else:  
-        messagebox.showinfo(title = "INFO LOGIN", message = "Acesso Negado. Verifique se esta cadastrado no sistema!")
->>>>>>> c73ede27f7d0bf45a73bcce5cbd03702d2a2369c
 
 # Registrar um novo usuário (essa parte não foi implementada, mas pode ser adicionada conforme necessário)
 

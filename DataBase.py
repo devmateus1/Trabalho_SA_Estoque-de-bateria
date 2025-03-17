@@ -23,9 +23,6 @@ class Database:
         );''')
     #DataBase Fornecedor
         self.conn.commit() #Confirma a criação da tabela
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#---------------------------------------------------------------FORNECEDOR-----------------------------------------------------------------------------------------------------------
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     def RegistrarNoBancoFornecedor(self,fornecedores,cpf,telefone,email,endereco,produto,quantidade):
         self.cursor.execute("INSERT INTO fornecedor(fornecedores, cpf, telefone, email, endereco, produto, quantidade) VALUES(%s, %s, %s, %s, %s, %s, %s)",(fornecedores, cpf, telefone, email, endereco, produto, quantidade)) #Insere os dados do usuario na tabela
@@ -46,9 +43,6 @@ class Database:
     def removerFornecedor(self,idfornecedor):
         self.cursor.execute("DELETE FROM fornecedor WHERE idfornecedor=%s", (idfornecedor,))
         self.conn.commit()
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#---------------------------------------------------------------FUNCIONARIOS-----------------------------------------------------------------------------------------------------------
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     def RegistrarNoBancofuncionario(self, cpf, nome, telefone, email, dataDeContratacao, cargo, salario, endereco):
         # Insere um novo funcionário no banco de dados
@@ -66,22 +60,11 @@ class Database:
         self.conn.commit() #Confirma a atualização do dados 
         self.conn.close()
 
-<<<<<<< HEAD
     def buscar_funcionario(self, id_funcionario):
          query = "SELECT * FROM funcionario WHERE id = %s"
          query = "SELECT * FROM funcionario WHERE idfuncionario = %s"
          self.cursor.execute(query, (id_funcionario,))
          return self.cursor.fetchone() 
-=======
-    def buscar_funcionario(self, idfuncionario):
-        query = "SELECT * FROM funcionario WHERE idfuncionario = %s"
-        self.cursor.execute(query, (idfuncionario,))
-        return self.cursor.fetchone() 
-    
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#---------------------------------------------------------------PRODUTO----------------------------------------------------------------------------------------------------------------
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
->>>>>>> c73ede27f7d0bf45a73bcce5cbd03702d2a2369c
 
         # Metódo para registrar um novo usuario no banco de dados
     def RegistrarNoBanco_Produto(self, tipo, voltagem, marca, quantidade, preco, data):
@@ -107,9 +90,6 @@ class Database:
         self.cursor.execute("""SELECT * FROM usuario WHERE usuario = %s AND senha = %s""", (usuario, senha))
         self.conn.commit() # Confirma a inseção dos dados
         
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#---------------------------------------------------------------LOGIN-----------------------------------------------------------------------------------------------------------------
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
      
 class login:
