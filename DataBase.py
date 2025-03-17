@@ -8,6 +8,7 @@ class Database:
             password = '',
             database = 'trabalho_sa'
         )
+
         self.cursor = self.conn.cursor() #Cria um cursor para executar comandos MySQL
         self.cursor.execute('''CREATE TABLE IF NOT EXISTS `fornecedor` (
                         `idfornecedor` int(11) NOT NULL,
@@ -49,7 +50,7 @@ class Database:
         self.conn.commit()  # Confirma a inserção dos dados
 
     def removerfuncionario(self,idfuncionario):
-        self.cursor.execute("DELETE FROM funcionario WHERE idfuncionario=%s",(idfuncionario))
+        self.cursor.execute("DELETE FROM funcionario WHERE idfuncionario=%s",(idfuncionario,))
         self.conn.commit()
 
     def alterarfuncionario(self, idfuncionario, cpf, nome, telefone, email, dataDeContratacao, cargo, salario, endereco):
@@ -58,10 +59,24 @@ class Database:
         self.conn.commit() #Confirma a atualização do dados 
         self.conn.close()
 
+<<<<<<< HEAD
     def buscar_funcionario(self, id_funcionario):
-        query = "SELECT * FROM funcionario WHERE id = %s"
+         query = "SELECT * FROM funcionario WHERE id = %s"
+         query = "SELECT * FROM funcionario WHERE idfuncionario = %s"
+         self.cursor.execute(query, (id_funcionario,))
+         return self.cursor.fetchone() 
+=======
+<<<<<<< HEAD
+    def buscar_funcionario(self, id_funcionario):
+        query = "SELECT * FROM funcionario WHERE idfuncionario = %s"
         self.cursor.execute(query, (id_funcionario,))
+=======
+    def buscar_funcionario(self, idfuncionario):
+        query = "SELECT * FROM funcionario WHERE idfuncionario = %s"
+        self.cursor.execute(query, (idfuncionario,))
+>>>>>>> 9dc2c45879e30e3f3b740d2c287aca34510c37d9
         return self.cursor.fetchone() 
+>>>>>>> 304360b547b8cc0ceccee92fc1e8dfd9d0657c88
     
 
         # Metódo para registrar um novo usuario no banco de dados
@@ -70,7 +85,43 @@ class Database:
         self.conn.commit() # Confirma a inseção dos dados
 
     # Metodo para buscar os dados de um usuario no banco de dados
-    def buscar_funcionario(self, id_produto):
-        query = "SELECT * FROM produto WHERE idproduto = %s"
-        self.cursor.execute(query, (id_produto,))
-        return self.cursor.fetchone() 
+    def selectUser(self, idproduto):
+        db = Database()
+        try:
+            c = db.conn.cursor()
+            c.execute("SELECT * FROM produto WHERE idproduto=%s", (idproduto,))
+            produto = c.fetchone()
+            if produto:
+                self.idusuario, self.tipo, self.voltagem, self.marca, self.quantidade, self.preco, self.data = produto
+            c.close()
+            return "Busca feita com sucesso!"
+        except Exception as e:
+            return f"Ocorreu um erro na busca do usuário: {e}"
+        
+    #Fazer login
+    def FazerLogin(self, usuario, senha):
+        self.cursor.execute("""SELECT * FROM usuario WHERE usuario = %s AND senha = %s""", (usuario, senha))
+        self.conn.commit() # Confirma a inseção dos dados
+        
+
+     
+class login:
+    def __init__(self):
+        # Conectar ao banco de dados (exemplo com psycopg2, adapte conforme necessário)
+        self.connection =mysql.connector.connect(
+            host="localhost",
+            database="trabalho_sa",
+            user="root",
+            password=""
+        )
+        self.cursor = self.connection.cursor()  # Criação do cursor
+    
+    def __del__(self):
+        # Fechar a conexão com o banco de dados ao destruir o objeto
+        if self.cursor:
+            self.cursor.close()
+        if self.connection:
+            self.connection.close()
+
+
+    
