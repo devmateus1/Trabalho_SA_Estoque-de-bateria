@@ -58,49 +58,14 @@ class TelaGeral:
         button_fg = "white"
 
         # Botões
-        excluirButton = ttk.Button(self.root, text="EXCLUIR", width=15, command=self.excluirFuncionario)
-        excluirButton.place(x=10, y=420)
-
-        alterarButton = ttk.Button(self.root, text="ALTERAR", width=15, command=self.alterarfuncionario)
-        alterarButton.place(x=130, y=420)
-
         listarButton = ttk.Button(self.root, text="BUSCAR", width=15, command=self.buscarfuncionario)
-        listarButton.place(x=250, y=420)
+        listarButton.place(x=200, y=420)
         
         listarButton = ttk.Button(self.root, text="limpar", width=15, command=self.LimparCampos)
-        listarButton.place(x=370, y=420)
+        listarButton.place(x=310, y=420)
 
     # Funções para os botões (ainda precisam ser implementadas)
-    def excluirFuncionario(self):
-            idfuncionario=self.ID_funcionarioEntry.get()
-            if idfuncionario =="":
-                messagebox.showerror(title="Erro de Busca", message="PREENCHA O CAMPO DE ID") #Exibe a mensagem de erro
-            else:
-                db = Database()
-                db.removerfuncionario(idfuncionario)
-                messagebox.showinfo("Sucesso","funcionario excluido com sucesso com sucesso!") #Exibe a mensagem de sucesso
-
-
-    def alterarfuncionario(self):
-            idfuncionario = self.ID_funcionarioEntry.get()
-            cpf = self.cpf_funcionarioEntry.get()
-            nome = self.nome_funcionarioEntry.get()
-            telefone = self.telefoneEntry.get()
-            email = self.emailEntry.get()
-            dataDeContratacao = self.data_da_contratacaoEntry.get()
-            cargo = self.cargoEntry.get()
-            salario = self.salarioEntry.get()
-            endereco = self.enderecoEntry.get()
-            
-            # Verifica se todos os campos estão preenchidos
-            if  idfuncionario == "" or cpf == "" or nome == "" or telefone == "" or email == "" or dataDeContratacao == "" or cargo == "" or salario == "" or endereco == "":
-                messagebox.showerror(title="Erro!", message="Todos os campos devem estar preenchidos!")
-            else:
-                db = Database()  # Cria uma instância do banco de dados
-                db.alterarfuncionario(idfuncionario, cpf, nome, telefone, email, dataDeContratacao, cargo, salario, endereco)  # Registra os dados
-                messagebox.showinfo("Sucesso", "Funcionário(a) alterado(a) com sucesso!")
-       
-
+    
     def buscarfuncionario(self):
         idfuncionario = self.ID_funcionarioEntry.get()
         if idfuncionario == "":
