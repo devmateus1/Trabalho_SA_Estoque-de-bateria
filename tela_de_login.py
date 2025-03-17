@@ -1,8 +1,8 @@
 from tkinter import * 
 from tkinter import messagebox 
 from tkinter import ttk 
-from dataclasses import dataclass
-from teste2 import login
+from DataBase import Database
+
 
 #Criação da tela
 jan = Tk() 
@@ -25,28 +25,26 @@ SenhaEntry = ttk.Entry(width = 30, show = "•")
 SenhaEntry.place(x = 155, y = 140)
 
 #Fazer login
-def FazerLogin():
+def FazerLogin(self):
 
     usuario = LoginEntry.get()
     senha = SenhaEntry.get()
 
-    db = login() 
-    db.cursor.execute("SELECT * FROM usuario WHERE usuario = %s AND senha = %s", (usuario, senha))
-    VerifyLogin = db.cursor.fetchone()
+    try:
+        if usuario == 'ADM' and senha == '1234':
+            from tela_de_adm import  TelaLoginCadastro
+            TelaLoginCadastro(self.root)        
+    except:
+        db = Database () 
+        db.cursor.execute("""SELECT * FROM usuario WHERE usuario = %s AND senha = %s""", (usuario, senha))
+        VerifyLogin = db.cursor.fetchone()
 
-    if VerifyLogin:
-        messagebox.showinfo(title = "INFO LOGIN", message = "Acesso Confirmado, Bem Vindo!")
+        if VerifyLogin:
+            messagebox.showinfo(title = "INFO LOGIN", message = "Acesso Confirmado, Bem Vindo!")
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-        from tela_de_adm import  TelaLoginCadastro
-=======
-        from tela_de_adm import TelaLoginCadastro
->>>>>>> Stashed changes
-=======
-        from tela_de_adm import TelaLoginCadastro
->>>>>>> Stashed changes
-        TelaLoginCadastro()
+            from tela_de_usuario import TeldACASTRO
+            TeldACASTRO
+        
         
     else:
         messagebox.showinfo(title = "INFO LOGIN", message = "Acesso Negado. Verifique se esta cadastrado no sistema!")
@@ -56,5 +54,6 @@ LoginButton.place(x = 130, y = 335)
 
 #Registrar um novo usuario
 
-
-jan.mainloop()
+if __name__ == "__main__":
+  
+    jan.mainloop()
