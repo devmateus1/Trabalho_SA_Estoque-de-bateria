@@ -89,6 +89,9 @@ class TelaLoginCadastro:
         self.FornecedoresButton = ttk.Button(self.root, text = "Funcionario", width = 30, command = self.TelaFuncionario)
         self.FornecedoresButton.place(x=100, y=300)
 
+        self.FornecedoresButton = ttk.Button(self.root, text = "Consultar Funcionario", width = 30, command = self.TelaconsultaFuncionario)
+        self.FornecedoresButton.place(x=100, y=350)
+
         self.BV = Label(self.root, text = "BEM VINDO ADM!!", font = ("Times New Roman", 15))
         self.BV.place(x = 50, y = 15)
 
@@ -116,6 +119,12 @@ class TelaLoginCadastro:
     def TelaFuncionario(self):
         from Cadastro_de_funcionarios2 import Abrir_funcionario
         Abrir_funcionario(self.root)
+        self.ProdutosButton.place(x=5000)
+
+
+    def TelaconsultaFuncionario(self):
+        from TelaGeralFuncionarios import TelaGeral
+        TelaGeral(self.root)
         self.ProdutosButton.place(x=5000)
 
 root = Tk()
