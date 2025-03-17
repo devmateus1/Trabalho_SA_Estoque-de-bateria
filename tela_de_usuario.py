@@ -2,7 +2,7 @@ from tkinter import * #Importa todos os mudulos do tkinter
 from tkinter import messagebox # Importar o mudulo de widgets tematicos do tkinter
 from tkinter import ttk
 
-<<<<<<< HEAD
+
 import DataBase
 
 #  Criar a janela
@@ -47,7 +47,7 @@ class TeldACASTRO:
 root = Tk()
 tela = TeldACASTRO(root)
 root.mainloop()
-=======
+
  #from DataBase import DataBase
 
 #Criar a janela
@@ -70,6 +70,5 @@ class TeldACASTRO:
 
     Funcionario = Button (text="FUNCIONARIO", width=15) 
     Funcionario .place (x=335 ,y=50)
-   
+
     jan.mainloop()
->>>>>>> f7da4dec606c82da5fbe97b22081c023e551e592
