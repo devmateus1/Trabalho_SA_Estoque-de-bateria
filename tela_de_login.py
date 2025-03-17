@@ -30,23 +30,18 @@ def FazerLogin(self):
     usuario = LoginEntry.get()
     senha = SenhaEntry.get()
 
-    try:
-        if usuario == 'ADM' and senha == '1234':
-            from tela_de_adm import  TelaLoginCadastro
-            TelaLoginCadastro(self.root)        
-    except:
-        db = Database () 
-        db.cursor.execute("""SELECT * FROM usuario WHERE usuario = %s AND senha = %s""", (usuario, senha))
-        VerifyLogin = db.cursor.fetchone()
+    
+    db = Database () 
+    db.cursor.execute("""SELECT * FROM usuario WHERE usuario = %s AND senha = %s""", (usuario, senha))
+    VerifyLogin = db.cursor.fetchone()
 
-        if VerifyLogin:
+    if VerifyLogin:
             messagebox.showinfo(title = "INFO LOGIN", message = "Acesso Confirmado, Bem Vindo!")
-
-            from tela_de_usuario import TeldACASTRO
-            TeldACASTRO
+            self.root.destroy()
+        #puxa no banco
+    
         
-        
-    else:
+    else:  
         messagebox.showinfo(title = "INFO LOGIN", message = "Acesso Negado. Verifique se esta cadastrado no sistema!")
 
 LoginButton = ttk.Button(text = "LOGIN", width = 15, command = FazerLogin)
