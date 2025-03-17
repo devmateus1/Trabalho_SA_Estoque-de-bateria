@@ -99,7 +99,7 @@ class Procura_DeleteEAlterarFornecedor():
                     QuantidadeFornecedorEntry.insert(0, usuario[7])
                     
                 else:
-                    messagebox.showerror("Erro", "Funcionário não encontrado")
+                    messagebox.showerror("Erro", "Fornecedor não encontrado")
                     LimparCampos()
 
                 
