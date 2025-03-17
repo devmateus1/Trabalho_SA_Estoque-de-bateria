@@ -10,7 +10,7 @@ USE `trabalho_sa`;
 -- Estrutura para tabela `fornecedor`
 --
 
-CREATE TABLE `fornecedor` (
+CREATE TABLE IF NOT EXISTS `fornecedor` (
   `idfornecedor` int(11) NOT NULL,
   `fornecedores` text DEFAULT NULL,
   `cpf` text DEFAULT NULL,
@@ -36,7 +36,7 @@ INSERT INTO `fornecedor` (`idfornecedor`, `fornecedores`, `cpf`, `telefone`, `em
 -- Estrutura para tabela `funcionario`
 --
 
-CREATE TABLE `funcionario` (
+CREATE TABLE IF NOT EXISTS `funcionario` (
   `idfuncionario` int(11) NOT NULL,
   `nome` text DEFAULT NULL,
   `cpf` text NOT NULL,
@@ -63,7 +63,7 @@ INSERT INTO `funcionario` (`idfuncionario`, `nome`, `cpf`, `telefone`, `email`, 
 -- Estrutura para tabela `produto`
 --
 
-CREATE TABLE `produto` (
+CREATE TABLE IF NOT EXISTS `produto` (
   `idproduto` int(11) NOT NULL,
   `tipo` text DEFAULT NULL,
   `voltagem` text DEFAULT NULL,
@@ -88,7 +88,7 @@ INSERT INTO `produto` (`idproduto`, `tipo`, `voltagem`, `marca`, `quantidade`, `
 -- Estrutura para tabela `usuario`
 --
 
-CREATE TABLE `usuario` (
+CREATE TABLE IF NOT EXISTS `usuario` (
   `idusuario` int(11) NOT NULL,
   `usuario` text DEFAULT NULL,
   `senha` text DEFAULT NULL

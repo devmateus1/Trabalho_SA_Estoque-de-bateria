@@ -33,7 +33,7 @@ class Database:
                             (fornecedores,cpf,telefone,email,endereco,produto,quantidade,idfornecedor)) #Atualiza os dados do usuario com id oferecido
         self.conn.commit() #Confirma a atualização do dados 
         self.conn.close()
-    def buscar_funcionario(self, idfornecedor):
+    def buscar_fornecedor(self, idfornecedor):
         query = "SELECT * FROM fornecedor WHERE idfornecedor = %s"
         self.cursor.execute(query, (idfornecedor,))
         return self.cursor.fetchone() 

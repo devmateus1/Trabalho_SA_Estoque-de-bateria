@@ -74,7 +74,7 @@ class Procura_Fornecedor():
                 messagebox.showerror(title="Erro", message="PREENCHA O CAMPO DE ID")
             else:
                 db = Database()  # Crie uma instância do banco de dados
-                usuario = db.buscar_funcionario(idfornecedor)  # Supondo que exista um método para buscar por id
+                usuario = db.buscar_fornecedor(idfornecedor)  # Supondo que exista um método para buscar por id
                 if usuario:
                     FornecedorEntry.delete(0,END) #Limpa o campo de entrada do fornecedor
                     CpfFornecedorEntry.delete(0,END) #Limpa o campo de entrada do cpf
