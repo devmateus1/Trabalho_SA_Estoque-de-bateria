@@ -26,27 +26,40 @@ def FazerLogin():
     usuario = LoginEntry.get()
     senha = SenhaEntry.get()
 
-    try:
-        # Verificando login do usuário 'ADM'
-        if usuario == 'ADM' and senha == '1234':
-            from tela_de_adm import TelaLoginCadastro
-            TelaLoginCadastro(jan)  # Passando a janela principal como parâmetro para a nova tela
-        else:
+    # try:
+    #     # Verificando login do usuário 'ADM'
+    #     if usuario == 'ADM' and senha == '1234':
+    #         from tela_de_adm import TelaLoginCadastro
+    #         TelaLoginCadastro(jan)  # Passando a janela principal como parâmetro para a nova tela
+    #     else:
             # Conexão com o banco de dados para validar o login do usuário
-            db = Database()
-            db.cursor.execute("""SELECT * FROM usuario WHERE usuario = %s AND senha = %s""", (usuario, senha))
-            VerifyLogin = db.cursor.fetchone()
+    db = Database()
+    db.cursor.execute("""SELECT * FROM usuario WHERE usuario = %s AND senha = %s""", (usuario, senha))
+    VerifyLogin = db.cursor.fetchone()
 
             # Se o login for validado no banco de dados
-            if VerifyLogin:
-                messagebox.showinfo(title="INFO LOGIN", message="Acesso Confirmado, Bem-vindo!")
-                from tela_de_usuario import TeldACASTRO
-                TeldACASTRO(jan)  # Passando a janela principal como parâmetro para a nova tela
-            else:
+    if VerifyLogin:
+        messagebox.showinfo(title="INFO LOGIN", message="Acesso Confirmado, Bem-vindo!")
+        adm = VerifyLogin[0]
+
+        if adm == 1:
+            from tela_de_adm import TelaLoginCadastro
+            root_menu = Tk()  
+            TelaLoginCadastro(root_menu)
+            root_menu.mainloop()
+
+        else:
+        
+
+            from tela_de_usuario import TeldACASTRO
+            root_menu = Tk() 
+            TeldACASTRO(root_menu)
+            root_menu.mainloop()
+    else:
                 # Se não encontrar o usuário no banco de dados
-                messagebox.showinfo(title="INFO LOGIN", message="Acesso Negado. Verifique se está cadastrado no sistema!")
-    except Exception as e:
-        messagebox.showerror(title="Erro", message=f"Ocorreu um erro: {str(e)}")
+        messagebox.showinfo(title="INFO LOGIN", message="Acesso Negado. Verifique se está cadastrado no sistema!")
+   
+    messagebox.showerror(title="Erro", message=f"Ocorreu um erro: {str(e)}")
 
 # Botão de login
 LoginButton = ttk.Button(text="LOGIN", width=15, command=FazerLogin)

@@ -86,11 +86,16 @@ class TelaLoginCadastro:
 
 
 
+        self.FornecedoresButton = ttk.Button(self.root, text = "Consultar Produto", width = 30, command = self.Telaconsultaproduto)
+        self.FornecedoresButton.place(x=100, y=250)
+
+
+
         self.FornecedoresButton = ttk.Button(self.root, text = "Funcionario", width = 30, command = self.TelaFuncionario)
-        self.FornecedoresButton.place(x=100, y=300)
+        self.FornecedoresButton.place(x=100, y=350)
 
         self.FornecedoresButton = ttk.Button(self.root, text = "Consultar Funcionario", width = 30, command = self.TelaconsultaFuncionario)
-        self.FornecedoresButton.place(x=100, y=350)
+        self.FornecedoresButton.place(x=100, y=400)
 
         self.BV = Label(self.root, text = "BEM VINDO ADM!!", font = ("Times New Roman", 15))
         self.BV.place(x = 50, y = 15)
@@ -110,10 +115,15 @@ class TelaLoginCadastro:
         self.ProdutosButton.place(x=5000)
 
     def TelaProduto(self):
-        from Produto_adm import AbrirProduto
-        AbrirProduto(self.root)
+        from Produto_cadastrar import AbrirProduto_cadastro
+        AbrirProduto_cadastro(self.root)
         self.ProdutosButton.place(x=5000)
 
+
+    def Telaconsultaproduto(self):
+        from Produto_adm import AbrirProduto_adm
+        AbrirProduto_adm (self.root)
+        self.ProdutosButton.place(x=5000)
 
 
     def TelaFuncionario(self):
