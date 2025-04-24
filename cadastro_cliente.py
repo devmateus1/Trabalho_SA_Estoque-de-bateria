@@ -1,32 +1,79 @@
-from tkinter import *  # Importa todos os módulos do Tkinter
-from tkinter import messagebox  # Importa o módulo de caixas de mensagens do Tkinter 
-from tkinter import ttk  # Importa o módulo ttk do Tkinter
-from DataBase import Database  # Importa a classe Database do módulo DataBase
-import tkinter as tk  # Importa o módulo tkinter como tk
+#Importar as biblotecas
+from tkinter import * #IMporta todos os modulos do tkinter
+from tkinter import messagebox #importa o modulo de caixas de de mensagens do tkinter 
+from tkinter import ttk #Importa a classe Database do modulo DataBase
+from DataBase import Database
+import tkinter as tk
 
-class Abrir_cliente:
-    def __init__(self, root):
+class Abrir_Fornecedor:
+    def __init__(self,root):
+       
 
-        tituloLabel = Label(text="CADASTRO DE CLIENTES", bg="#002333", fg="white", font=("Arial", 12, "bold"))
-        tituloLabel.place(x=130, y=10)
         
-        cpf_funcionarioLabel = Label(text="CPF:", bg="#002333", fg="white")
-        cpf_funcionarioLabel.place(x=30, y=50)
-        cpf_funcionarioEntry = ttk.Entry(width=40)
-        cpf_funcionarioEntry.place(x=150, y=50)
 
-        nome_funcionarioLabel = Label(text="Nome:", bg="#002333", fg="white")
-        nome_funcionarioLabel.place(x=30, y=90)
-        nome_funcionarioEntry = ttk.Entry(width=40)
-        nome_funcionarioEntry.place(x=150, y=90)
+        #CRIAR A JANELA
+        
+        #CRIA OS LABELS NECESSARIOS
 
-        telefoneLabel = Label(text="Telefone:", bg="#002333", fg="white")
-        telefoneLabel.place(x=30, y=130)
-        telefoneEntry = ttk.Entry(width=40)
-        telefoneEntry.place(x=150, y=130)
+        tituloLabel = Label(text="CADASTRO DE CLIENTE | ADM :",bg="#002333", fg="white") #Coloca um titulo para a janela
+        tituloLabel.place(x=160,y=10)
 
-        emailLabel = Label(text="E-mail:", bg="#002333", fg="white")
-        emailLabel.place(x=30, y=170)
-        emailEntry = ttk.Entry(width=40)
-        emailEntry.place(x=150, y=170)
+        ClienteLabel = Label(text="Nome do Cliente:",bg="#002333", fg="white") #Cria label do fornecedor
+        ClienteLabel.place(x=10,y=80)
+        ClienteEntry=ttk.Entry(width=30) #Cria um campo do cliente
+        ClienteEntry.place(x=150,y=80)   
 
+        CpfClienteLabel = Label(text="CPF do Cliente:",bg="#002333", fg="white") #Cria label do Cpf
+        CpfClienteLabel.place(x=10,y=120)
+        CpfClienteEntry = ttk.Entry(width=30) #Cria um campo do cpf
+        CpfClienteEntry.place(x=150,y=120)
+
+        TelefoneClienteLabel = Label(text="Telefone do Cliente:",bg="#002333", fg="white") #Cria label do Telefone
+        TelefoneClienteLabel.place(x=10,y=160)
+        TelefoneClienteEntry = ttk.Entry(width=30) #Cria um campo do telefone
+        TelefoneClienteEntry.place(x=150,y=160)
+
+        EnderecoClienteLabel = Label(text="Endereço do Cliente:",bg="#002333", fg="white") #Cria label do endereço
+        EnderecoClienteLabel.place(x=10,y=240)
+        EnderecoClienteEntry = ttk.Entry(width=30) #Cria um campo do endereço
+        EnderecoClienteEntry.place(x=150,y=240)
+
+        def RegistrarNoBancoFornecedor(): #Registra os dados no banco de dados
+            #Transforma os campos de textos em variaveis
+            NomeCliente=ClienteEntry.get()
+            cpf=CpfClienteEntry.get()
+            telefone=TelefoneClienteEntry.get()
+            endereco=EnderecoClienteEntry.get()
+            
+
+
+            if NomeCliente == "" or cpf == "" or telefone == "" or endereco == "" : #Verifica se os campos de textos estão vazios
+                messagebox.showerror(title="Erro de Cadastro", message="PREENCHA TODOS OS CAMPOS") #Exibe a mensagem de erro
+            else:
+                db = Database() #Cria uma instancia da classe Database
+                db.RegistrarNoBancoFornecedor(NomeCliente,cpf,telefone,endereco) #Chama o metodo para registrar no banco de dados 
+                messagebox.showinfo("Sucesso","Fornecedor registrado com sucesso!") #Exibe a mensagem de sucesso
+        CadastrarButton =  ttk.Button(text="Cadastrar",width=15,command=RegistrarNoBancoFornecedor) #Cria o botão de cadastro
+        CadastrarButton.place(x=370,y=80)
+
+
+        def LimparCampos():
+            ClienteEntry.delete(0,END) #Limpa o campo de entrada do fornecedor
+            CpfClienteEntry.delete(0,END) #Limpa o campo de entrada do cpf
+            TelefoneClienteEntry.delete(0,END) #Limpa o campo de entrada do telefone
+            EnderecoClienteEntry.delete(0,END) #Limpa o campo de entrada do endereço
+           
+        LimparButton =  ttk.Button(text="Limpar",width=15,command=LimparCampos) #Cria o botão de limpar
+        LimparButton.place(x=500,y=80)
+    
+if __name__=="__main__":
+    jan=Tk() # Cria uma instancia da janela principal
+    jan.title("ADM - Fornecedores") #Define o titulo da janela
+    jan .geometry("700x500") #Define o tamanho da janela
+    jan.configure(bg="#002333") #Configura a cor de fundo da janela
+    jan.resizable(width=False,height=False) #Impede que a janela seja redimensionad
+    logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
+    LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
+    LogoLabel.place(x=390, y=140) # Posiciona a imagem
+    app = Abrir_Fornecedor(jan)
+    jan.mainloop()
