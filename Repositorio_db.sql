@@ -74,11 +74,11 @@ CREATE TABLE IF NOT EXISTS `produto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `produto`
+-- Des1,pejando dados para a tabela `produto`
 --
 
 INSERT INTO `produto` (`idproduto`, `tipo`, `voltagem`, `marca`, `quantidade`, `preco`, `data`) VALUES
-(1, 'carro', '240', 'VGMPower', 100, '89', '14/06/28'),
+( 'carro', '240', 'VGMPower', 100, '89', '14/06/28'),
 (2, 'Moto', '100', 'VGMPower', 200, '59', '31/09/27'),
 (3, 'Onibus', '400', 'VGMPower', 50, '199', '12/10/30');
 
