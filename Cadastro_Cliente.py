@@ -34,11 +34,11 @@ class Abrir_Fornecedor:
         TelefoneClienteEntry.place(x=150,y=160)
 
         EnderecoClienteLabel = Label(text="Endereço do Cliente:",bg="#002333", fg="white") #Cria label do endereço
-        EnderecoClienteLabel.place(x=10,y=200)
+        EnderecoClienteLabel.place(x=10,y=240)
         EnderecoClienteEntry = ttk.Entry(width=30) #Cria um campo do endereço
-        EnderecoClienteEntry.place(x=150,y=200)
+        EnderecoClienteEntry.place(x=150,y=240)
 
-        def RegistrarNoBancoCliente(): #Registra os dados no banco de dados
+        def RegistrarNoBancoFornecedor(): #Registra os dados no banco de dados
             #Transforma os campos de textos em variaveis
             NomeCliente=ClienteEntry.get()
             cpf=CpfClienteEntry.get()
@@ -52,8 +52,8 @@ class Abrir_Fornecedor:
             else:
                 db = Database() #Cria uma instancia da classe Database
                 db.RegistrarNoBancoFornecedor(NomeCliente,cpf,telefone,endereco) #Chama o metodo para registrar no banco de dados 
-                messagebox.showinfo("Sucesso","Cliente registrado com sucesso!") #Exibe a mensagem de sucesso
-        CadastrarButton =  ttk.Button(text="Cadastrar",width=15,command=RegistrarNoBancoCliente) #Cria o botão de cadastro
+                messagebox.showinfo("Sucesso","Fornecedor registrado com sucesso!") #Exibe a mensagem de sucesso
+        CadastrarButton =  ttk.Button(text="Cadastrar",width=15,command=RegistrarNoBancoFornecedor) #Cria o botão de cadastro
         CadastrarButton.place(x=370,y=80)
 
 
@@ -68,7 +68,7 @@ class Abrir_Fornecedor:
     
 if __name__=="__main__":
     jan=Tk() # Cria uma instancia da janela principal
-    jan.title("ADM - CLIENTES") #Define o titulo da janela
+    jan.title("ADM - Fornecedores") #Define o titulo da janela
     jan .geometry("700x500") #Define o tamanho da janela
     jan.configure(bg="#002333") #Configura a cor de fundo da janela
     jan.resizable(width=False,height=False) #Impede que a janela seja redimensionad
