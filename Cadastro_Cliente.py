@@ -38,13 +38,13 @@ class Abrir_Fornecedor:
         EnderecoClienteEntry = ttk.Entry(width=30) #Cria um campo do endereço
         EnderecoClienteEntry.place(x=150,y=200)
 
-        def RegistrarNoCliente(): #Registra os dados no banco de dados
+        def RegistrarNoBancoCliente(): #Registra os dados no banco de dados
             #Transforma os campos de textos em variaveis
             NomeCliente=ClienteEntry.get()
             cpf=CpfClienteEntry.get()
             telefone=TelefoneClienteEntry.get()
             endereco=EnderecoClienteEntry.get()
-            
+
 
 
             if NomeCliente == "" or cpf == "" or telefone == "" or endereco == "" : #Verifica se os campos de textos estão vazios
@@ -53,7 +53,7 @@ class Abrir_Fornecedor:
                 db = Database() #Cria uma instancia da classe Database
                 db.RegistrarNoBancoCliente(NomeCliente,cpf,telefone,endereco) #Chama o metodo para registrar no banco de dados 
                 messagebox.showinfo("Sucesso","Fornecedor registrado com sucesso!") #Exibe a mensagem de sucesso
-        CadastrarButton =  ttk.Button(text="Cadastrar",width=15,command=RegistrarNoCliente) #Cria o botão de cadastro
+        CadastrarButton =  ttk.Button(text="Cadastrar",width=15,command=RegistrarNoBancoCliente) #Cria o botão de cadastro
         CadastrarButton.place(x=370,y=80)
 
 
