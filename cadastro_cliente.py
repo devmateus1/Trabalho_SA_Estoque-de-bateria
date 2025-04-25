@@ -34,11 +34,11 @@ class Abrir_Fornecedor:
         TelefoneClienteEntry.place(x=150,y=160)
 
         EnderecoClienteLabel = Label(text="Endereço do Cliente:",bg="#002333", fg="white") #Cria label do endereço
-        EnderecoClienteLabel.place(x=10,y=240)
+        EnderecoClienteLabel.place(x=10,y=200)
         EnderecoClienteEntry = ttk.Entry(width=30) #Cria um campo do endereço
-        EnderecoClienteEntry.place(x=150,y=240)
+        EnderecoClienteEntry.place(x=150,y=200)
 
-        def RegistrarNoBancoFornecedor(): #Registra os dados no banco de dados
+        def RegistrarNoCliente(): #Registra os dados no banco de dados
             #Transforma os campos de textos em variaveis
             NomeCliente=ClienteEntry.get()
             cpf=CpfClienteEntry.get()
@@ -51,9 +51,9 @@ class Abrir_Fornecedor:
                 messagebox.showerror(title="Erro de Cadastro", message="PREENCHA TODOS OS CAMPOS") #Exibe a mensagem de erro
             else:
                 db = Database() #Cria uma instancia da classe Database
-                db.RegistrarNoBancoFornecedor(NomeCliente,cpf,telefone,endereco) #Chama o metodo para registrar no banco de dados 
+                db.RegistrarNoBancoCliente(NomeCliente,cpf,telefone,endereco) #Chama o metodo para registrar no banco de dados 
                 messagebox.showinfo("Sucesso","Fornecedor registrado com sucesso!") #Exibe a mensagem de sucesso
-        CadastrarButton =  ttk.Button(text="Cadastrar",width=15,command=RegistrarNoBancoFornecedor) #Cria o botão de cadastro
+        CadastrarButton =  ttk.Button(text="Cadastrar",width=15,command=RegistrarNoCliente) #Cria o botão de cadastro
         CadastrarButton.place(x=370,y=80)
 
 

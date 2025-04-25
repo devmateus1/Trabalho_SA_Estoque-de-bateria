@@ -137,5 +137,5 @@ class login:
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     def RegistrarNoBancoCliente(self,nomecliente,cpf,telefone,endereco):
-                self.cursor.execute("INSERT INTO cliente (nomecliente, cpf, telefone, endereco) VALUES (%s ,%s ,%s ,%s, %s, %s)",(nomecliente, cpf, telefone, endereco)) # Insere os dados do usuario na tabela
-                self.conn.commit() # Confirma a inseção dos dados
+        self.cursor.execute("INSERT INTO cliente (nomecliente, cpf, telefone, endereco) VALUES (%s ,%s, %s, %s)",(nomecliente, cpf, telefone, endereco)) # Insere os dados do usuario na tabela
+        self.conn.commit() # Confirma a inseção dos dados
