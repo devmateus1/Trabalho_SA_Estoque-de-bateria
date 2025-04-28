@@ -42,6 +42,7 @@ class AbrirProduto_cadastro:
         DataBaseataProdutoLabel.place (x=45 , y=250)
         DataProdutoEntry =ttk.Entry(width=30)
         DataProdutoEntry.place (x=170 , y=250)
+        
 
 
         def LimparCampos():
