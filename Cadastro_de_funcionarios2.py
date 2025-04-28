@@ -3,6 +3,9 @@ from tkinter import messagebox  # Importa o módulo de caixas de mensagens do Tk
 from tkinter import ttk  # Importa o módulo ttk do Tkinter
 from DataBase import Database  # Importa a classe Database do módulo DataBase
 import tkinter as tk  # Importa o módulo tkinter como tk
+import smtplib # importações para enviar emails
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 class Abrir_funcionario:
     def __init__(self, root):
@@ -51,6 +54,13 @@ class Abrir_funcionario:
         enderecoLabel.place(x=30, y=330)
         enderecoEntry = ttk.Entry(width=40)
         enderecoEntry.place(x=150, y=330)
+
+        def enviar_email():
+            email = emailEntry.get()
+            remetente = 'vgmpower123@gmail.com'
+            senha = 'lnji dajd dyfy bhfx'
+            destinatario = email
+
 
         # Função para conectar ao banco de dados e cadastrar funcionário
         def conect_banco_funcionario():

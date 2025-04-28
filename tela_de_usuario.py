@@ -29,7 +29,7 @@ class TeldACASTRO:
         self.Funcionario.place(x=400, y=50)
 #TESTE
     def produto(self):
-        from Produto_cliente import AbrirProduto_cliente
+        from Procura_Produto import AbrirProduto_cliente
         AbrirProduto_cliente(self.root)  # Chama a função corretamente
         self.ProdutosButton.place(x=5000)
 
