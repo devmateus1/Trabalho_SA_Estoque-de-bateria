@@ -106,13 +106,17 @@ class TelaLoginCadastro:
 
     def TelaFornecedores(self):
         from Cadastro_Fornecedor import Abrir_Fornecedor
-        Abrir_Fornecedor(self.root)
-        self.ProdutosButton.place(x=5000)
-        
+        nova_janela = Toplevel(self.root)
+        Abrir_Fornecedor(nova_janela)
+       
+    
+
     def TelaConsulta(self):
-        from Procura_Delete_Alterar_Fornecedor import Procura_DeleteEAlterarFornecedor
-        Procura_DeleteEAlterarFornecedor(self.root)
-        self.ProdutosButton.place(x=5000)
+        from Produto_cadastrar import AbrirProduto_cadastro
+        nova_janela = Toplevel()  # Sem self.root
+        nova_janela.geometry("+1920+100")  # Posição inicial na segunda tela
+        AbrirProduto_cadastro(nova_janela)
+
 
     def TelaProduto(self):
         from Produto_cadastrar import AbrirProduto_cadastro
