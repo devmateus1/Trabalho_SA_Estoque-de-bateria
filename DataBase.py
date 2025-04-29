@@ -1,3 +1,4 @@
+#pip install mysql-connector-python
 import mysql.connector #Importa o modulo mysql.connector para conectar ao banco de dados MySQL
 #pip install mysql-connector-python
 class Database:

@@ -57,9 +57,28 @@ class Abrir_funcionario:
 
         def enviar_email():
             email = emailEntry.get()
+            nome = nome_funcionarioEntry.get()
             remetente = 'vgmpower123@gmail.com'
-            senha = 'lnji dajd dyfy bhfx'
+            senha = 'clig klkr vche uuad' 
             destinatario = email
+
+            mensagem = MIMEMultipart()
+            mensagem['From'] = remetente
+            mensagem['To'] = destinatario
+            mensagem['Subject'] = 'Cadastro no sistema VGM Power'
+
+            corpo = f'É uma honra, {nome}, tê-lo(a) em nossa equipe!'
+            mensagem.attach(MIMEText(corpo, 'plain'))
+
+            try:
+                servidor = smtplib.SMTP('smtp.gmail.com', 587)
+                servidor.starttls()
+                servidor.login(remetente, senha)
+                servidor.sendmail(remetente, destinatario, mensagem.as_string())
+                servidor.quit()
+                print('E-mail enviado com sucesso!')
+            except Exception as e:
+                print(f'Erro ao enviar e-mail: {e}')
 
 
         # Função para conectar ao banco de dados e cadastrar funcionário

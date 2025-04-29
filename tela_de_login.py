@@ -72,6 +72,7 @@ if __name__ == "__main__":
 from tkinter import *
 from tkinter import messagebox, ttk
 import tkinter.font as tkFont
+from DataBase import Database
 
 class LoginSystem:
     def __init__(self, root):
@@ -117,8 +118,8 @@ class LoginSystem:
                               font=self.label_font, bg="#002333", fg="white")
         self.user_label.pack(anchor=W)
         
-        self.user_entry = ttk.Entry(self.user_frame, font=self.label_font, width=25)
-        self.user_entry.pack(fill=X, ipady=5)
+        self.LoginEntry = ttk.Entry(self.user_frame, font=self.label_font, width=25)
+        self.LoginEntry.pack(fill=X, ipady=5)
         
         # Campo Senha
         self.pass_frame = Frame(self.form_frame, bg="#002333")
@@ -140,7 +141,7 @@ class LoginSystem:
                                  font=self.button_font, bg="#0078D7", fg="white",
                                  activebackground="#0063B1", activeforeground="white",
                                  borderwidth=0, padx=20, pady=10,
-                                 command=self.fazer_login)
+                                 command=self.FazerLogin)
         self.login_button.pack(fill=X)
         
         # Rodapé
@@ -159,45 +160,37 @@ class LoginSystem:
         y = (self.root.winfo_screenheight() // 2) - (height // 2)
         self.root.geometry(f'{width}x{height}+{x}+{y}')
     
-    def fazer_login(self):
-        usuario = self.user_entry.get()
+    def FazerLogin(self):
+        usuario = self.LoginEntry.get()
         senha = self.pass_entry.get()
-        
-        # try:
-        #     # Verificando login do usuário 'ADM'
-        #     if usuario == 'ADM' and senha == '1234':
-        #         from tela_de_adm import TelaLoginCadastro
-        #         TelaLoginCadastro(jan)  # Passando a janela principal como parâmetro para a nova tela
-        #     else:
-        #         # Conexão com o banco de dados para validar o login do usuário
-        #         db = Database()
-        #         db.cursor.execute("""SELECT * FROM usuario WHERE usuario = %s AND senha = %s""", (usuario, senha))
-        #         VerifyLogin = db.cursor.fetchone()
-        # 
-        #         # Se o login for validado no banco de dados
-        #         if VerifyLogin:
-        #             messagebox.showinfo(title="INFO LOGIN", message="Acesso Confirmado, Bem-vindo!")
-        #             adm = VerifyLogin[0]
-        # 
-        #             if adm == 1:
-        #                 from tela_de_adm import TelaLoginCadastro
-        #                 root_menu = Tk()  
-        #                 TelaLoginCadastro(root_menu)
-        #                 root_menu.mainloop()
-        #             else:
-        #                 from tela_de_usuario import TeldACASTRO
-        #                 root_menu = Tk() 
-        #                 TeldACASTRO(root_menu)
-        #                 root_menu.mainloop()
-        #         else:
-        #             # Se não encontrar o usuário no banco de dados
-        #             messagebox.showinfo(title="INFO LOGIN", message="Acesso Negado. Verifique se está cadastrado no sistema!")
-        # 
-        # except Exception as e:
-        #     messagebox.showerror(title="Erro", message=f"Ocorreu um erro: {str(e)}")
-        
-        # Simulação de login para demonstração
-        messagebox.showinfo("Login", f"Tentativa de login:\nUsuário: {usuario}\nSenha: {senha}")
+
+        try:
+            # Conexão com o banco de dados para validar o login do usuário
+            db = Database()
+            db.cursor.execute("""SELECT * FROM usuario WHERE usuario = %s AND senha = %s""", (usuario, senha))
+            VerifyLogin = db.cursor.fetchone()
+
+            # Se o login for validado no banco de dados
+            if VerifyLogin:
+                messagebox.showinfo(title="INFO LOGIN", message="Acesso Confirmado, Bem-vindo!")
+                adm = VerifyLogin[0]
+
+                if adm == 1:
+                    from tela_de_adm import TelaAdmin
+                    root_menu = Tk()  
+                    TelaAdmin(root_menu)
+                    root_menu.mainloop()
+
+                else:
+                    from tela_de_usuario import TeldACASTRO
+                    root_menu = Tk() 
+                    TeldACASTRO(root_menu)
+                    root_menu.mainloop()
+            else:
+                # Se não encontrar o usuário no banco de dados
+                messagebox.showinfo(title="INFO LOGIN", message="Acesso Negado. Verifique se está cadastrado no sistema!")
+        except Exception as e:
+            messagebox.showerror(title="Erro", message=f"Ocorreu um erro: {str(e)}")
 
 if __name__ == "__main__":
     root = Tk()
