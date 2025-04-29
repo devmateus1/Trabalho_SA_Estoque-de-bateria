@@ -1,4 +1,4 @@
-from tkinter import * # Importa todos os módulos do tkinter
+'''from tkinter import * # Importa todos os módulos do tkinter
 from tkinter import messagebox # Importa o módulo de widgets temáticos do tkinter
 from tkinter import ttk
 from DataBase import Database
@@ -99,4 +99,5 @@ if __name__ == "__main__":
         LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
         LogoLabel.place(x=500, y=100) # Posiciona o label no frame esquerdo
         app = AbrirProduto_cadastro(jan)
-        jan.mainloop()
+        jan.mainloop()'''
+
