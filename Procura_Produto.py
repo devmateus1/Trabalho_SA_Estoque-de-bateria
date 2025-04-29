@@ -11,7 +11,7 @@ class AbrirProduto_cliente:
         Cadastrotitulo.place(x=230 , y=10) # Posiciona o titulo
 
         IdProdutoLabel = Label (text="ID DO USUARIO :", bg="#002333", fg="white")
-        IdProdutoLabel.place (x=400 , y=50)
+        IdProdutoLabel.place (x=400 , y=50)  
         IdProdutoEntry =ttk.Entry(width=30)
         IdProdutoEntry.place (x=500 , y=50)
 
