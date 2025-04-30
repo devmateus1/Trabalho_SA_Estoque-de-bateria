@@ -1,13 +1,13 @@
 from tkinter import * #Importa todos os mudulos do tkinter
 from tkinter import messagebox # Importar o mudulo de widgets tematicos do tkinter
 from tkinter import ttk
-#from DataBase import Database
+from DataBase import Database
 import tkinter as tk
 
 class AbrirProduto_cliente:
     def __init__(self,root):
 
-        Cadastrotitulo = Label (text="CADASTRO DE PRODUTO | CLIENTE :", bg="#002333", fg="white") # Cria o titulo
+        Cadastrotitulo = Label (text="BUSCA DE PRODUTO COMPRADO PELO CLIENTE:", bg="#002333", fg="white") # Cria o titulo
         Cadastrotitulo.place(x=230 , y=10) # Posiciona o titulo
 
         IdProdutoLabel = Label (text="ID DO USUARIO :", bg="#002333", fg="white")
@@ -47,21 +47,20 @@ class AbrirProduto_cliente:
 
 
         def LimparCampos():
-            TipoProdutoEntry.delete(0 ,END)
-            VoltagemEntry.delete(0 ,END)
-            MarcaEntry.delete(0 ,END)
-            QuantidadeEntry.delete(0 ,END)
-            PrecoEntry.delete(0 ,END)
-            DataProdutoEntry.delete (0, END)
-            IdProdutoEntry.delete (0, END)
-
+            TipoProdutoEntry.delete(0, END)
+            VoltagemEntry.delete(0, END)
+            MarcaEntry.delete(0, END)
+            QuantidadeEntry.delete(0, END)
+            PrecoEntry.delete(0, END)
+            DataProdutoEntry.delete(0, END)
+            IdProdutoEntry.delete(0, END)
 
         def buscarproduto():
             idproduto = IdProdutoEntry.get()
             if idproduto == "":
                 messagebox.showerror(title="Erro", message="PREENCHA O CAMPO DE ID")
             else:
-                db = Database()  # Crie uma instância do banco de dados
+                db = Database()  # Cria uma instância do banco de dados
                 usuario = db.buscar_produto(idproduto)  # Supondo que exista um método para buscar por id
                 if usuario:
                     TipoProdutoEntry.insert(0, usuario[1])
@@ -70,16 +69,20 @@ class AbrirProduto_cliente:
                     QuantidadeEntry.insert(0, usuario[4])
                     PrecoEntry.insert(0, usuario[5])
                     DataProdutoEntry.insert(0, usuario[6])
-
                 else:
-                    messagebox.showerror("Erro", "Funcionário não encontrado")
+                    messagebox.showerror("Erro", "Usuário não encontrado")
                     LimparCampos()
 
+        
 
-        buscarbotao = Button(text="BUSCAR", width=15,command=buscarproduto)
-        buscarbotao.place (x=500 , y=90)
+        buscarbotao = Button(text="BUSCAR", width=15, command=buscarproduto)
+        buscarbotao.place(x=500, y=90)
 
+        LimparCamposbotao = Button(text="LIMPAR CAMPOS", width=15, command=LimparCampos)
+        LimparCamposbotao.place(x=650, y=90)
 
+        
+        
 if __name__ == "__main__":
         jan = Tk()
         jan.title("USUARIO - PRODUTO - CLIENTE")

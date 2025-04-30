@@ -141,3 +141,20 @@ class login:
             self.cursor.close()
         if self.connection:
             self.connection.close()
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------Busca produto e usuário---------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+def buscar_produtos_por_cliente(self, id_cliente):
+    query = """
+        SELECT p.idproduto, p.nome, p.tipo, p.preco
+        FROM cliente cl
+        INNER JOIN compra c ON cl.idcliente = c.idcliente
+        INNER JOIN item i ON c.idCompra = i.idcompra
+        INNER JOIN produto p ON i.idproduto = p.idproduto
+        WHERE cl.idcliente = %s
+    """
+    self.cursor.execute(query, (id_cliente,))
+    return self.cursor.fetchall()  # Retorna todos os produtos comprados pelo cliente
+

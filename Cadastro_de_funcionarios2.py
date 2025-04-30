@@ -82,6 +82,10 @@ class Abrir_funcionario:
 
 
         # Função para conectar ao banco de dados e cadastrar funcionário
+        def juntar_funcoes():
+            conect_banco_funcionario()
+            enviar_email()
+
         def conect_banco_funcionario():
             cpf = cpf_funcionarioEntry.get()
             nome = nome_funcionarioEntry.get()
@@ -91,17 +95,17 @@ class Abrir_funcionario:
             cargo = cargoEntry.get()
             salario = salarioEntry.get()
             endereco = enderecoEntry.get()
-            
+
             # Verifica se todos os campos estão preenchidos
             if cpf == "" or nome == "" or telefone == "" or email == "" or dataDeContratacao == "" or cargo == "" or salario == "" or endereco == "":
                 messagebox.showerror(title="Erro de cadastro!", message="Todos os campos devem estar preenchidos!")
             else:
                 db = Database()  # Cria uma instância do banco de dados
-                db.RegistrarNoBancofuncionario(cpf, nome, telefone, email, dataDeContratacao, cargo, salario, endereco)  # Registra os dados
+                db.RegistrarNoBancofuncionario(cpf, nome, telefone, email, dataDeContratacao, cargo, salario, endereco)
                 messagebox.showinfo("Sucesso", "Funcionário(a) cadastrado(a) com sucesso!")
-        
+
         # Botão de Cadastro
-        CadastrarButton = ttk.Button(text="Cadastrar", width=15, command=conect_banco_funcionario)
+        CadastrarButton = ttk.Button(text="Cadastrar", width=15, command=juntar_funcoes)
         CadastrarButton.place(x=180, y=380)
 
         # Função para limpar os campos de entrada

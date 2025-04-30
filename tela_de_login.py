@@ -165,32 +165,39 @@ class LoginSystem:
         senha = self.pass_entry.get()
 
         try:
-            # Conexão com o banco de dados para validar o login do usuário
             db = Database()
-            db.cursor.execute("""SELECT * FROM usuario WHERE usuario = %s AND senha = %s""", (usuario, senha))
-            VerifyLogin = db.cursor.fetchone()
 
-            # Se o login for validado no banco de dados
-            if VerifyLogin:
-                messagebox.showinfo(title="INFO LOGIN", message="Acesso Confirmado, Bem-vindo!")
-                adm = VerifyLogin[0]
+            # Verifica na tabela 'adm'
+            db.cursor.execute("SELECT * FROM adm WHERE usuario = %s AND senha = %s", (usuario, senha))
+            verify_adm = db.cursor.fetchone()
 
-                if adm == 1:
-                    from tela_de_adm import TelaAdmin
-                    root_menu = Tk()  
-                    TelaAdmin(root_menu)
-                    root_menu.mainloop()
+            if verify_adm:
+                messagebox.showinfo(title="INFO LOGIN", message="Acesso Confirmado, Bem-vindo administrador!")
+                from tela_de_adm import TelaAdmin
+                self.root.destroy()  # Fecha a tela atual, se estiver dentro de uma classe
+                root_menu = Tk()
+                TelaAdmin(root_menu)
+                root_menu.mainloop()
+                return
 
-                else:
-                    from tela_de_usuario import TeldACASTRO
-                    root_menu = Tk() 
-                    TeldACASTRO(root_menu)
-                    root_menu.mainloop()
+            # Se não for admin, verifica na tabela 'usuario'
+            db.cursor.execute("SELECT * FROM usuario WHERE usuario = %s AND senha = %s", (usuario, senha))
+            verify_user = db.cursor.fetchone()
+
+            if verify_user:
+                messagebox.showinfo(title="INFO LOGIN", message="Acesso Confirmado, Bem-vindo usuário!")
+                from tela_de_usuario import TeldACASTRO  # Corrigido o nome
+                self.root.destroy()
+                root_menu = Tk()
+                TeldACASTRO(root_menu)
+                root_menu.mainloop()
             else:
-                # Se não encontrar o usuário no banco de dados
                 messagebox.showinfo(title="INFO LOGIN", message="Acesso Negado. Verifique se está cadastrado no sistema!")
+
         except Exception as e:
             messagebox.showerror(title="Erro", message=f"Ocorreu um erro: {str(e)}")
+
+
 
 if __name__ == "__main__":
     root = Tk()
