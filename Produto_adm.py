@@ -76,12 +76,12 @@ class AbrirProduto_adm:
                     QuantidadeEntry.delete(0 ,END)
                     PrecoEntry.delete(0 ,END)
 
-                    TipoProdutoEntry.insert(0, usuario)
-                    VoltagemEntry.insert(0, usuario)
-                    MarcaEntry.insert(0, usuario)
-                    QuantidadeEntry.insert(0, usuario)
-                    PrecoEntry.insert(0, usuario)
-                    DataProdutoEntry.insert(0, usuario)
+                    TipoProdutoEntry.insert(0, usuario[1])
+                    VoltagemEntry.insert(0, usuario[2])
+                    MarcaEntry.insert(0, usuario[3])
+                    QuantidadeEntry.insert(0, usuario[4])
+                    PrecoEntry.insert(0, usuario[5])
+                    DataProdutoEntry.insert(0, usuario[6])
 
                 else:
                     messagebox.showerror("Erro", "Funcionário não encontrado")
