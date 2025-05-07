@@ -55,6 +55,26 @@ class Procura_DeleteEAlterarFornecedor():
         QuantidadeFornecedorEntry = ttk.Entry(width=30) #Cria um campo para colocar a quantidade de produto fornecido
         QuantidadeFornecedorEntry.place(x=150,y=390)
 
+        def RegistrarNoBancoFornecedor(): #Registra os dados no banco de dados
+            #Transforma os campos de textos em variaveis
+            fornecedores=FornecedorEntry.get()
+            cpf=CpfFornecedorEntry.get()
+            telefone=TelefoneFornecedorEntry.get()
+            email=EmailFornecedorEntry.get()
+            endereco=EnderecoFornecedorEntry.get()
+            produto=ProdutoFornecedorEntry.get()
+            quantidade=QuantidadeFornecedorEntry.get()
+
+
+            if fornecedores == "" or cpf == "" or telefone == "" or email == "" or endereco == "" or produto == "" or quantidade == "": #Verifica se os campos de textos estão vazios
+                messagebox.showerror(title="Erro de Cadastro", message="PREENCHA TODOS OS CAMPOS") #Exibe a mensagem de erro
+            else:
+                db = Database() #Cria uma instancia da classe Database
+                db.RegistrarNoBancoFornecedor(fornecedores,cpf,telefone,email,endereco,produto,quantidade) #Chama o metodo para registrar no banco de dados 
+                messagebox.showinfo("Sucesso","Fornecedor registrado com sucesso!") #Exibe a mensagem de sucesso
+
+
+
         def alterarFornecedor():
 
             #Transforma os campos de textos em variaveis
@@ -123,6 +143,9 @@ class Procura_DeleteEAlterarFornecedor():
             QuantidadeFornecedorEntry.delete(0,END) #Limpa o campo de entrada da quantidade de produto
             idEntry.delete(0,END)
 
+        CadastrarButton =  ttk.Button(text="Cadastrar",width=15,command=RegistrarNoBancoFornecedor) #Cria o botão de cadastro
+        CadastrarButton.place(x=100,y=0)
+
         alterarButton =  ttk.Button(text="ALTERAR",width=15,command=alterarFornecedor) #Cria o botão de alterar
         alterarButton.place(x=500,y=80)
 
@@ -138,7 +161,7 @@ class Procura_DeleteEAlterarFornecedor():
 if __name__=="__main__":
     jan=Tk() # Cria uma instancia da janela principal
     jan.title("ADM - Leitor Fornecedor") #Define o titulo da janela
-    jan .geometry("700x500") #Define o tamanho da janela
+    jan .geometry("800x400") #Define o tamanho da janela
     jan.configure(bg="#002333") #Configura a cor de fundo da janela
     jan.resizable(width=False,height=False) #Impede que a janela seja redimensionad
     logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
