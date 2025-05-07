@@ -10,48 +10,48 @@ class TelaGeral:
         self.root = root  # Referência da janela principal
         
         # Título da janela
-        tituloLabel = Label(self.root, text="TELA GERAL FUNCIONÁRIOS", bg="#002333", fg="white", font=("Arial", 13, "bold"))
-        tituloLabel.place(x=140, y=10)
+        tituloLabel = Label(self.root, text="TELA GERAL FUNCIONÁRIOS", bg="#002333", fg="white")
+        tituloLabel.place(x=230, y=10)
 
         # Labels e Campos de Entrada para os dados do funcionário
         field_bg = "#004455"  # Azul escuro para os campos
         text_fg = "white"  # Cor do texto
 
-        Label(self.root, text="ID DO FUNCIONARIO(A):", bg="#002333", fg=text_fg).place(x=30, y=50)
-        self.ID_funcionarioEntry = ttk.Entry(self.root, width=40)
-        self.ID_funcionarioEntry.place(x=200, y=50)
+        Label(self.root, text="ID DO FUNCIONARIO(A):", bg="#002333", fg=text_fg).place(x=360, y=40)
+        self.ID_funcionarioEntry = ttk.Entry(self.root, width=30)
+        self.ID_funcionarioEntry.place(x=500, y=40)
          
-        Label(self.root, text="CPF:", bg="#002333", fg=text_fg).place(x=30, y=90)
-        self.cpf_funcionarioEntry = ttk.Entry(self.root, width=40)
-        self.cpf_funcionarioEntry.place(x=200, y=90)
+        Label(self.root, text="CPF:", bg="#002333", fg=text_fg).place(x=117, y=40)
+        self.cpf_funcionarioEntry = ttk.Entry(self.root, width=30)
+        self.cpf_funcionarioEntry.place(x=150, y=40)
 
-        Label(self.root, text="Nome:", bg="#002333", fg=text_fg).place(x=30, y=130)
-        self.nome_funcionarioEntry = ttk.Entry(self.root, width=40)
-        self.nome_funcionarioEntry.place(x=200, y=130)
+        Label(self.root, text="Nome:", bg="#002333", fg=text_fg).place(x=105, y=75)
+        self.nome_funcionarioEntry = ttk.Entry(self.root, width=30)
+        self.nome_funcionarioEntry.place(x=150, y=75)
 
-        Label(self.root, text="Telefone:", bg="#002333", fg=text_fg).place(x=30, y=170)
-        self.telefoneEntry = ttk.Entry(self.root, width=40)
-        self.telefoneEntry.place(x=200, y=170)
+        Label(self.root, text="Telefone:", bg="#002333", fg=text_fg).place(x=92, y=110)
+        self.telefoneEntry = ttk.Entry(self.root, width=30)
+        self.telefoneEntry.place(x=150, y=110)
 
-        Label(self.root, text="E-mail:", bg="#002333", fg=text_fg).place(x=30, y=210)
-        self.emailEntry = ttk.Entry(self.root, width=40)
-        self.emailEntry.place(x=200, y=210)
+        Label(self.root, text="E-mail:", bg="#002333", fg=text_fg).place(x=104, y=145)
+        self.emailEntry = ttk.Entry(self.root, width=30)
+        self.emailEntry.place(x=150, y=145)
 
-        Label(self.root, text="Data de Contratação:", bg="#002333", fg=text_fg).place(x=30, y=250)
-        self.data_da_contratacaoEntry = ttk.Entry(self.root, width=40)
-        self.data_da_contratacaoEntry.place(x=200, y=250)
+        Label(self.root, text="Data de Contratação:", bg="#002333", fg=text_fg).place(x=30, y=180)
+        self.data_da_contratacaoEntry = ttk.Entry(self.root, width=30)
+        self.data_da_contratacaoEntry.place(x=150, y=180)
 
-        Label(self.root, text="Cargo:", bg="#002333", fg=text_fg).place(x=30, y=290)
-        self.cargoEntry = ttk.Entry(self.root, width=40)
-        self.cargoEntry.place(x=200, y=290)
+        Label(self.root, text="Cargo:", bg="#002333", fg=text_fg).place(x=105, y=215)
+        self.cargoEntry = ttk.Entry(self.root, width=30)
+        self.cargoEntry.place(x=150, y=215)
 
-        Label(self.root, text="Salário:", bg="#002333", fg=text_fg).place(x=30, y=330)
-        self.salarioEntry = ttk.Entry(self.root, width=40)
-        self.salarioEntry.place(x=200, y=330)
+        Label(self.root, text="Salário:", bg="#002333", fg=text_fg).place(x=102, y=250)
+        self.salarioEntry = ttk.Entry(self.root, width=30)
+        self.salarioEntry.place(x=150, y=250)
 
-        Label(self.root, text="Endereço:", bg="#002333", fg=text_fg).place(x=30, y=370)
-        self.enderecoEntry = ttk.Entry(self.root, width=40)
-        self.enderecoEntry.place(x=200, y=370)
+        Label(self.root, text="Endereço:", bg="#002333", fg=text_fg).place(x=88, y=285)
+        self.enderecoEntry = ttk.Entry(self.root, width=30)
+        self.enderecoEntry.place(x=150, y=285)
 
         # Botões (reorganizados e estilizados)
         button_bg = "#005577"  # Azul médio para botões
@@ -59,16 +59,19 @@ class TelaGeral:
 
         # Botões
         excluirButton = ttk.Button(self.root, text="EXCLUIR", width=15, command=self.excluirFuncionario)
-        excluirButton.place(x=10, y=420)
+        excluirButton.place(x=235, y=320)
 
         alterarButton = ttk.Button(self.root, text="ALTERAR", width=15, command=self.alterarfuncionario)
-        alterarButton.place(x=130, y=420)
+        alterarButton.place(x=80, y=360)
 
-        listarButton = ttk.Button(self.root, text="BUSCAR", width=15, command=self.buscarfuncionario)
-        listarButton.place(x=250, y=420)
+        BuscarButton = ttk.Button(self.root, text="BUSCAR", width=15, command=self.buscarfuncionario)
+        BuscarButton.place(x=500, y=80)
         
-        listarButton = ttk.Button(self.root, text="limpar", width=15, command=self.LimparCampos)
-        listarButton.place(x=370, y=420)
+        limparButton = ttk.Button(self.root, text="lIMPAR", width=15, command=self.LimparCampos)
+        limparButton.place(x=235, y=360)
+
+        CadastrarButton = ttk.Button(self.root, text="CADASTRAR", width=15, command=self.conect_banco_funcionario)
+        CadastrarButton.place(x=80, y=320)  
 
     # Funções para os botões (ainda precisam ser implementadas)
     def excluirFuncionario(self):
@@ -131,15 +134,34 @@ class TelaGeral:
             self.cargoEntry.delete(0, END)
             self.salarioEntry.delete(0, END)
             self.enderecoEntry.delete(0, END)
-    
-    
+   
+    def conect_banco_funcionario(self):
+        cpf = self.cpf_funcionarioEntry.get()
+        nome = self.nome_funcionarioEntry.get()
+        telefone = self.telefoneEntry.get()
+        email = self.emailEntry.get()
+        dataDeContratacao = self.data_da_contratacaoEntry.get()
+        cargo = self.cargoEntry.get()
+        salario = self.salarioEntry.get()
+        endereco = self.enderecoEntry.get()
+
+            # Verifica se todos os campos estão preenchidos
+        if cpf == "" or nome == "" or telefone == "" or email == "" or dataDeContratacao == "" or cargo == "" or salario == "" or endereco == "":
+            messagebox.showerror(title="Erro de cadastro!", message="Todos os campos devem estar preenchidos!")
+        else:
+            db = Database()  # Cria uma instância do banco de dados
+            db.RegistrarNoBancofuncionario(cpf, nome, telefone, email, dataDeContratacao, cargo, salario, endereco)
+            messagebox.showinfo("Sucesso", "Funcionário(a) cadastrado(a) com sucesso!")  
 
 
 if __name__ == "__main__":
     jan = Tk()  # Cria uma instância da janela principal
     jan.title("CADASTRO - Funcionários(a)")  # Define o título da janela
-    jan.geometry("500x500")  # Define o tamanho da janela
+    jan.geometry("800x400")  # Define o tamanho da janela
     jan.configure(background="#002333")  # Configura a cor de fundo da janela
     jan.resizable(width=False, height=False)  # Impede que a janela seja redimensionada
+    logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
+    LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
+    LogoLabel.place(x=450, y=150) # Posiciona o label no frame esquerdo
     app = TelaGeral(jan)  # Cria uma instância da classe TelaGeral
     jan.mainloop()  # Inicia o loop principal da interface gráfica
