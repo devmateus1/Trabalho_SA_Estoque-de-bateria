@@ -12,48 +12,48 @@ class Procura_DeleteEAlterarFornecedor():
         tituloLabel = Label(text="FORNECEDORES | ADM :",bg="#002333", fg="white") #Coloca um titulo para a janela
         tituloLabel.place(x=160,y=10)
 
-        alterarLabel = Label(text="Alterar forncedor:",bg="#002333", fg="white") #Coloca um label
-        alterarLabel.place(x=40,y=110)
+
 
         idLabel = Label(text="ID do Fornecedor:",bg="#002333", fg="white") #Cria label do ID
-        idLabel.place(x=10,y=80)
+        idLabel.place(x=400 , y=50)
+
         idEntry=ttk.Entry(width=30) #Cria um campo do ID
-        idEntry.place(x=150,y=80)   
+        idEntry.place(x=500 , y=50)  
 
         FornecedorLabel = Label(text="Nome do Fornecedor:",bg="#002333", fg="white") #Cria label do fornecedor
-        FornecedorLabel.place(x=10,y=150)
+        FornecedorLabel.place(x=15 , y=50)
         FornecedorEntry=ttk.Entry(width=30) #Cria um campo do forncedor
-        FornecedorEntry.place(x=150,y=150)   
+        FornecedorEntry.place(x=150 , y=50)   
 
         CpfFornecedorLabel = Label(text="CPF do Fornecedor:",bg="#002333", fg="white") #Cria label do Cpf
-        CpfFornecedorLabel.place(x=10,y=190)
+        CpfFornecedorLabel.place(x=15 , y=90)
         CpfFornecedorEntry = ttk.Entry(width=30) #Cria um campo do cpf
-        CpfFornecedorEntry.place(x=150,y=190)
+        CpfFornecedorEntry.place(x=150 , y=90)
 
         TelefoneFornecedorLabel = Label(text="Telefone do fornecedor:",bg="#002333", fg="white") #Cria label do Telefone
-        TelefoneFornecedorLabel.place(x=10,y=230)
+        TelefoneFornecedorLabel.place(x=15 , y=130)
         TelefoneFornecedorEntry = ttk.Entry(width=30) #Cria um campo do telefone
-        TelefoneFornecedorEntry.place(x=150,y=230)
+        TelefoneFornecedorEntry.place (x=150 , y=130)
 
         EmailFornecedorLabel = Label(text="Email do Fornecedor:",bg="#002333", fg="white") #Cria label do email
-        EmailFornecedorLabel.place(x=10,y=270)
+        EmailFornecedorLabel.place(x=15 , y=170)
         EmailFornecedorEntry = ttk.Entry(width=30) #Cria um campo do email
-        EmailFornecedorEntry.place(x=150,y=270)
+        EmailFornecedorEntry.place(x=150 , y=170)
 
         EnderecoFornecedorLabel = Label(text="Endereço do Fornecedor:",bg="#002333", fg="white") #Cria label do endereço
-        EnderecoFornecedorLabel.place(x=10,y=310)
+        EnderecoFornecedorLabel.place(x=15,y=210)
         EnderecoFornecedorEntry = ttk.Entry(width=30) #Cria um campo do endereço
-        EnderecoFornecedorEntry.place(x=150,y=310)
+        EnderecoFornecedorEntry.place(x=150,y=210)
 
         ProdutoFornecedorLabel = Label(text="Produto Fornecido:",bg="#002333", fg="white") #Cria label do produto
-        ProdutoFornecedorLabel.place(x=10,y=350)
+        ProdutoFornecedorLabel.place(x=15,y=250)
         ProdutoFornecedorEntry = ttk.Entry(width=30) #Cria um campo do produto
-        ProdutoFornecedorEntry.place(x=150,y=350)
+        ProdutoFornecedorEntry.place(x=150,y=250)
 
         QuantidadeFornecedorLabel = Label(text="Quantia de Produto:",bg="#002333", fg="white") #Cria label da quantidade de produto fornecido 
-        QuantidadeFornecedorLabel.place(x=10,y=390)
+        QuantidadeFornecedorLabel.place(x=10,y=290)
         QuantidadeFornecedorEntry = ttk.Entry(width=30) #Cria um campo para colocar a quantidade de produto fornecido
-        QuantidadeFornecedorEntry.place(x=150,y=390)
+        QuantidadeFornecedorEntry.place(x=150,y=290)
 
         def RegistrarNoBancoFornecedor(): #Registra os dados no banco de dados
             #Transforma os campos de textos em variaveis
@@ -144,13 +144,13 @@ class Procura_DeleteEAlterarFornecedor():
             idEntry.delete(0,END)
 
         CadastrarButton =  ttk.Button(text="Cadastrar",width=15,command=RegistrarNoBancoFornecedor) #Cria o botão de cadastro
-        CadastrarButton.place(x=100,y=0)
+        CadastrarButton.place(x=50,y=330)
 
         alterarButton =  ttk.Button(text="ALTERAR",width=15,command=alterarFornecedor) #Cria o botão de alterar
-        alterarButton.place(x=500,y=80)
+        alterarButton.place(x=250,y=330)
 
         pesquisaButton =  ttk.Button(text="BUSCAR",width=15,command=buscaFornecedor) #Cria o botão de buscar
-        pesquisaButton.place(x=370,y=80)
+        pesquisaButton.place(x=500,y=80)
 
         excluirButton =  ttk.Button(text="EXCLUIR",width=15,command=excluirFornecedor) #Cria o botão de excluir
         excluirButton.place(x=370,y=120)
@@ -166,6 +166,6 @@ if __name__=="__main__":
     jan.resizable(width=False,height=False) #Impede que a janela seja redimensionad
     logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
     LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
-    LogoLabel.place(x=390, y=180) # Posiciona a imagem
+    LogoLabel.place(x=480, y=150) # Posiciona o label no frame esquerdo
     app=Procura_DeleteEAlterarFornecedor(jan)
     jan.mainloop()
