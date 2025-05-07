@@ -5,7 +5,7 @@ from tkinter import ttk #Importa a classe Database do modulo DataBase
 from DataBase import Database
 import tkinter as tk
 
-class Abrir_Fornecedor:
+class Abrir_cliente:
     def __init__(self,root):
        
 
@@ -54,7 +54,7 @@ class Abrir_Fornecedor:
                 db.RegistrarNoBancoCliente(NomeCliente,cpf,telefone,endereco) #Chama o metodo para registrar no banco de dados 
                 messagebox.showinfo("Sucesso","Fornecedor registrado com sucesso!") #Exibe a mensagem de sucesso
         CadastrarButton =  ttk.Button(text="Cadastrar",width=15,command=RegistrarNoBancoCliente) #Cria o botão de cadastro
-        CadastrarButton.place(x=370,y=80)
+        CadastrarButton.place(x=80,y=270)
 
 
         def LimparCampos():
@@ -64,16 +64,16 @@ class Abrir_Fornecedor:
             EnderecoClienteEntry.delete(0,END) #Limpa o campo de entrada do endereço
            
         LimparButton =  ttk.Button(text="Limpar",width=15,command=LimparCampos) #Cria o botão de limpar
-        LimparButton.place(x=500,y=80)
+        LimparButton.place(x=220,y=270)
     
 if __name__=="__main__":
     jan=Tk() # Cria uma instancia da janela principal
     jan.title("ADM - Fornecedores") #Define o titulo da janela
-    jan .geometry("700x500") #Define o tamanho da janela
+    jan .geometry("800x400") #Define o tamanho da janela
     jan.configure(bg="#002333") #Configura a cor de fundo da janela
     jan.resizable(width=False,height=False) #Impede que a janela seja redimensionad
     logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
     LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
-    LogoLabel.place(x=390, y=140) # Posiciona a imagem
+    LogoLabel.place(x=470, y=80) # Posiciona a imagem
     app = Abrir_Fornecedor(jan)
     jan.mainloop()
