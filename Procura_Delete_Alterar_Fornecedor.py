@@ -16,9 +16,8 @@ class Procura_DeleteEAlterarFornecedor():
 
         idLabel = Label(text="ID do Fornecedor:",bg="#002333", fg="white") #Cria label do ID
         idLabel.place(x=400 , y=50)
-
         idEntry=ttk.Entry(width=30) #Cria um campo do ID
-        idEntry.place(x=500 , y=50)  
+        idEntry.place(x=525 , y=50)  
 
         FornecedorLabel = Label(text="Nome do Fornecedor:",bg="#002333", fg="white") #Cria label do fornecedor
         FornecedorLabel.place(x=15 , y=50)
@@ -150,13 +149,13 @@ class Procura_DeleteEAlterarFornecedor():
         alterarButton.place(x=250,y=330)
 
         pesquisaButton =  ttk.Button(text="BUSCAR",width=15,command=buscaFornecedor) #Cria o botão de buscar
-        pesquisaButton.place(x=500,y=80)
+        pesquisaButton.place(x=500,y=100)
 
         excluirButton =  ttk.Button(text="EXCLUIR",width=15,command=excluirFornecedor) #Cria o botão de excluir
-        excluirButton.place(x=370,y=120)
+        excluirButton.place(x=50,y=370)
 
         limparButton =  ttk.Button(text="LIMPAR",width=15,command=LimparCampos) #Cria o botão de limpar
-        limparButton.place(x=500,y=120)
+        limparButton.place(x=250,y=370)
 
 if __name__=="__main__":
     jan=Tk() # Cria uma instancia da janela principal
