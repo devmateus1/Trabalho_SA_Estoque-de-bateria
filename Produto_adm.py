@@ -4,7 +4,7 @@ from tkinter import ttk
 from DataBase import Database
 
 class AbrirProduto_adm:
-    def __init__(self):
+    def __init__(self,root):
 
  
         Cadastrotitulo = Label (text="CADASTRO DE PRODUTO | ADM :", bg="#002333", fg="white") # Cria o titulo
