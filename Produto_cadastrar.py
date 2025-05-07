@@ -100,3 +100,7 @@ if __name__ == "__main__":
         LogoLabel.place(x=500, y=100) # Posiciona o label no frame esquerdo
         app = AbrirProduto_cadastro(jan)
         jan.mainloop()
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2bf8e43341dc8ab6c81fda1ca234dc187fd65dd0

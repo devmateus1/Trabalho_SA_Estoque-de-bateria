@@ -4,7 +4,8 @@ from tkinter import ttk
 from DataBase import Database
 
 class AbrirProduto_adm:
-    def __init__(self,root):
+    def __init__(self):
+
  
         Cadastrotitulo = Label (text="CADASTRO DE PRODUTO | ADM :", bg="#002333", fg="white") # Cria o titulo
         Cadastrotitulo.place(x=230 , y=10) # Posiciona o titulo
@@ -115,6 +116,33 @@ class AbrirProduto_adm:
 
                 # Botão de cadastrar
 
+        def RegistrarNoBanco_Produto():
+            tipo = TipoProdutoEntry.get() # Obtém o valor do campo de entrada do tipo do produto
+            voltagem = VoltagemEntry.get() # Obtém o valor do campo de entrada da voltagem do produto
+            marca = MarcaEntry.get() # Obtém o valor do campo de entrada da marca do produto
+            quantidade = QuantidadeEntry.get() # Obtém o valor do campo de entrada da quantidade do produto
+            preco = PrecoEntry.get() #Obtém o valor do campo de entrada da quantidade do produto
+            data = DataProdutoEntry.get() # Obtém o valor do campo de entrada da quantidade do produto
+ 
+            if tipo == "" or voltagem == "" or marca == "" or quantidade == "" or preco == "" or data == "":
+                messagebox.showerror(title="Erro no Registro",message="PREENCHA TODOS OS CAMPOS") # Exibe mensagm de erro
+            else:
+                db = Database() # Cria uma instância da classe Database
+                db.RegistrarNoBanco_Produto(tipo, voltagem, marca, quantidade, preco, data) # Chama o método para registrar no banco de dados
+                messagebox.showinfo("Sucesso","Usuário registrado com sucesso!") # Exibe mensagem de Sucesso
+ 
+                     # Limpar os campos após o registro
+                TipoProdutoEntry.delete(0, END) # Limpa o campo de entrada do tipo
+                VoltagemEntry.delete(0, END) # Limpa o campo de entrada da voltagem
+                MarcaEntry.delete(0, END) # Limpa o campo de entrada da marca
+                QuantidadeEntry.delete(0, END) # Limpa o campo de entrada da quantidade
+                PrecoEntry.delete(0, END) # Limpa o campo de entrada do preço
+                DataProdutoEntry.delete(0, END) # Limpa o campo de entrada da data
+
+
+        
+ 
+
 
  
          # Botão de limpar campos
@@ -126,7 +154,10 @@ class AbrirProduto_adm:
         Alterar.place(x=80, y=340)
 
         Excluir = Button(text="EXCLUIR", width=15, command=excluirproduto)
-        Excluir.place(x=80, y=300)
+        Excluir.place(x=250, y=340)
+
+        Cadastrar = Button(text="CADASTRAR", width=15, command=RegistrarNoBanco_Produto)
+        Cadastrar.place(x=80, y=300)
 
         buscarbotao = Button(text="BUSCAR", width=15,command=buscarproduto)
         buscarbotao.place (x=500 , y=90)
