@@ -79,6 +79,9 @@ class AbrirProduto_cliente:
         buscarbotao = Button(text="BUSCAR", width=15,command=buscarproduto)
         buscarbotao.place (x=500 , y=90)
 
+        buscarbotao = Button(text="Limpar campos", width=15,command=LimparCampos)
+        buscarbotao.place (x=650 , y=90)
+
 
 if __name__ == "__main__":
         jan = Tk()
