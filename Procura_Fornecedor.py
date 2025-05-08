@@ -6,56 +6,60 @@ from DataBase import Database
 
 class Procura_Fornecedor():
     def __init__(self,root):
-    
+        self.root = root  # Referência à janela principal
+
+        # Frame principal
+        self.main_frame = Frame(self.root, bg="#002333")  # Frame para agrupar widgets
+        self.main_frame.pack(expand=True, fill=BOTH)
 
 
-        tituloLabel = Label(text="FORNECEDORES | USUARIO :",bg="#002333", fg="white") #Coloca um titulo para a janela
+        tituloLabel = Label(self.main_frame, text="FORNECEDORES | USUARIO :",bg="#002333", fg="white") #Coloca um titulo para a janela
         tituloLabel.place(x=160,y=10)
 
-        infoLabel = Label(text="Digite o ID do fornecedor para procurar:",bg="#002333", fg="white") #Coloca um titulo para a janela
+        infoLabel = Label(self.main_frame, text="Digite o ID do fornecedor para procurar:",bg="#002333", fg="white") #Coloca um titulo para a janela
         infoLabel.place(x=40,y=40)
 
-        alterarLabel = Label(text="Dados do forncedor procurado:",bg="#002333", fg="white") #Coloca um label
+        alterarLabel = Label(self.main_frame, text="Dados do forncedor procurado:",bg="#002333", fg="white") #Coloca um label
         alterarLabel.place(x=40,y=110)
 
-        idLabel = Label(text="ID do Fornecedor:",bg="#002333", fg="white") #Cria label do ID
+        idLabel = Label(self.main_frame, text="ID do Fornecedor:",bg="#002333", fg="white") #Cria label do ID
         idLabel.place(x=10,y=80)
-        idEntry=ttk.Entry(width=30) #Cria um campo do ID
+        idEntry=ttk.Entry(self.main_frame, width=30) #Cria um campo do ID
         idEntry.place(x=150,y=80)   
 
-        FornecedorLabel = Label(text="Nome do Fornecedor:",bg="#002333", fg="white") #Cria label do fornecedor
+        FornecedorLabel = Label(self.main_frame, text="Nome do Fornecedor:",bg="#002333", fg="white") #Cria label do fornecedor
         FornecedorLabel.place(x=10,y=150)
-        FornecedorEntry=ttk.Entry(width=30) #Cria um campo do forncedor
+        FornecedorEntry=ttk.Entry(self.main_frame, width=30) #Cria um campo do forncedor
         FornecedorEntry.place(x=150,y=150)   
 
-        CpfFornecedorLabel = Label(text="CPF do Fornecedor:",bg="#002333", fg="white") #Cria label do Cpf
+        CpfFornecedorLabel = Label(self.main_frame, text="CPF do Fornecedor:",bg="#002333", fg="white") #Cria label do Cpf
         CpfFornecedorLabel.place(x=10,y=190)
-        CpfFornecedorEntry = ttk.Entry(width=30) #Cria um campo do cpf
+        CpfFornecedorEntry = ttk.Entry(self.main_frame, width=30) #Cria um campo do cpf
         CpfFornecedorEntry.place(x=150,y=190)
 
-        TelefoneFornecedorLabel = Label(text="Telefone do fornecedor:",bg="#002333", fg="white") #Cria label do Telefone
+        TelefoneFornecedorLabel = Label(self.main_frame, text="Telefone do fornecedor:",bg="#002333", fg="white") #Cria label do Telefone
         TelefoneFornecedorLabel.place(x=10,y=230)
-        TelefoneFornecedorEntry = ttk.Entry(width=30) #Cria um campo do telefone
+        TelefoneFornecedorEntry = ttk.Entry(self.main_frame, width=30) #Cria um campo do telefone
         TelefoneFornecedorEntry.place(x=150,y=230)
 
-        EmailFornecedorLabel = Label(text="Email do Fornecedor:",bg="#002333", fg="white") #Cria label do email
+        EmailFornecedorLabel = Label(self.main_frame, text="Email do Fornecedor:",bg="#002333", fg="white") #Cria label do email
         EmailFornecedorLabel.place(x=10,y=270)
-        EmailFornecedorEntry = ttk.Entry(width=30) #Cria um campo do email
+        EmailFornecedorEntry = ttk.Entry(self.main_frame, width=30) #Cria um campo do email
         EmailFornecedorEntry.place(x=150,y=270)
 
-        EnderecoFornecedorLabel = Label(text="Endereço do Fornecedor:",bg="#002333", fg="white") #Cria label do endereço
+        EnderecoFornecedorLabel = Label(self.main_frame, text="Endereço do Fornecedor:",bg="#002333", fg="white") #Cria label do endereço
         EnderecoFornecedorLabel.place(x=10,y=310)
-        EnderecoFornecedorEntry = ttk.Entry(width=30) #Cria um campo do endereço
+        EnderecoFornecedorEntry = ttk.Entry(self.main_frame, width=30) #Cria um campo do endereço
         EnderecoFornecedorEntry.place(x=150,y=310)
 
-        ProdutoFornecedorLabel = Label(text="Produto Fornecido:",bg="#002333", fg="white") #Cria label do produto
+        ProdutoFornecedorLabel = Label(self.main_frame, text="Produto Fornecido:",bg="#002333", fg="white") #Cria label do produto
         ProdutoFornecedorLabel.place(x=10,y=350)
-        ProdutoFornecedorEntry = ttk.Entry(width=30) #Cria um campo do produto
+        ProdutoFornecedorEntry = ttk.Entry(self.main_frame, width=30) #Cria um campo do produto
         ProdutoFornecedorEntry.place(x=150,y=350)
 
-        QuantidadeFornecedorLabel = Label(text="Quantia de Produto:",bg="#002333", fg="white") #Cria label da quantidade de produto fornecido 
+        QuantidadeFornecedorLabel = Label(self.main_frame, text="Quantia de Produto:",bg="#002333", fg="white") #Cria label da quantidade de produto fornecido 
         QuantidadeFornecedorLabel.place(x=10,y=390)
-        QuantidadeFornecedorEntry = ttk.Entry(width=30) #Cria um campo para colocar a quantidade de produto fornecido
+        QuantidadeFornecedorEntry = ttk.Entry(self.main_frame, width=30) #Cria um campo para colocar a quantidade de produto fornecido
         QuantidadeFornecedorEntry.place(x=150,y=390)
         
         def LimparCampos():
@@ -101,6 +105,23 @@ class Procura_Fornecedor():
         pesquisaButton.place(x=370,y=80)
         limparButton =  ttk.Button(text="LIMPAR",width=15,command=LimparCampos) #Cria o botão de alterar
         limparButton.place(x=500,y=80)
+
+        def voltar_menu():
+            self.root.destroy()  # Fecha a tela atual (tela de busca de produto)
+            root = Tk()  # Cria uma nova instância da janela principal
+            from tela_usuario import TeldACASTRO  # Importa a tela principal
+            TeldACASTRO(root)  # Chama a tela principal
+
+        # Função que junta as funcionalidades de voltar e limpar
+        def juntar_funcoes():
+            LimparCampos()  # Limpa os campos
+            voltar_menu()  # Volta ao menu e destrói a tela anterior
+
+        # Botões
+
+        # Botão de Voltar ao Menu
+        VoltarMenu = Button(self.main_frame, text="Voltar ao menu", width=15, command=juntar_funcoes)
+        VoltarMenu.place(x=500, y=130)  # Ajuste a posição conforme necessário
 
 
 

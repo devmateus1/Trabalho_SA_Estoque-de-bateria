@@ -8,7 +8,7 @@ import tkinter.font as tkFont
 class TeldACASTRO:
     def __init__(self, root):
         self.root = root
-        self.root.title("VGM Systems - Tela do Usuário")
+        self.root.title("VGM Systems - Tela do ADM")
         self.root.geometry("800x400")
         self.root.configure(background="#002333")
         self.root.resizable(False, False)
@@ -31,7 +31,7 @@ class TeldACASTRO:
                                  bg="#002333", fg="white")
         self.title_label.pack(pady=(10, 5))
 
-        self.subtitle_label = Label(self.main_frame, text="Painel do Usuário", font=self.label_font,
+        self.subtitle_label = Label(self.main_frame, text="Painel do ADM", font=self.label_font,
                                     bg="#002333", fg="#a0a0a0")
         self.subtitle_label.pack(pady=(0, 30))
 

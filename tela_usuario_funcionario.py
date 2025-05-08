@@ -1,14 +1,13 @@
-from tkinter import *  # Importa todos os módulos do Tkinter
-from tkinter import messagebox  # Importa o módulo de caixas de mensagens do Tkinter 
-from tkinter import ttk  # Importa o módulo ttk do Tkinter
-from DataBase import Database # Importa a classe Database do módulo DataBase
-import tkinter as tk  # Importa o módulo tkinter como tk
+from tkinter import *
+from tkinter import messagebox
+from tkinter import ttk
+from DataBase import Database
+import tkinter as tk
 
 class TelaGeral:
     def __init__(self, root):
-        
         self.root = root  # Referência da janela principal
-        
+
         # Título da janela
         tituloLabel = Label(self.root, text="TELA GERAL FUNCIONÁRIOS", bg="#002333", fg="white", font=("Arial", 13, "bold"))
         tituloLabel.place(x=140, y=10)
@@ -53,16 +52,20 @@ class TelaGeral:
         self.enderecoEntry = ttk.Entry(self.root, width=40)
         self.enderecoEntry.place(x=200, y=370)
 
-        # Botões (reorganizados e estilizados)
+        # Botões
         button_bg = "#005577"  # Azul médio para botões
         button_fg = "white"
 
-        # Botões
+        # Botões existentes
         listarButton = ttk.Button(self.root, text="BUSCAR", width=15, command=self.buscarfuncionario)
         listarButton.place(x=200, y=420)
         
         listarButton = ttk.Button(self.root, text="limpar", width=15, command=self.LimparCampos)
         listarButton.place(x=310, y=420)
+
+        # Botão "Voltar ao Menu" - Ajustando o uso do ttk.Button
+        VoltarMenu = ttk.Button(self.root, text="Voltar ao menu", width=15, command=self.juntar_funcoes)
+        VoltarMenu.place(x=90, y=420)  # Ajuste a posição conforme necessário
 
     # Funções para os botões (ainda precisam ser implementadas)
     
@@ -97,13 +100,21 @@ class TelaGeral:
             self.salarioEntry.delete(0, END)
             self.enderecoEntry.delete(0, END)
     
-    
+    def voltar_menu(self):
+            self.root.destroy()  # Fecha a tela atual (tela de busca de produto)
+            root = Tk()  # Cria uma nova instância da janela principal
+            from tela_usuario import TeldACASTRO  # Importa a tela principal
+            TeldACASTRO(root)  # Chama a tela principal
 
+        # Função que junta as funcionalidades de voltar e limpar
+    def juntar_funcoes(self):
+        self.LimparCampos()
+        self.voltar_menu()
 
 if __name__ == "__main__":
     jan = Tk()  # Cria uma instância da janela principal
     jan.title("CADASTRO - Funcionários(a)")  # Define o título da janela
-    jan.geometry("500x500")  # Define o tamanho da janela
+    jan.geometry("700x600")  # Aumentei o tamanho da janela
     jan.configure(background="#002333")  # Configura a cor de fundo da janela
     jan.resizable(width=False, height=False)  # Impede que a janela seja redimensionada
     app = TelaGeral(jan)  # Cria uma instância da classe TelaGeral
