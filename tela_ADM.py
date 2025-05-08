@@ -36,19 +36,19 @@ class TeldACASTRO:
         self.subtitle_label.pack(pady=(0, 30))
 
         # Botões centralizados em coluna
-        self.Produto = Button(self.main_frame, text="Consulta Produto", font=self.button_font,
+        self.Produto = Button(self.main_frame, text="ADM-Consulta Produto", font=self.button_font,
                               bg="#0078D7", fg="white", activebackground="#0063B1",
                               activeforeground="white", borderwidth=0, width=25, pady=10,
                               command=self.produto)
         self.Produto.pack(pady=8)
 
-        self.Fornecedor = Button(self.main_frame, text="Consulta Fornecedor", font=self.button_font,
+        self.Fornecedor = Button(self.main_frame, text="ADM-Fornecedor", font=self.button_font,
                                  bg="#0078D7", fg="white", activebackground="#0063B1",
                                  activeforeground="white", borderwidth=0, width=25, pady=10,
                                  command=self.fornecedor)
         self.Fornecedor.pack(pady=8)
 
-        self.Funcionario = Button(self.main_frame, text="Consulta Funcionário", font=self.button_font,
+        self.Funcionario = Button(self.main_frame, text="ADM-Consulta Funcionário", font=self.button_font,
                                   bg="#0078D7", fg="white", activebackground="#0063B1",
                                   activeforeground="white", borderwidth=0, width=25, pady=10,
                                   command=self.funcionario)
@@ -81,13 +81,13 @@ class TeldACASTRO:
 
     def fornecedor(self):
         self.limpar_tela()
-        from Procura_Fornecedor import Procura_Fornecedor
+        from FornecedorADM import FornecedorADM
         self.center_window(800, 500)
-        Procura_Fornecedor(self.main_frame)
+        FornecedorADM(self.main_frame)
 
     def funcionario(self):
         self.limpar_tela()
-        from tela_usuario_funcionario import TelaGeral
+        from TelaFuncionarios_adm import TelaGeral
         self.center_window(800, 500)
         TelaGeral(self.main_frame)
 

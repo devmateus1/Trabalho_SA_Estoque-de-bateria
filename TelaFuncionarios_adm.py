@@ -6,8 +6,9 @@ import tkinter as tk  # Importa o módulo tkinter como tk
 
 class TelaGeral:
     def __init__(self, root):
-        
-        self.root = root  # Referência da janela principal
+        self.root = root
+        self.main_frame = Frame(self.root, bg="#002333")
+        self.main_frame.pack(expand=True, fill=BOTH)
         
         # Título da janela
         tituloLabel = Label(self.root, text="TELA GERAL FUNCIONÁRIOS", bg="#002333", fg="white")
@@ -72,6 +73,8 @@ class TelaGeral:
 
         CadastrarButton = ttk.Button(self.root, text="CADASTRAR", width=15, command=self.conect_banco_funcionario)
         CadastrarButton.place(x=80, y=320)  
+
+        Button(self.main_frame, text="Voltar ao menu", width=15, command=self.juntar_funcoes).place(x=500, y=370)
 
     # Funções para os botões (ainda precisam ser implementadas)
     def excluirFuncionario(self):
@@ -152,6 +155,18 @@ class TelaGeral:
             db = Database()  # Cria uma instância do banco de dados
             db.RegistrarNoBancofuncionario(cpf, nome, telefone, email, dataDeContratacao, cargo, salario, endereco)
             messagebox.showinfo("Sucesso", "Funcionário(a) cadastrado(a) com sucesso!")  
+        
+    
+
+    def voltar_menu(self):
+        self.root.destroy()
+        from tela_ADM import TeldACASTRO
+        root = Tk()
+        TeldACASTRO(root)
+
+    def juntar_funcoes(self):
+        self.LimparCampos()
+        self.voltar_menu()
 
 
 if __name__ == "__main__":
