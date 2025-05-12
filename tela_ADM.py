@@ -5,11 +5,10 @@ from tkinter import ttk, messagebox
 import tkinter.font as tkFont
 
 
-
 class TeldACASTRO:
     def __init__(self, root):
         self.root = root
-        self.root.title("VGM Systems - Tela do Usuário")
+        self.root.title("VGM Systems - Tela do ADM")
         self.root.geometry("800x400")
         self.root.configure(background="#002333")
         self.root.resizable(False, False)
@@ -32,29 +31,28 @@ class TeldACASTRO:
                                  bg="#002333", fg="white")
         self.title_label.pack(pady=(10, 5))
 
-        self.subtitle_label = Label(self.main_frame, text="Painel do Usuário", font=self.label_font,
+        self.subtitle_label = Label(self.main_frame, text="Painel do ADM", font=self.label_font,
                                     bg="#002333", fg="#a0a0a0")
         self.subtitle_label.pack(pady=(0, 30))
 
         # Botões centralizados em coluna
-        self.Produto = Button(self.main_frame, text="Consulta Produto", font=self.button_font,
+        self.Produto = Button(self.main_frame, text="ADM-Consulta Produto", font=self.button_font,
                               bg="#0078D7", fg="white", activebackground="#0063B1",
                               activeforeground="white", borderwidth=0, width=25, pady=10,
                               command=self.produto)
         self.Produto.pack(pady=8)
 
-        self.Fornecedor = Button(self.main_frame, text="Consulta Fornecedor", font=self.button_font,
+        self.Fornecedor = Button(self.main_frame, text="ADM-Fornecedor", font=self.button_font,
                                  bg="#0078D7", fg="white", activebackground="#0063B1",
                                  activeforeground="white", borderwidth=0, width=25, pady=10,
                                  command=self.fornecedor)
         self.Fornecedor.pack(pady=8)
 
-        self.Funcionario = Button(self.main_frame, text="Consulta Funcionário", font=self.button_font,
+        self.Funcionario = Button(self.main_frame, text="ADM-Consulta Funcionário", font=self.button_font,
                                   bg="#0078D7", fg="white", activebackground="#0063B1",
                                   activeforeground="white", borderwidth=0, width=25, pady=10,
                                   command=self.funcionario)
         self.Funcionario.pack(pady=8)
-        
 
         # Rodapé
         self.version_label = Label(self.main_frame, text="v1.0.0", font=("Helvetica", 8),
@@ -73,22 +71,32 @@ class TeldACASTRO:
 
     def produto(self):
         self.limpar_tela()
-        from Procura_Produto import AbrirProduto_cliente
-        self.center_window(800, 500)
-        AbrirProduto_cliente(self.main_frame)
+        from Produto_adm import AbrirProduto_adm
+        self.center_window(800, 400)
+        self.logo = PhotoImage(file="icon/_SLA_.png")  # Caminho relativo da imagem
+        self.logo_label = Label(self.main_frame.master, image=self.logo, bg="#002333")
+        self.logo_label.place(x=500, y=150)  # Posição do logo           
+        AbrirProduto_adm(self.main_frame)
 
 
     def fornecedor(self):
         self.limpar_tela()
-        from Procura_Fornecedor import Procura_Fornecedor
+        from FornecedorADM import FornecedorADM
         self.center_window(800, 500)
-        Procura_Fornecedor(self.main_frame)
+        FornecedorADM(self.main_frame)
 
     def funcionario(self):
         self.limpar_tela()
-        from tela_usuario_funcionario import TelaGeral
+        from TelaFuncionarios_adm import TelaGeral
         self.center_window(800, 500)
         TelaGeral(self.main_frame)
+
+    def voltar_menu(self):
+        """Volta ao menu principal"""
+        self.limpar_tela()
+        self.center_window(800, 400)
+        self.criar_widgets()
+
 
 if __name__ == "__main__":
     root = Tk()

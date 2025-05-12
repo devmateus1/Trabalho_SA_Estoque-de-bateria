@@ -52,7 +52,7 @@ class Abrir_Fornecedor:
             else:
                 db = Database() #Cria uma instancia da classe Database
                 db.RegistrarNoBancoCliente(NomeCliente,cpf,telefone,endereco) #Chama o metodo para registrar no banco de dados 
-                messagebox.showinfo("Sucesso","Fornecedor registrado com sucesso!") #Exibe a mensagem de sucesso
+                messagebox.showinfo("Sucesso","Cliente registrado com sucesso!") #Exibe a mensagem de sucesso
         CadastrarButton =  ttk.Button(text="Cadastrar",width=15,command=RegistrarNoBancoCliente) #Cria o botão de cadastro
         CadastrarButton.place(x=370,y=80)
 

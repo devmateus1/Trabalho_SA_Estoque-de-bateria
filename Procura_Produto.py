@@ -1,101 +1,114 @@
-from tkinter import * #Importa todos os mudulos do tkinter
-from tkinter import messagebox # Importar o mudulo de widgets tematicos do tkinter
-from tkinter import ttk
+from tkinter import *
+from tkinter import ttk, messagebox
 from DataBase import Database
-import tkinter as tk
+import tkinter.font as tkFont
 
 class AbrirProduto_cliente:
-    def __init__(self,root):
+    def __init__(self, root):
+        self.root = root
+        self.root.configure(background="#002333")
 
-        Cadastrotitulo = Label (text="BUSCA DE PRODUTO COMPRADO PELO CLIENTE:", bg="#002333", fg="white") # Cria o titulo
-        Cadastrotitulo.place(x=230 , y=10) # Posiciona o titulo
+        # Fontes
+        self.title_font = tkFont.Font(family="Helvetica", size=16, weight="bold")
+        self.label_font = tkFont.Font(family="Helvetica", size=10)
+        self.button_font = tkFont.Font(family="Helvetica", size=10, weight="bold")
 
-        IdProdutoLabel = Label (text="ID DO USUARIO :", bg="#002333", fg="white")
-        IdProdutoLabel.place (x=400 , y=50)  
-        IdProdutoEntry =ttk.Entry(width=30)
-        IdProdutoEntry.place (x=500 , y=50)
+        # Frame principal
+        self.main_frame = Frame(self.root, bg="#002333")
+        self.main_frame.pack(expand=True, fill=BOTH, padx=20, pady=20)
 
-        TipoProdutoLabel = Label (text="TIPO DA BATERIA :", bg="#002333", fg="white")
-        TipoProdutoLabel.place (x=55 , y=50)
-        TipoProdutoEntry =ttk.Entry(width=30)
-        TipoProdutoEntry.place (x=170 , y=50)
+        # Cabeçalho
+        self.title_label = Label(self.main_frame, text="BUSCA DE PRODUTO COMPRADO PELO CLIENTE:",
+                                 font=self.title_font, bg="#002333", fg="white")
+        self.title_label.pack(pady=(10, 20))
 
-        VoltagemLabel = Label (text="VOLTAGEM DA BATERIA :", bg="#002333", fg="white")
-        VoltagemLabel.place (x=20 , y=90)
-        VoltagemEntry =ttk.Entry(width=30)
-        VoltagemEntry.place (x=170 , y=90)
+        # Frame dos campos
+        form_frame = Frame(self.main_frame, bg="#002333")
+        form_frame.pack()
 
-        MarcaLabel = Label (text="MARCA DA BATERIA :", bg="#002333", fg="white")
-        MarcaLabel.place (x=40 , y=130)
-        MarcaEntry =ttk.Entry(width=30)
-        MarcaEntry.place (x=170 , y=130)
+        # Entradas e labels
+        self.entries = {}
+        campos = [
+            ("ID DO PRODUTO", 0, 1),
+            ("TIPO DA BATERIA", 1, 0),
+            ("VOLTAGEM DA BATERIA", 2, 0),
+            ("MARCA DA BATERIA", 3, 0),
+            ("QUANTIDADE DA BATERIA", 4, 0),
+            ("PREÇO DA BATERIA", 5, 0),
+            ("DATA DE VALIDADE", 6, 0)
+        ]
 
-        QuantidadeLabel = Label (text="QUANTIDADE DA BATERIA :", bg="#002333", fg="white")
-        QuantidadeLabel.place (x=8 , y=170)
-        QuantidadeEntry =ttk.Entry(width=30)
-        QuantidadeEntry.place (x=170 , y=170)
+        for texto, linha, coluna in campos:
+            label = Label(form_frame, text=texto + ":", font=self.label_font, bg="#002333", fg="white")
+            label.grid(row=linha, column=coluna * 2, sticky=E, pady=5, padx=5)
+            entry = ttk.Entry(form_frame, width=30)
+            entry.grid(row=linha, column=coluna * 2 + 1, pady=5, padx=5)
+            self.entries[texto] = entry
 
-        PrecoLabel = Label (text="PREÇO DA BATERIA :", bg="#002333", fg="white")
-        PrecoLabel.place (x=45 , y=210)
-        PrecoEntry =ttk.Entry(width=30)
-        PrecoEntry.place (x=170 , y=210)
+        # Botões
+        botoes_frame = Frame(self.main_frame, bg="#002333")
+        botoes_frame.pack(pady=20)
 
-        DataBaseataProdutoLabel = Label (text="DATA DE VALIDADE :", bg="#002333", fg="white")
-        DataBaseataProdutoLabel.place (x=45 , y=250)
-        DataProdutoEntry =ttk.Entry(width=30)
-        DataProdutoEntry.place (x=170 , y=250)
+        Button(botoes_frame, text="BUSCAR", font=self.button_font, bg="#0078D7", fg="white",
+               activebackground="#0063B1", activeforeground="white", borderwidth=0,
+               width=18, pady=8, command=self.buscarproduto).pack(side=LEFT, padx=10)
+
+        Button(botoes_frame, text="LIMPAR CAMPOS", font=self.button_font, bg="#0078D7", fg="white",
+               activebackground="#0063B1", activeforeground="white", borderwidth=0,
+               width=18, pady=8, command=self.LimparCampos).pack(side=LEFT, padx=10)
+
+        Button(botoes_frame, text="VOLTAR AO MENU", font=self.button_font, bg="#0078D7", fg="white",
+               activebackground="#0063B1", activeforeground="white", borderwidth=0,
+               width=18, pady=8, command=self.juntar_funcoes).pack(side=LEFT, padx=10)
+
+        # Rodapé
+        self.version_label = Label(self.main_frame, text="v1.0.0", font=("Helvetica", 8),
+                                   bg="#002333", fg="#a0a0a0")
+        self.version_label.pack(side=BOTTOM, pady=(10, 0))
+
+    def LimparCampos(self):
+        for entry in self.entries.values():
+            entry.delete(0, END)
+
+    def buscarproduto(self):
+        idproduto = self.entries["ID DO PRODUTO"].get()
+        if not idproduto:
+            messagebox.showerror(title="Erro", message="PREENCHA O CAMPO DE ID")
+            return
+
+        db = Database()
+        usuario = db.buscar_produto(idproduto)
+        if usuario:
+            chaves = list(self.entries.keys())
+            for i in range(1, len(chaves)):  # pula o ID
+                self.entries[chaves[i]].delete(0, END)
+                self.entries[chaves[i]].insert(0, usuario[i])
+        else:
+            messagebox.showerror("Erro", "Produto não encontrado")
+            self.LimparCampos()
+
+    def voltar_menu(self):
+        self.root.destroy()
+        from tela_usuario import TeldACASTRO
+        root = Tk()
+        TeldACASTRO(root)
+        root.mainloop()
+
+    def limpar_tela(self):
+        for widget in self.main_frame.winfo_children():
+            widget.destroy()
+
+    def juntar_funcoes(self):
+        self.limpar_tela()
+        self.voltar_menu()
 
 
-        def LimparCampos():
-            TipoProdutoEntry.delete(0, END)
-            VoltagemEntry.delete(0, END)
-            MarcaEntry.delete(0, END)
-            QuantidadeEntry.delete(0, END)
-            PrecoEntry.delete(0, END)
-            DataProdutoEntry.delete(0, END)
-            IdProdutoEntry.delete(0, END)
-
-        def buscarproduto():
-            idproduto = IdProdutoEntry.get()
-            if idproduto == "":
-                messagebox.showerror(title="Erro", message="PREENCHA O CAMPO DE ID")
-            else:
-                db = Database()  # Cria uma instância do banco de dados
-                usuario = db.buscar_produto(idproduto)  # Supondo que exista um método para buscar por id
-                if usuario:
-                    TipoProdutoEntry.insert(0, usuario[1])
-                    VoltagemEntry.insert(0, usuario[2])
-                    MarcaEntry.insert(0, usuario[3])
-                    QuantidadeEntry.insert(0, usuario[4])
-                    PrecoEntry.insert(0, usuario[5])
-                    DataProdutoEntry.insert(0, usuario[6])
-                else:
-                    messagebox.showerror("Erro", "Usuário não encontrado")
-                    LimparCampos()
-
-        
-
-        buscarbotao = Button(text="BUSCAR", width=15, command=buscarproduto)
-        buscarbotao.place(x=500, y=90)
-
-        LimparCamposbotao = Button(text="LIMPAR CAMPOS", width=15, command=LimparCampos)
-        LimparCamposbotao.place(x=650, y=90)
-
-        
-        
 if __name__ == "__main__":
-        jan = Tk()
-        jan.title("USUARIO - PRODUTO - CLIENTE")
-        jan.geometry("800x400")
-        jan.configure(background="#002333")
-        jan.resizable(width=False, height=False)
-        logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
-        LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
-        LogoLabel.place(x=480, y=150) # Posiciona o label no frame esquerdo
-        app = AbrirProduto_cliente(jan)
-        jan.mainloop()
+    root = Tk()
+    root.title("USUÁRIO - PRODUTO - CLIENTE")
+    root.geometry("800x500")
+    root.configure(background="#002333")
+    root.resizable(False, False)
 
-
-
- 
-
+    app = AbrirProduto_cliente(root)
+    root.mainloop()
