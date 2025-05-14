@@ -30,6 +30,7 @@ class AbrirProduto_cliente:
         self.entries = {}
         campos = [
             ("ID DO PRODUTO", 1, 1),
+<<<<<<< Updated upstream
             ("ID DO FORNECEDOR", 1, 0),
             ("TIPO DA BATERIA", 2, 0),
             ("VOLTAGEM DA BATERIA", 3, 0),
@@ -37,6 +38,14 @@ class AbrirProduto_cliente:
             ("QUANTIDADE DA BATERIA", 5, 0),
             ("PREÇO DA BATERIA", 6, 0),
             ("DATA DE VALIDADE", 7, 0)
+=======
+            ("TIPO DA BATERIA", 1, 0),
+            ("VOLTAGEM DA BATERIA", 2, 0),
+            ("MARCA DA BATERIA", 3, 0),
+            ("QUANTIDADE DA BATERIA", 4, 0),
+            ("PREÇO DA BATERIA", 5, 0),
+            ("DATA DE VALIDADE", 6, 0)
+>>>>>>> Stashed changes
         ]
 
         for texto, linha, coluna in campos:

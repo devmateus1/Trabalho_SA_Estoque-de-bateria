@@ -2,6 +2,8 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
 from DataBase import Database
+import customtkinter as ctk
+
 
 class AbrirProduto_adm:
     def __init__(self, root):
@@ -41,6 +43,19 @@ class AbrirProduto_adm:
         self.IdProdutoEntry = ttk.Entry(self.main_frame, width=30)
         self.IdProdutoEntry.place(x=500, y=50)
 
+        #COMBO box fornecedor
+        self.combobox_fornecedor = ctk.CTkComboBox(self.root, values= self.buscar_fornecedores(), height=30, width=210)
+        self.combobox_fornecedor.place(x=600, y=100)
+
+        # Rótulo
+        label = ttk.Label(jan, text="Selecione o fornecedor:")
+        label.pack(pady=10)
+
+        # Criar o ComboBox
+        combo = label(jan, values= fornecedores, state="readonly")
+        combo.place(x=500, y=100)
+
+
         def buscarproduto():
             idproduto = self.IdProdutoEntry.get()
             if idproduto == "":
@@ -59,6 +74,15 @@ class AbrirProduto_adm:
                 else:
                     messagebox.showerror("Erro", "Funcionário não encontrado")
                     self.LimparCampos()
+
+        def buscar_fornecedores():
+            db = Database()
+            busca = listar_fornecedores_db()
+            fornecedores = [nome[1] for nome in busca]
+            return fornecedores
+
+
+
 
         def alterarproduto():
             idproduto = self.IdProdutoEntry.get()

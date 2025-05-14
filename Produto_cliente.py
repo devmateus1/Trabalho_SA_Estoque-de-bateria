@@ -64,12 +64,12 @@ class AbrirProduto_cliente:
                 db = Database()  # Crie uma instância do banco de dados
                 usuario = db.buscar_produto(idproduto)  # Supondo que exista um método para buscar por id
                 if usuario:
-                    TipoProdutoEntry.insert(0, usuario[1])
-                    VoltagemEntry.insert(0, usuario[2])
-                    MarcaEntry.insert(0, usuario[3])
-                    QuantidadeEntry.insert(0, usuario[4])
-                    PrecoEntry.insert(0, usuario[5])
-                    DataProdutoEntry.insert(0, usuario[6])
+                    TipoProdutoEntry.insert(0, usuario[2])
+                    VoltagemEntry.insert(0, usuario[3])
+                    MarcaEntry.insert(0, usuario[4])
+                    QuantidadeEntry.insert(0, usuario[5])
+                    PrecoEntry.insert(0, usuario[6])
+                    DataProdutoEntry.insert(0, usuario[7])
 
                 else:
                     messagebox.showerror("Erro", "Funcionário não encontrado")

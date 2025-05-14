@@ -48,6 +48,14 @@ class Database:
     def removerFornecedor(self,idfornecedor):
         self.cursor.execute("DELETE FROM fornecedor WHERE idfornecedor=%s", (idfornecedor,))
         self.conn.commit()
+
+    def listar_fornecedores_db(self, idfornecedor, fornecedores):
+        query = "SELECT id_fornecedor, nome_fornecedor FROM fornecedor"
+        self.cursor.execute(query, (idfornecedor,fornecedores))
+        busca = self.cursor.fetchall()
+        return busca
+    
+
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------FUNCIONARIOS-----------------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
