@@ -94,25 +94,11 @@ class TelaLoginCadastro:
     # Funções de navegação
     def TelaFornecedores(self):
         from Cadastro_Fornecedor import Abrir_Fornecedor
-<<<<<<< HEAD
-        nova_janela = Toplevel(self.root)
-        Abrir_Fornecedor(nova_janela)
-       
-    
-
-    def TelaConsulta(self):
-        from Produto_cadastrar import AbrirProduto_cadastro
-        nova_janela = Toplevel()  # Sem self.root
-        nova_janela.geometry("+1920+100")  # Posição inicial na segunda tela
-        AbrirProduto_cadastro(nova_janela)
-
-=======
         Abrir_Fornecedor(self.root)
 
     def TelaConsulta(self):
         from Procura_Delete_Alterar_Fornecedor import Procura_DeleteEAlterarFornecedor
         Procura_DeleteEAlterarFornecedor(self.root)
->>>>>>> 9d4d5e8edc52856258f73f09e95a015bb5b1bd56
 
     def TelaProduto(self):
         from Produto_cadastrar import AbrirProduto_cadastro
