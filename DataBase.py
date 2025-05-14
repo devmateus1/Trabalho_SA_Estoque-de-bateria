@@ -97,6 +97,7 @@ class Database:
         return self.cursor.fetchone()
     
     def removerproduto(self,idproduto):
+        self.cursor.execute("DELETE * FROM compra WHERE idproduto=%s",(idproduto,))
         self.cursor.execute("DELETE FROM produto WHERE idproduto=%s",(idproduto,))
         self.conn.commit()
 

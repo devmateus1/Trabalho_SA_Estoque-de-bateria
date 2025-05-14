@@ -11,21 +11,17 @@ class AbrirProduto_cliente:
         # Fontes
         self.title_font = tkFont.Font(family="Helvetica", size=16, weight="bold")
         self.label_font = tkFont.Font(family="Helvetica", size=10)
-        self.button_font = tkFont.Font(family="Helvetica", size=10, weight="bold")
-
+        self.button_font = tkFont.Font(family="Helvetica", size=10, weight="bold")      
         # Frame principal
         self.main_frame = Frame(self.root, bg="#002333")
-        self.main_frame.pack(expand=True, fill=BOTH, padx=20, pady=20)
-
+        self.main_frame.pack(expand=True, fill=BOTH, padx=20, pady=20)      
         # Cabeçalho
-        self.title_label = Label(self.main_frame, text="BUSCA DE PRODUTO | CLIENTE:",
+        self.title_label = Label(self.main_frame, text="BUSCA DE PRODUTO | USUARIO:",
                                  font=self.title_font, bg="#002333", fg="white")
-        self.title_label.pack(pady=(10, 20))
-
+        self.title_label.pack(pady=(10, 20))        
         # Frame dos campos
         form_frame = Frame(self.main_frame, bg="#002333")
-        form_frame.pack()
-
+        form_frame.pack()       
         # Entradas e labels
         self.entries = {}
         campos = [

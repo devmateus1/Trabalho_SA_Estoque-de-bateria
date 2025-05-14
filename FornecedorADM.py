@@ -141,6 +141,7 @@ class FornecedorADM():
         self.LimparCampos()
         self.voltar_menu()
 
+   
 
 if __name__ == "__main__":
     jan = Tk()
@@ -148,7 +149,9 @@ if __name__ == "__main__":
     jan.geometry("800x400")
     jan.configure(bg="#002333")
     jan.resizable(False, False)
-    logo = PhotoImage(file="icon/_SLA_.png")
-    Label(image=logo, bg="#002333").place(x=480, y=150)
     app = FornecedorADM(jan)
+    logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
+    LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
+    LogoLabel.place(x=480, y=140) # Posiciona o label no frame esquerdo
     jan.mainloop()
+

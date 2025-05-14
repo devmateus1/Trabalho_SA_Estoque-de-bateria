@@ -89,9 +89,7 @@ if __name__ == "__main__":
         jan.geometry("800x400")
         jan.configure(background="#002333")
         jan.resizable(width=False, height=False)
-        logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
-        LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
-        LogoLabel.place(x=480, y=150) # Posiciona o label no frame esquerdo
+
         app = AbrirProduto_cliente(jan)
         jan.mainloop()
 
