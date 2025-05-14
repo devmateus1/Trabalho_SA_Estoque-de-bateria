@@ -18,7 +18,7 @@ class AbrirProduto_cliente:
         self.main_frame.pack(expand=True, fill=BOTH, padx=20, pady=20)
 
         # Cabeçalho
-        self.title_label = Label(self.main_frame, text="BUSCA DE PRODUTO COMPRADO PELO CLIENTE:",
+        self.title_label = Label(self.main_frame, text="BUSCA DE PRODUTO | CLIENTE:",
                                  font=self.title_font, bg="#002333", fg="white")
         self.title_label.pack(pady=(10, 20))
 
@@ -29,13 +29,14 @@ class AbrirProduto_cliente:
         # Entradas e labels
         self.entries = {}
         campos = [
-            ("ID DO PRODUTO", 0, 1),
-            ("TIPO DA BATERIA", 1, 0),
-            ("VOLTAGEM DA BATERIA", 2, 0),
-            ("MARCA DA BATERIA", 3, 0),
-            ("QUANTIDADE DA BATERIA", 4, 0),
-            ("PREÇO DA BATERIA", 5, 0),
-            ("DATA DE VALIDADE", 6, 0)
+            ("ID DO PRODUTO", 1, 1),
+            ("ID DO FORNECEDOR", 1, 0),
+            ("TIPO DA BATERIA", 2, 0),
+            ("VOLTAGEM DA BATERIA", 3, 0),
+            ("MARCA DA BATERIA", 4, 0),
+            ("QUANTIDADE DA BATERIA", 5, 0),
+            ("PREÇO DA BATERIA", 6, 0),
+            ("DATA DE VALIDADE", 7, 0)
         ]
 
         for texto, linha, coluna in campos:
@@ -80,9 +81,10 @@ class AbrirProduto_cliente:
         usuario = db.buscar_produto(idproduto)
         if usuario:
             chaves = list(self.entries.keys())
-            for i in range(1, len(chaves)):  # pula o ID
+            for i in range(len(chaves)):  # pula o ID
                 self.entries[chaves[i]].delete(0, END)
                 self.entries[chaves[i]].insert(0, usuario[i])
+                
         else:
             messagebox.showerror("Erro", "Produto não encontrado")
             self.LimparCampos()
