@@ -41,6 +41,18 @@ class AbrirProduto_adm:
         self.IdProdutoEntry = ttk.Entry(self.main_frame, width=30)
         self.IdProdutoEntry.place(x=500, y=50)
 
+        # Label da ComboBox
+        Label(self.main_frame, text="Fornecedor:", bg="#002333", fg="white").place(x=400, y=130)
+
+        # Buscar os fornecedores do banco
+        db = Database()
+        fornecedores = db.buscar_nome_fornecedor()
+
+        # Cria a ComboBox de fornecedores
+        self.combo_box_forn = ttk.Combobox(self.main_frame, values=fornecedores, state="readonly", width=27)
+        self.combo_box_forn.place(x=500, y=130)
+
+
         def buscarproduto():
             idproduto = self.IdProdutoEntry.get()
             if idproduto == "":
@@ -49,7 +61,6 @@ class AbrirProduto_adm:
                 db = Database()
                 usuario = db.buscar_produto(idproduto)
                 if usuario:
-                    self.LimparCampos()
                     self.TipoProdutoEntry.insert(0, usuario[2])
                     self.VoltagemEntry.insert(0, usuario[3])
                     self.MarcaEntry.insert(0, usuario[4])
@@ -93,7 +104,7 @@ class AbrirProduto_adm:
             preco = self.PrecoEntry.get()
             data = self.DataProdutoEntry.get()
 
-            if "" in [tipo, voltagem, marca, quantidade, preco, data]:
+            if "" in [tipo, voltagem, marca, quantidade, preco, data, idfornecedor]:
                 messagebox.showerror(title="Erro no Registro", message="PREENCHA TODOS OS CAMPOS")
             else:
                 db = Database()

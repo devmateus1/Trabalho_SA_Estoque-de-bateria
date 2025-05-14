@@ -1,23 +1,30 @@
 from tkinter import *
+from tkinter import ttk
 
-def janela_principal():
-    bt1 = Button(janela1, text="Abrir a segunda janela", command=lambda: janela_secundaria(janela1))
-    bt1.place(x=50, y=100)
+def exibir_selecao():
+    # Exibe a opção selecionada pelo usuário
+    selecionado = combo_box.get()
+    label_resultado.config(text=f"Você selecionou: {selecionado}")
 
-def janela_secundaria(master):
-    janela2 = Toplevel(master)
-    janela2.transient(master)
-    janela2.geometry("300x300+200+200")
-    janela2["bg"] = "green"
+# Configura a janela principal
+root = Tk()
+root.title("Exemplo de ComboBox")
+root.geometry("300x200")
 
-    bt1 = Button(janela2, text="Voltar", command=janela2.destroy)
-    bt1.place(x=50, y=100)
+# Lista de opções para o ComboBox
+opcoes = ["Opção 1", "Opção 2", "Opção 3", "Opção 4"]
 
-if __name__ == "__main__":
-    janela1 = Tk()
-    janela1.geometry("300x300+200+200")
-    janela1["bg"] = "green"
+# Cria o ComboBox e coloca na interface
+combo_box = ttk.Combobox(root, values=opcoes, state="readonly")  # 'readonly' para não permitir digitar
+combo_box.place(x=50, y=50)
 
-    janela_principal()
-    
-    janela1.mainloop()
+# Cria um botão para exibir a seleção do ComboBox
+botao = Button(root, text="Exibir Seleção", command=exibir_selecao)
+botao.place(x=50, y=100)
+
+# Rótulo para exibir a seleção do ComboBox
+label_resultado = Label(root, text="")
+label_resultado.place(x=50, y=150)
+
+# Inicia o loop da interface gráfica
+root.mainloop()
