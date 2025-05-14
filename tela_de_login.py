@@ -173,10 +173,10 @@ class LoginSystem:
 
             if verify_adm:
                 messagebox.showinfo(title="INFO LOGIN", message="Acesso Confirmado, Bem-vindo administrador!")
-                from tela_de_adm import TelaAdmin
+                from tela_ADM import TeldACASTRO
                 self.root.destroy()  # Fecha a tela atual, se estiver dentro de uma classe
                 root_menu = Tk()
-                TelaAdmin(root_menu)
+                TeldACASTRO(root_menu)
                 root_menu.mainloop()
                 return
 

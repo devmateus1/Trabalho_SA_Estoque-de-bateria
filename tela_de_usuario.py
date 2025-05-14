@@ -13,7 +13,7 @@ class TeldACASTRO:
         self.root.geometry("800x400")
         self.root.configure(background="#002333")
         self.root.resizable(False, False)
-        self.center_window(800, 400)
+        self.center_window(400, 400)
 
         # Fontes
         self.title_font = tkFont.Font(family="Helvetica", size=20, weight="bold")
@@ -63,8 +63,8 @@ class TeldACASTRO:
 
     def limpar_tela(self):
         """Limpa todos os widgets dentro do main_frame."""
-        for widget in self.main_frame.winfo_children():
-            widget.destroy()
+        for center_window in self.main_frame.winfo_children():
+            center_window.destroy()
 
     def center_window(self, width, height):
         x = (self.root.winfo_screenwidth() // 2) - (width // 2)

@@ -120,6 +120,13 @@ class FornecedorADM():
             db.removerFornecedor(idfornecedor)
             messagebox.showinfo("Sucesso", "Fornecedor excluído com sucesso!")
             self.LimparCampos()
+        # Criando a combobox
+    def buscar_nome_fornecedor(self):
+        self.cursor.execute("SELECT fornecedores FROM fornecedor")
+        resultados = self.cursor.fetchall()
+        return [nome[0] for nome in resultados if nome[0] is not None]
+
+
 
     def LimparCampos(self):
         self.idEntry.delete(0, END)
