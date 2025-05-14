@@ -77,6 +77,14 @@ class TelaGeral:
             db = Database()  # Crie uma instância do banco de dados
             usuario = db.buscar_funcionario(idfuncionario)  # Supondo que exista um método para buscar por id
             if usuario:
+                self.cpf_funcionarioEntry.delete(0, END)
+                self.nome_funcionarioEntry.delete(0, END)
+                self.telefoneEntry.delete(0, END)
+                self.emailEntry.delete(0, END)
+                self.data_da_contratacaoEntry.delete(0, END)
+                self.cargoEntry.delete(0, END)
+                self.salarioEntry.delete(0, END)
+                self.enderecoEntry.delete(0, END)
                 self.cpf_funcionarioEntry.insert(0, usuario[1])
                 self.nome_funcionarioEntry.insert(0, usuario[2])
                 self.telefoneEntry.insert(0, usuario[3])

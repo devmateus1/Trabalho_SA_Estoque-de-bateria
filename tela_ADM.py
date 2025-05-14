@@ -36,19 +36,19 @@ class TeldACASTRO:
         self.subtitle_label.pack(pady=(0, 30))
 
         # Botões centralizados em coluna
-        self.Produto = Button(self.main_frame, text="ADM-Consulta Produto", font=self.button_font,
+        self.Produto = Button(self.main_frame, text="ADM - Produto", font=self.button_font,
                               bg="#0078D7", fg="white", activebackground="#0063B1",
                               activeforeground="white", borderwidth=0, width=25, pady=10,
                               command=self.produto)
         self.Produto.pack(pady=8)
 
-        self.Fornecedor = Button(self.main_frame, text="ADM-Fornecedor", font=self.button_font,
+        self.Fornecedor = Button(self.main_frame, text="ADM - Fornecedor", font=self.button_font,
                                  bg="#0078D7", fg="white", activebackground="#0063B1",
                                  activeforeground="white", borderwidth=0, width=25, pady=10,
                                  command=self.fornecedor)
         self.Fornecedor.pack(pady=8)
 
-        self.Funcionario = Button(self.main_frame, text="ADM-Consulta Funcionário", font=self.button_font,
+        self.Funcionario = Button(self.main_frame, text="ADM - Funcionário", font=self.button_font,
                                   bg="#0078D7", fg="white", activebackground="#0063B1",
                                   activeforeground="white", borderwidth=0, width=25, pady=10,
                                   command=self.funcionario)

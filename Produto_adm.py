@@ -50,12 +50,12 @@ class AbrirProduto_adm:
                 usuario = db.buscar_produto(idproduto)
                 if usuario:
                     self.LimparCampos()
-                    self.TipoProdutoEntry.insert(0, usuario[1])
-                    self.VoltagemEntry.insert(0, usuario[2])
-                    self.MarcaEntry.insert(0, usuario[3])
-                    self.QuantidadeEntry.insert(0, usuario[4])
-                    self.PrecoEntry.insert(0, usuario[5])
-                    self.DataProdutoEntry.insert(0, usuario[6])
+                    self.TipoProdutoEntry.insert(0, usuario[2])
+                    self.VoltagemEntry.insert(0, usuario[3])
+                    self.MarcaEntry.insert(0, usuario[4])
+                    self.QuantidadeEntry.insert(0, usuario[5])
+                    self.PrecoEntry.insert(0, usuario[6])
+                    self.DataProdutoEntry.insert(0, usuario[7])
                 else:
                     messagebox.showerror("Erro", "Funcionário não encontrado")
                     self.LimparCampos()
