@@ -61,6 +61,12 @@ class AbrirProduto_adm:
                 db = Database()
                 usuario = db.buscar_produto(idproduto)
                 if usuario:
+                    self.TipoProdutoEntry.delete(0, END)
+                    self.VoltagemEntry.delete(0, END)
+                    self.MarcaEntry.delete(0, END)
+                    self.QuantidadeEntry.delete(0, END)
+                    self.PrecoEntry.delete(0, END)
+                    self.DataProdutoEntry.delete(0, END)
                     # Assumindo que a consulta retorna os campos na seguinte ordem:
                     # produto: [tipo, voltagem, marca, quantidade, preco, data, idfornecedor]
                     # fornecedor: [nome_fornecedor]
