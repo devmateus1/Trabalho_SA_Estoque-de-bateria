@@ -73,9 +73,9 @@ class TeldACASTRO:
         self.limpar_tela()
         from Produto_adm import AbrirProduto_adm
         self.center_window(800, 400)
-        self.logo = PhotoImage(file="icon/_SLA_.png")  # Caminho relativo da imagem
-        self.logo_label = Label(self.main_frame.master, image=self.logo, bg="#002333")
-        self.logo_label.place(x=500, y=150)  # Posição do logo           
+
+
+
         AbrirProduto_adm(self.main_frame)
 
 
@@ -83,18 +83,18 @@ class TeldACASTRO:
         self.limpar_tela()
         from FornecedorADM import FornecedorADM
         self.center_window(800, 500)
-        self.logo = PhotoImage(file="icon/_SLA_.png")  # Caminho relativo da imagem
-        self.logo_label = Label(self.main_frame.master, image=self.logo, bg="#002333")
-        self.logo_label.place(x=500, y=150)  # Posição do logo           
+
+
+
         FornecedorADM(self.main_frame)
 
     def funcionario(self):
         self.limpar_tela()
         from TelaFuncionarios_adm import TelaGeral
         self.center_window(800, 500)
-        self.logo = PhotoImage(file="icon/_SLA_.png")  # Caminho relativo da imagem
-        self.logo_label = Label(self.main_frame.master, image=self.logo, bg="#002333")
-        self.logo_label.place(x=500, y=150)  # Posição do logo           
+
+
+
         TelaGeral(self.main_frame)
 
     def voltar_menu(self):

@@ -61,14 +61,28 @@ class AbrirProduto_adm:
                 db = Database()
                 usuario = db.buscar_produto(idproduto)
                 if usuario:
-                    self.TipoProdutoEntry.insert(0, usuario[2])
-                    self.VoltagemEntry.insert(0, usuario[3])
-                    self.MarcaEntry.insert(0, usuario[4])
-                    self.QuantidadeEntry.insert(0, usuario[5])
-                    self.PrecoEntry.insert(0, usuario[6])
-                    self.DataProdutoEntry.insert(0, usuario[7])
+                    # Assumindo que a consulta retorna os campos na seguinte ordem:
+                    # produto: [tipo, voltagem, marca, quantidade, preco, data, idfornecedor]
+                    # fornecedor: [nome_fornecedor]
+                    tipo_produto = usuario[2]  # Produto: tipo
+                    voltagem = usuario[3]  # Produto: voltagem
+                    marca = usuario[4]  # Produto: marca
+                    quantidade = usuario[5]  # Produto: quantidade
+                    preco = usuario[6]  # Produto: preco
+                    data = usuario[7]  # Produto: data
+                     # Fornecedor: idfornecedor
+                    nome_fornecedor = usuario[9]  # Fornecedor: nome do fornecedor
+
+                    # Preenchendo os campos com os dados encontrados
+                    self.TipoProdutoEntry.insert(0, tipo_produto)
+                    self.VoltagemEntry.insert(0, voltagem)
+                    self.MarcaEntry.insert(0, marca)
+                    self.QuantidadeEntry.insert(0, quantidade)
+                    self.PrecoEntry.insert(0, preco)
+                    self.DataProdutoEntry.insert(0, data)
+                    self.combo_box_forn.set(nome_fornecedor)  # Nome do fornecedor
                 else:
-                    messagebox.showerror("Erro", "Funcionário não encontrado")
+                    messagebox.showerror("Erro", "Produto não encontrado")
                     self.LimparCampos()
 
         def alterarproduto():
@@ -79,12 +93,27 @@ class AbrirProduto_adm:
             quantidade = self.QuantidadeEntry.get()
             preco = self.PrecoEntry.get()
             data = self.DataProdutoEntry.get()
+            fornecedor = self.combo_box_forn.get()
 
-            if "" in [idproduto, tipo, voltagem, marca, quantidade, preco, data]:
+            # Dividir a string por espaços
+            partes = fornecedor.split()
+
+            # Separar o número e o texto
+            numeros = [parte for parte in partes if parte.isdigit()]
+            texto_sem_numeros = " ".join([parte for parte in partes if not parte.isdigit()])
+
+            # Exibir os resultados
+            print("Números encontrados:", numeros)
+            print("Texto sem números:", texto_sem_numeros)
+
+            cod_fornecedor = numeros[0]
+
+
+            if "" in [idproduto, tipo, voltagem, marca, quantidade, preco, data,cod_fornecedor]:
                 messagebox.showerror(title="Erro de Atualização", message="PREENCHA TODOS OS CAMPOS")
             else:
                 db = Database()
-                db.alterarproduto(idproduto, tipo, voltagem, marca, quantidade, preco, data)
+                db.alterarproduto(idproduto, tipo, voltagem, marca, quantidade, preco, data,cod_fornecedor)
                 messagebox.showinfo("Sucesso", "Produto atualizado com sucesso!")
 
         def excluirproduto():
@@ -103,12 +132,27 @@ class AbrirProduto_adm:
             quantidade = self.QuantidadeEntry.get()
             preco = self.PrecoEntry.get()
             data = self.DataProdutoEntry.get()
+            fornecedor = self.combo_box_forn.get()
 
-            if "" in [tipo, voltagem, marca, quantidade, preco, data]:
+            # Dividir a string por espaços
+            partes = fornecedor.split()
+
+            # Separar o número e o texto
+            numeros = [parte for parte in partes if parte.isdigit()]
+            texto_sem_numeros = " ".join([parte for parte in partes if not parte.isdigit()])
+
+            # Exibir os resultados
+            print("Números encontrados:", numeros)
+            print("Texto sem números:", texto_sem_numeros)
+
+            cod_fornecedor = numeros[0]
+
+
+            if "" in [tipo, voltagem, marca, quantidade, preco, data,cod_fornecedor]:
                 messagebox.showerror(title="Erro no Registro", message="PREENCHA TODOS OS CAMPOS")
             else:
                 db = Database()
-                db.RegistrarNoBanco_Produto(tipo, voltagem, marca, quantidade, preco, data)
+                db.RegistrarNoBanco_Produto(tipo, voltagem, marca, quantidade, preco, data,cod_fornecedor)
                 messagebox.showinfo("Sucesso", "Produto registrado com sucesso!")
                 self.LimparCampos()
 

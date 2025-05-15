@@ -1,7 +1,20 @@
 #pip install mysql-connector-python
 import mysql.connector #Importa o modulo mysql.connector para conectar ao banco de dados MySQL
 #pip install mysql-connector-python
+
+def get_connection():
+    return  mysql.connector.connect(
+    host = 'localhost',
+    user = 'root',
+    password = '',
+    database = 'trabalho_sa'
+)
+
 class Database:
+
+
+
+
     def __init__(self):
         #Conecta ao banco de dados MySQL com as credenciais forncedas
         self.conn = mysql.connector.connect(
@@ -25,6 +38,8 @@ class Database:
         );''')
     #DataBase Fornecedor
         self.conn.commit() #Confirma a criação da tabela
+
+
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------FORNECEDOR-------------------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -99,26 +114,38 @@ class Database:
 
 
         # Metódo para registrar um novo usuario no banco de dados
-    def RegistrarNoBanco_Produto(self, tipo, voltagem, marca, quantidade, preco, data):
-        self.cursor.execute("INSERT INTO produto (tipo, voltagem, marca, quantidade, preco, data) VALUES (%s ,%s ,%s ,%s, %s, %s)",(tipo, voltagem, marca, quantidade, preco, data)) # Insere os dados do usuario na tabela
-        self.conn.commit() # Confirma a inseção dos dados
+    def RegistrarNoBanco_Produto(self, tipo, voltagem, marca, quantidade, preco, data, cod_fornecedor):
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO produto (tipo, voltagem, marca, quantidade, preco, data, idfornecedor) VALUES (%s, %s, %s, %s, %s, %s, %s)", 
+                       (tipo, voltagem, marca, quantidade, preco, data, cod_fornecedor))  # Inserir dados
+        conn.commit()  # Confirmar a inserção
+        conn.close()
+        cursor.close()
 
     # Metodo para buscar os dados de um usuario no banco de dados
     def buscar_produto(self, id_produto):
-        query = "SELECT * FROM produto WHERE idproduto = %s"
+        query = """
+        SELECT produto.*, fornecedor.*
+        FROM produto
+        INNER JOIN fornecedor ON fornecedor.idfornecedor = produto.idfornecedor
+        WHERE produto.idproduto = %s
+        """
         self.cursor.execute(query, (id_produto,))
         return self.cursor.fetchone()
-    
     def removerproduto(self,idproduto):
         self.cursor.execute("DELETE * FROM compra WHERE idproduto=%s",(idproduto,))
         self.cursor.execute("DELETE FROM produto WHERE idproduto=%s",(idproduto,))
         self.conn.commit()
 
-    def alterarproduto(self, idproduto, tipo, voltagem, marca, quantidade, preco, data):
-        self.cursor.execute("UPDATE produto SET tipo=%s, voltagem=%s, marca=%s, quantidade=%s, preco=%s, data=%s WHERE idproduto=%s",
-                            (tipo, voltagem, marca, quantidade, preco, data, idproduto)) #Atualiza os dados do usuario com id oferecido
-        self.conn.commit() #Confirma a atualização do dados 
-        self.conn.close()
+    def alterarproduto(self, idproduto, tipo, voltagem, marca, quantidade, preco, data,cod_fornecedor):
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute("UPDATE produto SET tipo=%s, voltagem=%s, marca=%s, quantidade=%s, preco=%s, data=%s, idfornecedor=%s WHERE idproduto=%s", 
+                       (tipo, voltagem, marca, quantidade, preco, data, cod_fornecedor,idproduto))  # Inserir dados
+        conn.commit()  # Confirmar a inserção
+        conn.close()
+        cursor.close()
         
     #Fazer login
     def FazerLogin(self, usuario, senha):
