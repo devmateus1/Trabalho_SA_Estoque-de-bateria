@@ -86,6 +86,7 @@ class TeldACASTRO:
 
     def fornecedor(self):
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         self.root.destroy()
         from Procura_Fornecedor import Procura_Fornecedor
         root = Tk()
@@ -95,6 +96,13 @@ class TeldACASTRO:
         LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
         LogoLabel.place(x=490, y=150) # Posiciona o label no frame esquerdo
 =======
+=======
+        self.limpar_tela()
+        from Procura_Fornecedor import ProcuraFornecedor
+        ProcuraFornecedor(self.main_frame)
+
+    def funcionario(self):
+>>>>>>> Stashed changes
         self.limpar_tela()
         from Procura_Fornecedor import ProcuraFornecedor
         ProcuraFornecedor(self.main_frame)
