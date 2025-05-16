@@ -51,7 +51,7 @@ class AbrirProduto_adm:
         # Cria a ComboBox de fornecedores
         self.combo_box_forn = ttk.Combobox(self.main_frame, values=fornecedores, state="readonly", width=27)
         self.combo_box_forn.place(x=500, y=130)
-
+        self.combo_box_forn.set("Selecione um fornecedor")
 
         def buscarproduto():
             idproduto = self.IdProdutoEntry.get()
@@ -168,7 +168,7 @@ class AbrirProduto_adm:
         Button(self.main_frame, text="ALTERAR", width=15, command=alterarproduto).place(x=80, y=340)
         Button(self.main_frame, text="EXCLUIR", width=15, command=excluirproduto).place(x=250, y=340)
         Button(self.main_frame, text="BUSCAR", width=15, command=buscarproduto).place(x=500, y=90)
-        Button(self.main_frame, text="Voltar ao menu", width=15, command=self.juntar_funcoes).place(x=500, y=370)
+        Button(self.main_frame, text="Voltar ao menu", width=15, command=self.juntar_funcoes).place(x=650, y=90)
 
     def LimparCampos(self):
         self.TipoProdutoEntry.delete(0, END)
@@ -178,6 +178,7 @@ class AbrirProduto_adm:
         self.PrecoEntry.delete(0, END)
         self.DataProdutoEntry.delete(0, END)
         self.IdProdutoEntry.delete(0, END)
+        self.combo_box_forn.set("Selecione um fornecedor")
 
     def voltar_menu(self):
         self.root.destroy()
@@ -198,5 +199,5 @@ if __name__ == "__main__":
     app = AbrirProduto_adm(jan)
     logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
     LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
-    LogoLabel.place(x=480, y=150) # Posiciona o label no frame esquerdo
+    LogoLabel.place(x=480, y=180) # Posiciona o label no frame esquerdo
     jan.mainloop()
