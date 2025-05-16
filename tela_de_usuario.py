@@ -37,11 +37,11 @@ class TeldACASTRO:
         self.subtitle_label.pack(pady=(0, 30))
 
         # Botões centralizados em coluna
-        self.Produto = Button(self.main_frame, text="Consulta Produto", font=self.button_font,
-                              bg="#0078D7", fg="white", activebackground="#0063B1",
-                              activeforeground="white", borderwidth=0, width=25, pady=10,
-                              command=self.produto)
-        self.Produto.pack(pady=8)
+        #self.Produto = Button(self.main_frame, text="Consulta Produto", font=self.button_font,
+                              #bg="#0078D7", fg="white", activebackground="#0063B1",
+                              #activeforeground="white", borderwidth=0, width=25, pady=10,
+                              #command=self.produto)
+        #self.Produto.pack(pady=8)
 
         self.Fornecedor = Button(self.main_frame, text="Consulta Fornecedor", font=self.button_font,
                                  bg="#0078D7", fg="white", activebackground="#0063B1",
@@ -71,22 +71,21 @@ class TeldACASTRO:
         y = (self.root.winfo_screenheight() // 2) - (height // 2)
         self.root.geometry(f'{width}x{height}+{x}+{y}')
 
-    def produto(self):
-        self.root.destroy()
-        from Procura_Produto import AbrirProduto_cliente
-        root = Tk()
-        root.geometry("800x400")
-        AbrirProduto_cliente(root)
-        logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
-        LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
-        LogoLabel.place(x=490, y=112) # Posiciona o label no frame esquerdo
+    #def produto(self):
+        #self.root.destroy()
+        #from Procura_Produto import AbrirProduto_cliente
+        #root = Tk()
+        #root.geometry("800x400")
+        #AbrirProduto_cliente(root)
+        #logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
+        #LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
+        #LogoLabel.place(x=490, y=112) # Posiciona o label no frame esquerdo##
 
-        root.mainloop()
+       # root.mainloop()
 
 
     def fornecedor(self):
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
         self.root.destroy()
         from Procura_Fornecedor import Procura_Fornecedor
         root = Tk()
@@ -95,31 +94,26 @@ class TeldACASTRO:
         logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
         LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
         LogoLabel.place(x=490, y=150) # Posiciona o label no frame esquerdo
-=======
-=======
-        self.limpar_tela()
-        from Procura_Fornecedor import ProcuraFornecedor
-        ProcuraFornecedor(self.main_frame)
 
-    def funcionario(self):
->>>>>>> Stashed changes
-        self.limpar_tela()
-        from Procura_Fornecedor import ProcuraFornecedor
-        ProcuraFornecedor(self.main_frame)
->>>>>>> Stashed changes
+        
+
+   
+
 
         root.mainloop()
     def funcionario(self):
         self.root.destroy()
         from tela_usuario_funcionario import TelaGeral
         root = Tk()
-        root.geometry("800x400")
+        root.geometry("800x600")
         TelaGeral(root)
         logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
         LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
         LogoLabel.place(x=490, y=120) # Posiciona o label no frame esquerdo
 
         root.mainloop()
+
+
 
 if __name__ == "__main__":
     root = Tk()
