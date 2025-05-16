@@ -311,3 +311,79 @@ INSERT INTO `item` VALUES
 (28,28,28,5),
 (29,29,29,4),
 (30,30,30,3);
+--
+-- Estrutura para tabela `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `COD_USER` int(11) NOT NULL AUTO_INCREMENT,
+  `usuario` varchar(50) NOT NULL,
+  `senha` varchar(50) NOT NULL
+   PRIMARY KEY (`COD_USER`),
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `usuario`
+--
+
+INSERT INTO `usuario` (`COD_USER`, `usuario`, `senha`) VALUES
+(1, 'user1', 'senha1'),
+(2, 'user2', 'senha2'),
+(3, 'user3', 'senha3'),
+(4, 'user4', 'senha4'),
+(5, 'user5', 'senha5'),
+(6, 'user6', 'senha6'),
+(7, 'user7', 'senha7'),
+(8, 'user8', 'senha8'),
+(9, 'user9', 'senha9'),
+(10, 'user10', 'senha10'),
+(11, 'user11', 'senha11'),
+(12, 'user12', 'senha12'),
+(13, 'user13', 'senha13'),
+(14, 'user14', 'senha14'),
+(15, 'user15', 'senha15'),
+(16, 'user16', 'senha16'),
+(17, 'user17', 'senha17'),
+(18, 'user18', 'senha18'),
+(19, 'user19', 'senha19'),
+(20, 'user20', 'senha20'),
+(21, 'user21', 'senha21'),
+(22, 'user22', 'senha22'),
+(23, 'user23', 'senha23'),
+(24, 'user24', 'senha24'),
+(25, 'user25', 'senha25'),
+(26, 'user26', 'senha26'),
+(27, 'user27', 'senha27'),
+(28, 'user28', 'senha28'),
+(29, 'user29', 'senha29'),
+(30, 'user30', 'senha30'),
+(31, 'user31', 'senha31'),
+(32, 'user32', 'senha32'),
+(33, 'user33', 'senha33'),
+(34, 'user34', 'senha34'),
+(35, 'user35', 'senha35'),
+(36, 'user36', 'senha36'),
+(37, 'user37', 'senha37'),
+(38, 'user38', 'senha38'),
+(39, 'user39', 'senha39'),
+(40, 'user40', 'senha40'),
+(41, 'user41', 'senha41'),
+(42, 'user42', 'senha42'),
+(43, 'user43', 'senha43'),
+(44, 'user44', 'senha44'),
+(45, 'user45', 'senha45'),
+(46, 'user46', 'senha46'),
+(47, 'user47', 'senha47'),
+(48, 'user48', 'senha48'),
+(49, 'user49', 'senha49'),
+(50, 'user50', 'senha50'),
+(51, 'user51', 'senha51'),
+(52, 'user52', 'senha52'),
+(53, 'user53', 'senha53'),
+(54, 'user54', 'senha54'),
+(55, 'user55', 'senha55'),
+(56, 'user56', 'senha56'),
+(57, 'user57', 'senha57'),
+(58, 'user58', 'senha58'),
+(59, 'user59', 'senha59'),
+(60, 'user60', 'senha60');

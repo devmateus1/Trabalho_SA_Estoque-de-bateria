@@ -140,8 +140,9 @@ class Procura_Fornecedor():
 
         # Botões
 
-        # Botão de Voltar ao Menu
-
+            # Botão de Voltar ao Menu
+        VoltarMenu = Button(self.main_frame, text="Voltar ao menu", width=15, command=juntar_funcoes)
+        VoltarMenu.place(x=500, y=130)  # Ajuste a posição conforme necessário
 
 
 
