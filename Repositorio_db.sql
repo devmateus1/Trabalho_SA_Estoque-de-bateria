@@ -172,7 +172,7 @@ CREATE TABLE `produto` (
   `data` date DEFAULT NULL,
   PRIMARY KEY (`idproduto`),
   KEY `fk_produto_idfornecedor` (`idfornecedor`),
-  CONSTRAINT `fk_produto_idfornecedor` FOREIGN KEY (`idfornecedor`) REFERENCES `fornecedor` (`idfornecedor`)
+  CONSTRAINT `fk_produto_idfornecedor` FOREIGN KEY (`idfornecedor`) REFERENCES `fornecedor` (`idfornecedor`)on delete cascade
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -222,8 +222,8 @@ CREATE TABLE `compra` (
   PRIMARY KEY (`idCompra`),
   KEY `fk_compra_idcliente` (`idcliente`),
   KEY `fk_compra_idfuncionario` (`idfuncionario`),
-  CONSTRAINT `fk_compra_idcliente` FOREIGN KEY (`idcliente`) REFERENCES `cliente` (`idcliente`),
-  CONSTRAINT `fk_compra_idfuncionario` FOREIGN KEY (`idfuncionario`) REFERENCES `funcionario` (`idfuncionario`)
+  CONSTRAINT `fk_compra_idcliente` FOREIGN KEY (`idcliente`) REFERENCES `cliente` (`idcliente`)on delete cascade,
+  CONSTRAINT `fk_compra_idfuncionario` FOREIGN KEY (`idfuncionario`) REFERENCES `funcionario` (`idfuncionario`)on delete cascade
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -273,8 +273,8 @@ CREATE TABLE `item` (
   PRIMARY KEY (`iditem`),
   KEY `fk_item_idproduto` (`idproduto`),
   KEY `fk_item_idcompra` (`idcompra`),
-  CONSTRAINT `fk_item_idcompra` FOREIGN KEY (`idcompra`) REFERENCES `compra` (`idCompra`),
-  CONSTRAINT `fk_item_idproduto` FOREIGN KEY (`idproduto`) REFERENCES `produto` (`idproduto`)
+  CONSTRAINT `fk_item_idcompra` FOREIGN KEY (`idcompra`) REFERENCES `compra` (`idCompra`)on delete cascade,
+  CONSTRAINT `fk_item_idproduto` FOREIGN KEY (`idproduto`) REFERENCES `produto` (`idproduto`)on delete cascade
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --

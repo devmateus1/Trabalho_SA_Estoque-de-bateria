@@ -133,10 +133,26 @@ class Database:
         """
         self.cursor.execute(query, (id_produto,))
         return self.cursor.fetchone()
-    def removerproduto(self,idproduto):
-        self.cursor.execute("DELETE * FROM compra WHERE idproduto=%s",(idproduto,))
-        self.cursor.execute("DELETE FROM produto WHERE idproduto=%s",(idproduto,))
-        self.conn.commit()
+    
+    def removerproduto(self, idproduto):
+        try:
+            # Verifica se o produto existe usando o nome correto da coluna
+            self.cursor.execute("SELECT COUNT(*) FROM produto WHERE idproduto=%s", (idproduto,))
+            resultado = self.cursor.fetchone()
+
+            if resultado[0] == 0:
+                print(f"Produto com id {idproduto} não encontrado.")
+                return
+
+            # Deleta o produto, usando o nome correto da coluna
+            self.cursor.execute("DELETE FROM produto WHERE idproduto=%s", (idproduto,))
+            self.conn.commit()
+
+            print(f"Produto com id {idproduto} e suas compras relacionadas foram removidos com sucesso.")
+        
+        except Exception as e:
+            self.conn.rollback()  # Desfaz a transação em caso de erro
+            print(f"Ocorreu um erro: {e}")
 
     def alterarproduto(self, idproduto, tipo, voltagem, marca, quantidade, preco, data,cod_fornecedor):
         conn = get_connection()
