@@ -108,39 +108,53 @@ class Procura_Fornecedor():
 
         
 
-        def voltar_menu():
+        # def voltar_menu():
             
-            jan.quit()
-            jan.destroy()  # Fecha a tela atual (tela de busca de produto)
-            root = Tk()  # Cria uma nova instância da janela principal
-            from tela_usuario import TeldACASTRO  # Importa a tela principal
-            root.quit
-            TeldACASTRO(root)  # Chama a tela principal
-            
+        #     jan.quit()
+        #     jan.destroy()  # Fecha a tela atual (tela de busca de produto)
+        #     root = Tk()  # Cria uma nova instância da janela principal
+        #     from tela_usuario import TeldACASTRO  # Importa a tela principal
+        #     root.quit
+        #     TeldACASTRO(root)  # Chama a tela principal
+        #     root.destroy()
+        #     root.deiconify()
 
         # Função que junta as funcionalidades de voltar e limpar
-        def juntar_funcoes():
-            LimparCampos()  # Limpa os campos
-            voltar_menu()  # Volta ao menu e destrói a tela anterior
+    def voltar_menu(self):
+    
+        from tela_de_usuario import TeldACASTRO
+        root = Tk()
+        TeldACASTRO(root)
+        root.destroy()
+        root.deiconify()
+        root.mainloop()
+
+    def limpar_tela(self):
+        for widget in self.main_frame.winfo_children():
+            widget.destroy()
+
+    def juntar_funcoes(self):
+        self.limpar_tela()
+        self.voltar_menu()
+  # Volta ao menu e destrói a tela anterior
 
         # Botões
 
         # Botão de Voltar ao Menu
-        VoltarMenu = Button(self.main_frame, text="Voltar ao menu", width=15, command=juntar_funcoes)
-        VoltarMenu.place(x=500, y=130)  # Ajuste a posição conforme necessário
+
 
 
 
 
 
 if __name__=="__main__":
-    jan=Tk() # Cria uma instancia da janela principal
-    jan.title("ADM - Leitor Fornecedor") #Define o titulo da janela
-    jan .geometry("700x500") #Define o tamanho da janela
-    jan.configure(background="#002333") #Configura a cor de fundo da janela
-    jan.resizable(width=False,height=False) #Impede que a janela seja redimensionad
+    root=Tk() # Cria uma instancia da janela principal
+    root.title("ADM - Leitor Fornecedor") #Define o titulo da janela
+    root .geometry("700x500") #Define o tamanho da janela
+    root.configure(background="#002333") #Configura a cor de fundo da janela
+    root.resizable(width=False,height=False) #Impede que a janela seja redimensionad
     logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
     LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
     LogoLabel.place(x=390, y=180) # Posiciona a imagem
-    app=Procura_Fornecedor(jan)
-    jan.mainloop()
+    app=Procura_Fornecedor(root)
+    root.mainloop()

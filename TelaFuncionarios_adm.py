@@ -74,7 +74,7 @@ class TelaGeral:
         CadastrarButton = ttk.Button(self.root, text="CADASTRAR", width=15, command=self.conect_banco_funcionario)
         CadastrarButton.place(x=80, y=320)  
 
-        Button(self.main_frame, text="Voltar ao menu", width=15, command=self.juntar_funcoes).place(x=500, y=370)
+        Button(self.main_frame, text="VOLTAR AO MENU", width=15, command=self.juntar_funcoes).place(x=650, y=80)
 
     # Funções para os botões (ainda precisam ser implementadas)
     def excluirFuncionario(self):

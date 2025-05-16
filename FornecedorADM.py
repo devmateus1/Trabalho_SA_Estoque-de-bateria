@@ -50,7 +50,7 @@ class FornecedorADM():
         ttk.Button(text="EXCLUIR", width=15, command=self.excluirFornecedor).place(x=50, y=370)
         ttk.Button(text="LIMPAR", width=15, command=self.LimparCampos).place(x=250, y=370)
 
-        Button(self.main_frame, text="Voltar ao menu", width=15, command=self.juntar_funcoes).place(x=500, y=370)
+        Button(self.main_frame, text="VOLTAR AO MENU", width=15, command=self.juntar_funcoes).place(x=650, y=100)
 
     def RegistrarNoBancoFornecedor(self):
         fornecedores = self.FornecedorEntry.get()
