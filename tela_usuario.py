@@ -80,9 +80,10 @@ class TeldACASTRO:
 
     def fornecedor(self):
         self.limpar_tela()
-        from Procura_Fornecedor import Procura_Fornecedor
-        self.center_window(800, 500)
-        Procura_Fornecedor(self.main_frame)
+        from Procura_Fornecedor import ProcuraFornecedor
+        ProcuraFornecedor (self.main_frame, self)
+                          
+        self.criar_botao_voltar()
 
     def funcionario(self):
         self.limpar_tela()
