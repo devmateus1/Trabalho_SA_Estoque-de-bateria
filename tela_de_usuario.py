@@ -63,8 +63,8 @@ class TeldACASTRO:
 
     def limpar_tela(self):
         """Limpa todos os widgets dentro do main_frame."""
-        for widget in self.main_frame.winfo_children():
-            widget.destroy()
+        for center_window in self.main_frame.winfo_children():
+            center_window.destroy()
 
     def center_window(self, width, height):
         x = (self.root.winfo_screenwidth() // 2) - (width // 2)
@@ -72,23 +72,40 @@ class TeldACASTRO:
         self.root.geometry(f'{width}x{height}+{x}+{y}')
 
     def produto(self):
-        self.limpar_tela()
+        self.root.destroy()
         from Procura_Produto import AbrirProduto_cliente
-        self.center_window(800, 500)
-        AbrirProduto_cliente(self.main_frame)
+        root = Tk()
+        root.geometry("800x400")
+        AbrirProduto_cliente(root)
+        logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
+        LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
+        LogoLabel.place(x=490, y=112) # Posiciona o label no frame esquerdo
+
+        root.mainloop()
 
 
     def fornecedor(self):
-        self.limpar_tela()
+        self.root.destroy()
         from Procura_Fornecedor import Procura_Fornecedor
-        self.center_window(800, 500)
-        Procura_Fornecedor(self.main_frame)
+        root = Tk()
+        root.geometry("800x400")
+        Procura_Fornecedor(root)
+        logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
+        LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
+        LogoLabel.place(x=490, y=150) # Posiciona o label no frame esquerdo
 
+        root.mainloop()
     def funcionario(self):
-        self.limpar_tela()
+        self.root.destroy()
         from tela_usuario_funcionario import TelaGeral
-        self.center_window(800, 500)
-        TelaGeral(self.main_frame)
+        root = Tk()
+        root.geometry("800x400")
+        TelaGeral(root)
+        logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
+        LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
+        LogoLabel.place(x=490, y=120) # Posiciona o label no frame esquerdo
+
+        root.mainloop()
 
 if __name__ == "__main__":
     root = Tk()

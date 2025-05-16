@@ -50,7 +50,7 @@ class FornecedorADM():
         ttk.Button(text="EXCLUIR", width=15, command=self.excluirFornecedor).place(x=50, y=370)
         ttk.Button(text="LIMPAR", width=15, command=self.LimparCampos).place(x=250, y=370)
 
-        Button(self.main_frame, text="Voltar ao menu", width=15, command=self.juntar_funcoes).place(x=500, y=370)
+        Button(self.main_frame, text="VOLTAR AO MENU", width=15, command=self.juntar_funcoes).place(x=650, y=100)
 
     def RegistrarNoBancoFornecedor(self):
         fornecedores = self.FornecedorEntry.get()
@@ -120,6 +120,13 @@ class FornecedorADM():
             db.removerFornecedor(idfornecedor)
             messagebox.showinfo("Sucesso", "Fornecedor excluído com sucesso!")
             self.LimparCampos()
+        # Criando a combobox
+    def buscar_nome_fornecedor(self):
+        self.cursor.execute("SELECT fornecedores FROM fornecedor")
+        resultados = self.cursor.fetchall()
+        return [nome[0] for nome in resultados if nome[0] is not None]
+
+
 
     def LimparCampos(self):
         self.idEntry.delete(0, END)
@@ -141,6 +148,7 @@ class FornecedorADM():
         self.LimparCampos()
         self.voltar_menu()
 
+   
 
 if __name__ == "__main__":
     jan = Tk()
@@ -148,7 +156,9 @@ if __name__ == "__main__":
     jan.geometry("800x400")
     jan.configure(bg="#002333")
     jan.resizable(False, False)
-    logo = PhotoImage(file="icon/_SLA_.png")
-    Label(image=logo, bg="#002333").place(x=480, y=150)
     app = FornecedorADM(jan)
+    logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
+    LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
+    LogoLabel.place(x=480, y=140) # Posiciona o label no frame esquerdo
     jan.mainloop()
+

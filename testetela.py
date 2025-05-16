@@ -1,18 +1,17 @@
-# main.py - Com botão de voltar integrado
-
 from tkinter import *
 from tkinter import ttk, messagebox
 import tkinter.font as tkFont
+from DataBase import Database  # Certifique-se de ter esse módulo com buscar_fornecedor(id)
 
 
 class TeldACASTRO:
     def __init__(self, root):
         self.root = root
         self.root.title("VGM Systems - Tela do ADM")
-        self.root.geometry("800x400")
+        self.root.geometry("800x500")
         self.root.configure(background="#002333")
         self.root.resizable(False, False)
-        self.center_window(800, 400)
+        self.center_window(800, 500)
 
         # Fontes
         self.title_font = tkFont.Font(family="Helvetica", size=20, weight="bold")
@@ -26,6 +25,7 @@ class TeldACASTRO:
         self.criar_widgets()
 
     def criar_widgets(self):
+        """Cria os widgets do menu principal."""
         # Header
         self.title_label = Label(self.main_frame, text="VGM Systems", font=self.title_font,
                                  bg="#002333", fg="white")
@@ -35,7 +35,7 @@ class TeldACASTRO:
                                     bg="#002333", fg="#a0a0a0")
         self.subtitle_label.pack(pady=(0, 30))
 
-        # Botões centralizados em coluna
+        # Botões centralizados
         self.Produto = Button(self.main_frame, text="ADM - Produto", font=self.button_font,
                               bg="#0078D7", fg="white", activebackground="#0063B1",
                               activeforeground="white", borderwidth=0, width=25, pady=10,
@@ -70,55 +70,29 @@ class TeldACASTRO:
         self.root.geometry(f'{width}x{height}+{x}+{y}')
 
     def produto(self):
-        self.root.destroy()
+        self.limpar_tela()
         from Produto_adm import AbrirProduto_adm
-        root = Tk()
-        root.geometry("800x400")
-        AbrirProduto_adm(root)
-        logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
-        LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
-        LogoLabel.place(x=490, y=180) # Posiciona o label no frame esquerdo
-        # Centraliza a janela principal também
-        self.center_window(root, 800, 600)
-
-        root.mainloop()
-
+        AbrirProduto_adm(self.main_frame)
 
     def fornecedor(self):
-        self.root.destroy()
-        from FornecedorADM import FornecedorADM
-        root = Tk()
-        root.geometry("800x400")
-        FornecedorADM(root)
-        logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
-        LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
-        LogoLabel.place(x=490, y=150) # Posiciona o label no frame esquerdo
+        self.limpar_tela()
+        from Procura_Fornecedor import Procura_Fornecedor
+        Procura_Fornecedor(self.main_frame)  # Carrega a tela de busca no mesmo frame
 
-        root.mainloop()
     def funcionario(self):
-        self.root.destroy()
+        self.limpar_tela()
         from TelaFuncionarios_adm import TelaGeral
-        root = Tk()
-        root.geometry("800x400")
-        TelaGeral(root)
-        logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
-        LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
-        LogoLabel.place(x=490, y=150) # Posiciona o label no frame esquerdo
-
-        root.mainloop()
-
-
-
         TelaGeral(self.main_frame)
 
     def voltar_menu(self):
         """Volta ao menu principal"""
         self.limpar_tela()
-        self.center_window(800, 400)
+        self.center_window(800, 500)
         self.criar_widgets()
+
 
 
 if __name__ == "__main__":
     root = Tk()
     app = TeldACASTRO(root)
-    root.mainloop() 
+    root.mainloop()

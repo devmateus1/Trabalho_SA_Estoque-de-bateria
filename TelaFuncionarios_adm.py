@@ -74,7 +74,7 @@ class TelaGeral:
         CadastrarButton = ttk.Button(self.root, text="CADASTRAR", width=15, command=self.conect_banco_funcionario)
         CadastrarButton.place(x=80, y=320)  
 
-        Button(self.main_frame, text="Voltar ao menu", width=15, command=self.juntar_funcoes).place(x=500, y=370)
+        Button(self.main_frame, text="VOLTAR AO MENU", width=15, command=self.juntar_funcoes).place(x=650, y=80)
 
     # Funções para os botões (ainda precisam ser implementadas)
     def excluirFuncionario(self):
@@ -183,8 +183,8 @@ if __name__ == "__main__":
     jan.geometry("800x400")  # Define o tamanho da janela
     jan.configure(background="#002333")  # Configura a cor de fundo da janela
     jan.resizable(width=False, height=False)  # Impede que a janela seja redimensionada
+    app = TelaGeral(jan)  # Cria uma instância da classe TelaGeral
     logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
     LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
-    LogoLabel.place(x=450, y=150) # Posiciona o label no frame esquerdo
-    app = TelaGeral(jan)  # Cria uma instância da classe TelaGeral
+    LogoLabel.place(x=480, y=140) # Posiciona o label no frame esquerdo
     jan.mainloop()  # Inicia o loop principal da interface gráfica

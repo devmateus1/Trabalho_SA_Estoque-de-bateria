@@ -1,132 +1,160 @@
-from tkinter import *
-from tkinter import ttk, messagebox
-import tkinter.font as tkFont
+#Importar as biblotecas
+from tkinter import * #IMporta todos os modulos do tkinter
+from tkinter import messagebox #importa o modulo de caixas de de mensagens do tkinter 
+from tkinter import ttk #Importa a classe Database do modulo DataBase
 from DataBase import Database
 
-class ProcuraFornecedor:
-    def __init__(self, root):
-        """Inicializa a aplicação e configura a interface"""
-        self.root = root
-        self.root.title("VGM Systems - Consulta Fornecedor")
-        self.root.configure(bg="#002333")
-        self.root.resizable(False, False)
-        self.center_window(800, 500)
+class Procura_Fornecedor():
+    def __init__(self,root):
+        self.root = root  # Referência à janela principal
 
-        # Instancia o banco de dados
-        self.db = Database()
-
-        # Cria fontes
-        self.create_fonts()
-
-        # Cria widgets da interface
-        self.create_layout()
-
-    def create_fonts(self):
-        """Define as fontes utilizadas na interface"""
-        self.title_font = tkFont.Font(family="Helvetica", size=20, weight="bold")
-        self.label_font = tkFont.Font(family="Helvetica", size=12)
-        self.button_font = tkFont.Font(family="Helvetica", size=12, weight="bold")
-
-    def create_layout(self):
-        """Cria a estrutura da interface, incluindo labels, entradas e botões"""
-        self.main_frame = Frame(self.root, bg="#002333")
+        # Frame principal
+        self.main_frame = Frame(self.root, bg="#002333")  # Frame para agrupar widgets
         self.main_frame.pack(expand=True, fill=BOTH)
 
-        # Título da tela
-        Label(self.main_frame, text="FORNECEDORES | USUÁRIO", font=self.title_font, bg="#002333", fg="white").pack(pady=(10, 20))
 
-        # Frame de campos de entrada
-        self.form_frame = Frame(self.main_frame, bg="#002333")
-        self.form_frame.pack()
+        tituloLabel = Label(self.main_frame, text="FORNECEDORES | USUARIO :",bg="#002333", fg="white") #Coloca um titulo para a janela
+        tituloLabel.place(x=160,y=10)
 
-        # Criação dos campos de entrada
-        self.entries = []
-        self.create_form_fields()
+        infoLabel = Label(self.main_frame, text="Digite o ID do fornecedor para procurar:",bg="#002333", fg="white") #Coloca um titulo para a janela
+        infoLabel.place(x=40,y=40)
 
-        # Criação dos botões
-        self.create_buttons()
+        alterarLabel = Label(self.main_frame, text="Dados do forncedor procurado:",bg="#002333", fg="white") #Coloca um label
+        alterarLabel.place(x=40,y=110)
 
-    def create_form_fields(self):
-        """Cria os campos de entrada para consulta do fornecedor"""
-        campos = [
-            "ID do Fornecedor",
-            "Nome do Fornecedor",
-            "CPF do Fornecedor",
-            "Telefone do Fornecedor",
-            "Email do Fornecedor",
-            "Endereço do Fornecedor",
-            "Produto Fornecido",
-            "Quantia de Produto"
-        ]
+        idLabel = Label(self.main_frame, text="ID do Fornecedor:",bg="#002333", fg="white") #Cria label do ID
+        idLabel.place(x=10,y=80)
+        idEntry=ttk.Entry(self.main_frame, width=30) #Cria um campo do ID
+        idEntry.place(x=150,y=80)   
 
-        # Adiciona os campos de entrada
-        for i, campo in enumerate(campos):
-            self.add_label_entry(self.form_frame, campo, i)
+        FornecedorLabel = Label(self.main_frame, text="Nome do Fornecedor:",bg="#002333", fg="white") #Cria label do fornecedor
+        FornecedorLabel.place(x=10,y=150)
+        FornecedorEntry=ttk.Entry(self.main_frame, width=30) #Cria um campo do forncedor
+        FornecedorEntry.place(x=150,y=150)   
 
-    def add_label_entry(self, parent, text, row):
-        """Adiciona um label e entry ao layout"""
-        Label(parent, text=text + ":", font=self.label_font, bg="#002333", fg="white").grid(
-            row=row, column=0, sticky=W, padx=10, pady=5
-        )
-        entry = ttk.Entry(parent, width=40)
-        entry.grid(row=row, column=1, padx=10, pady=5)
-        self.entries.append(entry)
+        CpfFornecedorLabel = Label(self.main_frame, text="CPF do Fornecedor:",bg="#002333", fg="white") #Cria label do Cpf
+        CpfFornecedorLabel.place(x=10,y=190)
+        CpfFornecedorEntry = ttk.Entry(self.main_frame, width=30) #Cria um campo do cpf
+        CpfFornecedorEntry.place(x=150,y=190)
 
-    def create_buttons(self):
-        """Cria os botões de interação"""
-        btn_frame = Frame(self.main_frame, bg="#002333")
-        btn_frame.pack(pady=20)
+        TelefoneFornecedorLabel = Label(self.main_frame, text="Telefone do fornecedor:",bg="#002333", fg="white") #Cria label do Telefone
+        TelefoneFornecedorLabel.place(x=10,y=230)
+        TelefoneFornecedorEntry = ttk.Entry(self.main_frame, width=30) #Cria um campo do telefone
+        TelefoneFornecedorEntry.place(x=150,y=230)
 
-        # Botões para buscar, limpar e voltar
-        ttk.Button(btn_frame, text="BUSCAR", width=20, command=self.buscar_fornecedor).grid(row=0, column=0, padx=10)
-        ttk.Button(btn_frame, text="LIMPAR", width=20, command=self.limpar_campos).grid(row=0, column=1, padx=10)
-        Button(
-            btn_frame, text="VOLTAR AO MENU", font=self.button_font, bg="#0078D7", fg="white", 
-            activebackground="#0063B1", activeforeground="white", borderwidth=0, width=20, pady=5, 
-            command=self.voltar_menu
-        ).grid(row=0, column=2, padx=10)
+        EmailFornecedorLabel = Label(self.main_frame, text="Email do Fornecedor:",bg="#002333", fg="white") #Cria label do email
+        EmailFornecedorLabel.place(x=10,y=270)
+        EmailFornecedorEntry = ttk.Entry(self.main_frame, width=30) #Cria um campo do email
+        EmailFornecedorEntry.place(x=150,y=270)
 
-    def buscar_fornecedor(self):
-        """Realiza a busca de fornecedor por ID"""
-        id_fornecedor = self.entries[0].get()
-        if not id_fornecedor:
-            messagebox.showerror("Erro", "Preencha o campo de ID")
-            return
+        EnderecoFornecedorLabel = Label(self.main_frame, text="Endereço do Fornecedor:",bg="#002333", fg="white") #Cria label do endereço
+        EnderecoFornecedorLabel.place(x=10,y=310)
+        EnderecoFornecedorEntry = ttk.Entry(self.main_frame, width=30) #Cria um campo do endereço
+        EnderecoFornecedorEntry.place(x=150,y=310)
 
-        fornecedor = self.db.buscar_fornecedor(id_fornecedor)
-        if fornecedor:
-            self.preencher_campos(fornecedor)
-        else:
-            messagebox.showerror("Erro", "Fornecedor não encontrado")
-            self.limpar_campos()
+        ProdutoFornecedorLabel = Label(self.main_frame, text="Produto Fornecido:",bg="#002333", fg="white") #Cria label do produto
+        ProdutoFornecedorLabel.place(x=10,y=350)
+        ProdutoFornecedorEntry = ttk.Entry(self.main_frame, width=30) #Cria um campo do produto
+        ProdutoFornecedorEntry.place(x=150,y=350)
 
-    def preencher_campos(self, fornecedor):
-        """Preenche os campos com as informações do fornecedor encontrado"""
-        for i in range(1, 8):
-            self.entries[i].delete(0, END)
-            self.entries[i].insert(0, fornecedor[i])
+        QuantidadeFornecedorLabel = Label(self.main_frame, text="Quantia de Produto:",bg="#002333", fg="white") #Cria label da quantidade de produto fornecido 
+        QuantidadeFornecedorLabel.place(x=10,y=390)
+        QuantidadeFornecedorEntry = ttk.Entry(self.main_frame, width=30) #Cria um campo para colocar a quantidade de produto fornecido
+        QuantidadeFornecedorEntry.place(x=150,y=390)
+        
+        def LimparCampos():
+                    FornecedorEntry.delete(0,END) #Limpa o campo de entrada do fornecedor
+                    CpfFornecedorEntry.delete(0,END) #Limpa o campo de entrada do cpf
+                    TelefoneFornecedorEntry.delete(0,END) #Limpa o campo de entrada do telefone
+                    EmailFornecedorEntry.delete(0,END) #Limpa o campo de entrada do email
+                    EnderecoFornecedorEntry.delete(0,END) #Limpa o campo de entrada do endereço
+                    ProdutoFornecedorEntry.delete(0,END) #Limpa o campo de entrada do produto
+                    QuantidadeFornecedorEntry.delete(0,END) #Limpa o campo de entrada da quantidade de produto
+                    idEntry.delete(0,END)
+        
+        def buscaFornecedor():
+            idfornecedor = idEntry.get()
+            if idfornecedor == "":
+                messagebox.showerror(title="Erro", message="PREENCHA O CAMPO DE ID")
+            else:
+                db = Database()  # Crie uma instância do banco de dados
+                usuario = db.buscar_fornecedor(idfornecedor)  # Supondo que exista um método para buscar por id
+                if usuario:
+                    FornecedorEntry.delete(0,END) #Limpa o campo de entrada do fornecedor
+                    CpfFornecedorEntry.delete(0,END) #Limpa o campo de entrada do cpf
+                    TelefoneFornecedorEntry.delete(0,END) #Limpa o campo de entrada do telefone
+                    EmailFornecedorEntry.delete(0,END) #Limpa o campo de entrada do email
+                    EnderecoFornecedorEntry.delete(0,END) #Limpa o campo de entrada do endereço
+                    ProdutoFornecedorEntry.delete(0,END) #Limpa o campo de entrada do produto
+                    QuantidadeFornecedorEntry.delete(0,END) #Limpa o campo de entrada da quantidade de produto
+                    #Coloca os dados obtidos no campo de texto
+                    FornecedorEntry.insert(0, usuario[1])
+                    CpfFornecedorEntry.insert(0, usuario[2])
+                    TelefoneFornecedorEntry.insert(0, usuario[3])
+                    EmailFornecedorEntry.insert(0, usuario[4])
+                    EnderecoFornecedorEntry.insert(0, usuario[5])
+                    ProdutoFornecedorEntry.insert(0, usuario[6])
+                    QuantidadeFornecedorEntry.insert(0, usuario[7])
+                    
+                else:
+                    messagebox.showerror("Erro", "Fornecedor não encontrado")
+                    LimparCampos()
 
-    def limpar_campos(self):
-        """Limpa todos os campos de entrada"""
-        for entry in self.entries:
-            entry.delete(0, END)
 
+        pesquisaButton =  ttk.Button(self.main_frame, text="BUSCAR",width=15,command=buscaFornecedor) #Cria o botão de alterar
+        pesquisaButton.place(x=370,y=80)
+        limparButton =  ttk.Button(self.main_frame, text="LIMPAR",width=15,command=LimparCampos) #Cria o botão de alterar
+        limparButton.place(x=500,y=80)
+
+        
+
+        # def voltar_menu():
+            
+        #     jan.quit()
+        #     jan.destroy()  # Fecha a tela atual (tela de busca de produto)
+        #     root = Tk()  # Cria uma nova instância da janela principal
+        #     from tela_usuario import TeldACASTRO  # Importa a tela principal
+        #     root.quit
+        #     TeldACASTRO(root)  # Chama a tela principal
+        #     root.destroy()
+        #     root.deiconify()
+
+        # Função que junta as funcionalidades de voltar e limpar
     def voltar_menu(self):
-        """Fecha a tela atual e retorna ao menu do usuário"""
-        self.root.destroy()
-        from tela_usuario import TeldACASTRO
-        nova_root = Tk()
-        TeldACASTRO(nova_root)
-        nova_root.mainloop()
+    
+        from tela_de_usuario import TeldACASTRO
+        root = Tk()
+        TeldACASTRO(root)
+        root.destroy()
+        root.deiconify()
+        root.mainloop()
 
-    def center_window(self, width, height):
-        """Centraliza a janela na tela"""
-        x = (self.root.winfo_screenwidth() // 2) - (width // 2)
-        y = (self.root.winfo_screenheight() // 2) - (height // 2)
-        self.root.geometry(f'{width}x{height}+{x}+{y}')
+    def limpar_tela(self):
+        for widget in self.main_frame.winfo_children():
+            widget.destroy()
+
+    def juntar_funcoes(self):
+        self.limpar_tela()
+        self.voltar_menu()
+  # Volta ao menu e destrói a tela anterior
+
+        # Botões
+
+        # Botão de Voltar ao Menu
 
 
-if __name__ == "__main__":
-    root = Tk()
-    app = ProcuraFornecedor(root)
+
+
+
+
+if __name__=="__main__":
+    root=Tk() # Cria uma instancia da janela principal
+    root.title("ADM - Leitor Fornecedor") #Define o titulo da janela
+    root .geometry("700x500") #Define o tamanho da janela
+    root.configure(background="#002333") #Configura a cor de fundo da janela
+    root.resizable(width=False,height=False) #Impede que a janela seja redimensionad
+    logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
+    LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
+    LogoLabel.place(x=390, y=180) # Posiciona a imagem
+    app=Procura_Fornecedor(root)
     root.mainloop()
