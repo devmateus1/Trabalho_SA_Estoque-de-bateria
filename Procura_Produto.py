@@ -3,7 +3,7 @@ from tkinter import messagebox
 from tkinter import ttk
 from DataBase import Database
 
-class AbrirProduto_adm:
+class AbrirProduto_cliente:
     def __init__(self, root):
         self.root = root
         self.main_frame = Frame(self.root, bg="#002333")
@@ -91,84 +91,14 @@ class AbrirProduto_adm:
                     messagebox.showerror("Erro", "Produto não encontrado")
                     self.LimparCampos()
 
-        def alterarproduto():
-            idproduto = self.IdProdutoEntry.get()
-            tipo = self.TipoProdutoEntry.get()
-            voltagem = self.VoltagemEntry.get()
-            marca = self.MarcaEntry.get()
-            quantidade = self.QuantidadeEntry.get()
-            preco = self.PrecoEntry.get()
-            data = self.DataProdutoEntry.get()
-            fornecedor = self.combo_box_forn.get()
-
-            # Dividir a string por espaços
-            partes = fornecedor.split()
-
-            # Separar o número e o texto
-            numeros = [parte for parte in partes if parte.isdigit()]
-            texto_sem_numeros = " ".join([parte for parte in partes if not parte.isdigit()])
-
-            # Exibir os resultados
-            print("Números encontrados:", numeros)
-            print("Texto sem números:", texto_sem_numeros)
-
-            cod_fornecedor = numeros[0]
-
-
-            if "" in [idproduto, tipo, voltagem, marca, quantidade, preco, data,cod_fornecedor]:
-                messagebox.showerror(title="Erro de Atualização", message="PREENCHA TODOS OS CAMPOS")
-            else:
-                db = Database()
-                db.alterarproduto(idproduto, tipo, voltagem, marca, quantidade, preco, data,cod_fornecedor)
-                messagebox.showinfo("Sucesso", "Produto atualizado com sucesso!")
-
-        def excluirproduto():
-            idproduto = self.IdProdutoEntry.get()
-            if idproduto == "":
-                messagebox.showerror(title="Erro de Busca", message="PREENCHA O CAMPO DE ID")
-            else:
-                db = Database()
-                db.removerproduto(idproduto)
-                messagebox.showinfo("Sucesso", "Produto excluído com sucesso!")
-
-        def RegistrarNoBanco_Produto():
-            tipo = self.TipoProdutoEntry.get()
-            voltagem = self.VoltagemEntry.get()
-            marca = self.MarcaEntry.get()
-            quantidade = self.QuantidadeEntry.get()
-            preco = self.PrecoEntry.get()
-            data = self.DataProdutoEntry.get()
-            fornecedor = self.combo_box_forn.get()
-
-            # Dividir a string por espaços
-            partes = fornecedor.split()
-
-            # Separar o número e o texto
-            numeros = [parte for parte in partes if parte.isdigit()]
-            texto_sem_numeros = " ".join([parte for parte in partes if not parte.isdigit()])
-
-            # Exibir os resultados
-            print("Números encontrados:", numeros)
-            print("Texto sem números:", texto_sem_numeros)
-
-            cod_fornecedor = numeros[0]
-
-
-            if "" in [tipo, voltagem, marca, quantidade, preco, data,cod_fornecedor]:
-                messagebox.showerror(title="Erro no Registro", message="PREENCHA TODOS OS CAMPOS")
-            else:
-                db = Database()
-                db.RegistrarNoBanco_Produto(tipo, voltagem, marca, quantidade, preco, data,cod_fornecedor)
-                messagebox.showinfo("Sucesso", "Produto registrado com sucesso!")
-                self.LimparCampos()
 
         # Botões
-        Button(self.main_frame, text="CADASTRAR", width=15, command=RegistrarNoBanco_Produto).place(x=80, y=300)
-        Button(self.main_frame, text="LIMPAR", width=15, command=self.LimparCampos).place(x=250, y=300)
-        Button(self.main_frame, text="ALTERAR", width=15, command=alterarproduto).place(x=80, y=340)
-        Button(self.main_frame, text="EXCLUIR", width=15, command=excluirproduto).place(x=250, y=340)
-        Button(self.main_frame, text="BUSCAR", width=15, command=buscarproduto).place(x=500, y=90)
-        Button(self.main_frame, text="Voltar ao menu", width=15, command=self.juntar_funcoes).place(x=650, y=90)
+        Button(self.main_frame, text="LIMPAR",bg="#0078D7", fg="white", activebackground="#0063B1",
+                                 activeforeground="white", borderwidth=0, width=15, command=self.LimparCampos).place(x=80, y=300)
+        Button(self.main_frame, text="BUSCAR", bg="#0078D7", fg="white", activebackground="#0063B1",
+                                 activeforeground="white", borderwidth=0, width=15, command=buscarproduto).place(x=500, y=90)
+        Button(self.main_frame, text="VOLTAR AO MENU", bg="#0078D7", fg="white", activebackground="#0063B1",
+                                 activeforeground="white", borderwidth=0, width=17, command=self.juntar_funcoes).place(x=650, y=90)
 
     def LimparCampos(self):
         self.TipoProdutoEntry.delete(0, END)
@@ -182,7 +112,7 @@ class AbrirProduto_adm:
 
     def voltar_menu(self):
         self.root.destroy()
-        from tela_ADM import TeldACASTRO
+        from tela_de_usuario import TeldACASTRO
         root = Tk()
         TeldACASTRO(root)
 
@@ -196,7 +126,7 @@ if __name__ == "__main__":
     jan.geometry("800x400")
     jan.configure(background="#002333")
     jan.resizable(width=False, height=False)
-    app = AbrirProduto_adm(jan)
+    app = AbrirProduto_cliente(jan)
     logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
     LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
     LogoLabel.place(x=480, y=180) # Posiciona o label no frame esquerdo
