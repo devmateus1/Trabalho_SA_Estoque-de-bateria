@@ -89,7 +89,7 @@ class TeldACASTRO:
         self.root.destroy()
         from Procura_Fornecedor import Procura_Fornecedor
         root = Tk()
-        root.geometry("800x400")
+        root.geometry("800x600")
         Procura_Fornecedor(root)
         logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
         LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
