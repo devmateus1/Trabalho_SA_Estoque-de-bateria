@@ -9,7 +9,7 @@ class AbrirProduto_cliente:
         self.root.configure(background="#002333")
         
         # Título
-        Cadastrotitulo = Label(root, text="CADASTRO DE PRODUTO | CLIENTE :", 
+        Cadastrotitulo = Label(root, text="CONSULTA DE PRODUTO | CLIENTE :", 
                               bg="#002333", fg="white", font=("Helvetica", 14, "bold"))
         Cadastrotitulo.place(x=230, y=10)
 
@@ -37,8 +37,7 @@ class AbrirProduto_cliente:
         self.limparbotao.place(x=650, y=90)
 
         self.limparbotao = Button(root, text="Voltar ao menu", width=15, command=self.voltar_menu)
-        self.limparbotao.place(x=500, y=150)
-
+        self.limparbotao.place(x=650, y=150)
 
         # Linha 3
         MarcaLabel = Label(root, text="MARCA DA BATERIA:", bg="#002333", fg="white")
@@ -88,7 +87,6 @@ class AbrirProduto_cliente:
             else:
                 messagebox.showerror("Erro", "Produto não encontrado")
                 self.LimparCampos()
-
     def voltar_menu(self):
         self.root.destroy()
         from tela_de_usuario import TeldACASTRO

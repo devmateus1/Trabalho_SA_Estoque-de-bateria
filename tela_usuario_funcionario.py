@@ -1,130 +1,118 @@
 from tkinter import *
-from tkinter import messagebox
-from tkinter import ttk
-from DataBase import Database
-import tkinter as tk
+from tkinter import ttk, messagebox
+import tkinter.font as tkFont
 
-class TelaGeral:
+
+
+class TeldACASTRO:
     def __init__(self, root):
-        self.root = root  # Referência da janela principal
+        self.root = root
+        self.root.title("VGM Systems - Tela do Usuário")
+        self.root.geometry("800x400")
+        self.root.configure(background="#002333")
+        self.root.resizable(False, False)
+        self.center_window(800, 400)
 
-        # Título da janela
-        tituloLabel = Label(self.root, text="TELA GERAL FUNCIONÁRIOS", bg="#002333", fg="white", font=("Arial", 13, "bold"))
-        tituloLabel.place(x=140, y=10)
+        # Fontes
+        self.title_font = tkFont.Font(family="Helvetica", size=20, weight="bold")
+        self.button_font = tkFont.Font(family="Helvetica", size=12, weight="bold")
+        self.label_font = tkFont.Font(family="Helvetica", size=12)
 
-        # Labels e Campos de Entrada para os dados do funcionário
-        field_bg = "#004455"  # Azul escuro para os campos
-        text_fg = "white"  # Cor do texto
+        # Frame principal
+        self.main_frame = Frame(self.root, bg="#002333")
+        self.main_frame.pack(expand=True, fill=BOTH)
 
-        Label(self.root, text="ID DO FUNCIONARIO(A):", bg="#002333", fg=text_fg).place(x=30, y=50)
-        self.ID_funcionarioEntry = ttk.Entry(self.root, width=40)
-        self.ID_funcionarioEntry.place(x=200, y=50)
-         
-        Label(self.root, text="CPF:", bg="#002333", fg=text_fg).place(x=30, y=90)
-        self.cpf_funcionarioEntry = ttk.Entry(self.root, width=40)
-        self.cpf_funcionarioEntry.place(x=200, y=90)
+        self.criar_widgets()
 
-        Label(self.root, text="Nome:", bg="#002333", fg=text_fg).place(x=30, y=130)
-        self.nome_funcionarioEntry = ttk.Entry(self.root, width=40)
-        self.nome_funcionarioEntry.place(x=200, y=130)
+    def criar_widgets(self):
+        # Header
+        self.title_label = Label(self.main_frame, text="VGM Systems", font=self.title_font,
+                                 bg="#002333", fg="white")
+        self.title_label.pack(pady=(10, 5))
 
-        Label(self.root, text="Telefone:", bg="#002333", fg=text_fg).place(x=30, y=170)
-        self.telefoneEntry = ttk.Entry(self.root, width=40)
-        self.telefoneEntry.place(x=200, y=170)
+        self.subtitle_label = Label(self.main_frame, text="Painel do Usuário", font=self.label_font,
+                                    bg="#002333", fg="#a0a0a0")
+        self.subtitle_label.pack(pady=(0, 30))
 
-        Label(self.root, text="E-mail:", bg="#002333", fg=text_fg).place(x=30, y=210)
-        self.emailEntry = ttk.Entry(self.root, width=40)
-        self.emailEntry.place(x=200, y=210)
+        # Botões centralizados em coluna
+        self.Produto = Button(self.main_frame, text="Consulta Produto", font=self.button_font,
+                              bg="#0078D7", fg="white", activebackground="#0063B1",
+                              activeforeground="white", borderwidth=0, width=25, pady=10,
+                              command=self.produto)
+        self.Produto.pack(pady=8)
 
-        Label(self.root, text="Data de Contratação:", bg="#002333", fg=text_fg).place(x=30, y=250)
-        self.data_da_contratacaoEntry = ttk.Entry(self.root, width=40)
-        self.data_da_contratacaoEntry.place(x=200, y=250)
+        self.Fornecedor = Button(self.main_frame, text="Consulta Fornecedor", font=self.button_font,
+                                 bg="#0078D7", fg="white", activebackground="#0063B1",
+                                 activeforeground="white", borderwidth=0, width=25, pady=10,
+                                 command=self.fornecedor)
+        self.Fornecedor.pack(pady=8)
 
-        Label(self.root, text="Cargo:", bg="#002333", fg=text_fg).place(x=30, y=290)
-        self.cargoEntry = ttk.Entry(self.root, width=40)
-        self.cargoEntry.place(x=200, y=290)
-
-        Label(self.root, text="Salário:", bg="#002333", fg=text_fg).place(x=30, y=330)
-        self.salarioEntry = ttk.Entry(self.root, width=40)
-        self.salarioEntry.place(x=200, y=330)
-
-        Label(self.root, text="Endereço:", bg="#002333", fg=text_fg).place(x=30, y=370)
-        self.enderecoEntry = ttk.Entry(self.root, width=40)
-        self.enderecoEntry.place(x=200, y=370)
-
-        # Botões
-        button_bg = "#005577"  # Azul médio para botões
-        button_fg = "white"
-
-        # Botões existentes
-        listarButton = ttk.Button(self.root, text="BUSCAR", width=15, command=self.buscarfuncionario)
-        listarButton.place(x=200, y=420)
-        
-        listarButton = ttk.Button(self.root, text="limpar", width=15, command=self.LimparCampos)
-        listarButton.place(x=310, y=420)
-
-        # Botão "Voltar ao Menu" - Ajustando o uso do ttk.Button
-        VoltarMenu = ttk.Button(self.root, text="Voltar ao menu", width=15, command=self.juntar_funcoes)
-        VoltarMenu.place(x=90, y=420)  # Ajuste a posição conforme necessário
-
-    # Funções para os botões (ainda precisam ser implementadas)
     
-    def buscarfuncionario(self):
-        idfuncionario = self.ID_funcionarioEntry.get()
-        if idfuncionario == "":
-            messagebox.showerror(title="Erro", message="PREENCHA O CAMPO DE ID")
-        else:
-            db = Database()  # Crie uma instância do banco de dados
-            usuario = db.buscar_funcionario(idfuncionario)  # Supondo que exista um método para buscar por id
-            if usuario:
-                self.cpf_funcionarioEntry.delete(0, END)
-                self.nome_funcionarioEntry.delete(0, END)
-                self.telefoneEntry.delete(0, END)
-                self.emailEntry.delete(0, END)
-                self.data_da_contratacaoEntry.delete(0, END)
-                self.cargoEntry.delete(0, END)
-                self.salarioEntry.delete(0, END)
-                self.enderecoEntry.delete(0, END)
-                self.cpf_funcionarioEntry.insert(0, usuario[1])
-                self.nome_funcionarioEntry.insert(0, usuario[2])
-                self.telefoneEntry.insert(0, usuario[3])
-                self.emailEntry.insert(0, usuario[4])
-                self.data_da_contratacaoEntry.insert(0, usuario[5])
-                self.cargoEntry.insert(0, usuario[6])
-                self.salarioEntry.insert(0, usuario[7])
-                self.enderecoEntry.insert(0, usuario[8])
-            else:
-                messagebox.showerror("Erro", "Funcionário não encontrado")
-                self.LimparCampos()
-    
-    def LimparCampos(self):
-            self.ID_funcionarioEntry.delete(0, END)
-            self.cpf_funcionarioEntry.delete(0, END)
-            self.nome_funcionarioEntry.delete(0, END)
-            self.telefoneEntry.delete(0, END)
-            self.emailEntry.delete(0, END)
-            self.data_da_contratacaoEntry.delete(0, END)
-            self.cargoEntry.delete(0, END)
-            self.salarioEntry.delete(0, END)
-            self.enderecoEntry.delete(0, END)
-    
-    def voltar_menu(self):
-            self.root.destroy()  # Fecha a tela atual (tela de busca de produto)
-            root = Tk()  # Cria uma nova instância da janela principal
-            from tela_usuario import TeldACASTRO  # Importa a tela principal
-            TeldACASTRO(root)  # Chama a tela principal
+                                  
+        self.Funcionario = Button(self.main_frame, text="Produto comprado pelo cliente", font=self.button_font,
+                                  bg="#0078D7", fg="white", activebackground="#0063B1",
+                                  activeforeground="white", borderwidth=0, width=25, pady=10,
+                                  command=self.Produto_cliente)
+        self.Funcionario.pack(pady=8)
 
-        # Função que junta as funcionalidades de voltar e limpar
-    def juntar_funcoes(self):
-        self.LimparCampos()
-        self.voltar_menu()
+
+        # Rodapé
+        self.version_label = Label(self.main_frame, text="v1.0.0", font=("Helvetica", 8),
+                                   bg="#002333", fg="#a0a0a0")
+        self.version_label.pack(side=BOTTOM, pady=(30, 0))
+
+    def limpar_tela(self):
+        """Limpa todos os widgets dentro do main_frame."""
+        for center_window in self.main_frame.winfo_children():
+            center_window.destroy()
+
+    def center_window(self, width, height):
+        x = (self.root.winfo_screenwidth() // 2) - (width // 2)
+        y = (self.root.winfo_screenheight() // 2) - (height // 2)
+        self.root.geometry(f'{width}x{height}+{x}+{y}')
+
+    def produto(self):
+        self.root.destroy()
+        from Procura_Produto import AbrirProduto_cliente
+        root = Tk()
+        root.geometry("800x400")
+        AbrirProduto_cliente(root)
+        logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
+        LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
+        LogoLabel.place(x=490, y=112) # Posiciona o label no frame esquerdo
+        LogoLabel.place(x=490, y=182) # Posiciona o label no frame esquerdo
+
+        root.mainloop()
+
+
+    def fornecedor(self):
+        self.root.destroy()
+        from Procura_Fornecedor import Procura_Fornecedor
+        root = Tk()
+        root.geometry("800x400")
+        root.geometry("800x500")
+        Procura_Fornecedor(root)
+        logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
+        LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
+        LogoLabel.place(x=490, y=150) # Posiciona o label no frame esquerdo
+
+        root.mainloop()
+    
+    def Produto_cliente(self):
+        self.root.destroy()
+        from tela_usuario_funcionario import TelaGeral
+        from Produto_cliente import AbrirProduto_cliente
+        root = Tk()
+        root.geometry("800x400")
+        TelaGeral(root)
+        logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
+        LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
+        LogoLabel.place(x=490, y=120) # Posiciona o label no frame esquerdo
+
+        AbrirProduto_cliente(root)
+        root.mainloop()
 
 if __name__ == "__main__":
-    root = Tk()  # Cria uma instância da janela principal
-    root.title("CADASTRO - Funcionários(a)")  # Define o título da janela
-    root.geometry("500x500")  # Aumentei o tamanho da janela
-    root.configure(background="#002333")  # Configura a cor de fundo da janela
-    root.resizable(width=False, height=False)  # Impede que a janela seja redimensionada
-    app = TelaGeral(root)  # Cria uma instância da classe TelaGeral
-    root.mainloop()  # Inicia o loop principal da interface gráfica
- 
+    root = Tk()
+    app = TeldACASTRO(root)
+    root.mainloop()
