@@ -61,7 +61,9 @@ class Procura_Fornecedor():
         QuantidadeFornecedorLabel.place(x=10,y=390)
         QuantidadeFornecedorEntry = ttk.Entry(self.main_frame, width=30) #Cria um campo para colocar a quantidade de produto fornecido
         QuantidadeFornecedorEntry.place(x=150,y=390)
-        
+        # Botão "Voltar ao Menu" - Ajustando o uso do ttk.Button
+        VoltarMenu = ttk.Button(self.root, text="Voltar ao menu", width=15, command=self.juntar_funcoes)
+        VoltarMenu.place(x=370,y=150)  # Ajuste a posição conforme necessário
         def LimparCampos():
                     FornecedorEntry.delete(0,END) #Limpa o campo de entrada do fornecedor
                     CpfFornecedorEntry.delete(0,END) #Limpa o campo de entrada do cpf
@@ -124,20 +126,14 @@ class Procura_Fornecedor():
 
         # Função que junta as funcionalidades de voltar e limpar
     def voltar_menu(self):
-    
-        from tela_de_usuario import TeldACASTRO
-        root = Tk()
-        TeldACASTRO(root)
-        root.destroy()
-        root.deiconify()
-        root.mainloop()
+            self.root.destroy()  # Fecha a tela atual (tela de busca de produto)
+            root = Tk()  # Cria uma nova instância da janela principal
+            from tela_de_usuario import TeldACASTRO  # Importa a tela principal
+            TeldACASTRO(root)  # Chama a tela principal
 
-    def limpar_tela(self):
-        for widget in self.main_frame.winfo_children():
-            widget.destroy()
-
+        # Função que junta as funcionalidades de voltar e limpar
     def juntar_funcoes(self):
-        self.limpar_tela()
+       
         self.voltar_menu()
   # Volta ao menu e destrói a tela anterior
 

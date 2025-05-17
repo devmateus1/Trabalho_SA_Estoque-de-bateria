@@ -37,11 +37,11 @@ class TeldACASTRO:
         self.subtitle_label.pack(pady=(0, 30))
 
         # Botões centralizados em coluna
-        self.Produto = Button(self.main_frame, text="Consulta Produto", font=self.button_font,
-                              bg="#0078D7", fg="white", activebackground="#0063B1",
-                              activeforeground="white", borderwidth=0, width=25, pady=10,
-                              command=self.produto)
-        self.Produto.pack(pady=8)
+        #self.Produto = Button(self.main_frame, text="Consulta Produto", font=self.button_font,
+                              #bg="#0078D7", fg="white", activebackground="#0063B1",
+                              #activeforeground="white", borderwidth=0, width=25, pady=10,
+                              #command=self.produto)
+        #self.Produto.pack(pady=8)
 
         self.Fornecedor = Button(self.main_frame, text="Consulta Fornecedor", font=self.button_font,
                                  bg="#0078D7", fg="white", activebackground="#0063B1",
@@ -81,10 +81,11 @@ class TeldACASTRO:
         LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
         LogoLabel.place(x=490, y=182) # Posiciona o label no frame esquerdo
 
-        root.mainloop()
+       # root.mainloop()
 
 
     def fornecedor(self):
+
         self.root.destroy()
         from Procura_Fornecedor import Procura_Fornecedor
         root = Tk()
@@ -93,6 +94,11 @@ class TeldACASTRO:
         logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
         LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
         LogoLabel.place(x=490, y=150) # Posiciona o label no frame esquerdo
+
+        
+
+   
+
 
         root.mainloop()
 
@@ -103,6 +109,8 @@ class TeldACASTRO:
         root.geometry("800x400")
         AbrirProduto_cliente(root)
         root.mainloop()
+
+
 
 if __name__ == "__main__":
     root = Tk()
