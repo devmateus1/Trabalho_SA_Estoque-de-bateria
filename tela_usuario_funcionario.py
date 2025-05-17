@@ -120,10 +120,11 @@ class TelaGeral:
         self.voltar_menu()
 
 if __name__ == "__main__":
-    jan = Tk()  # Cria uma instância da janela principal
-    jan.title("CADASTRO - Funcionários(a)")  # Define o título da janela
-    jan.geometry("700x600")  # Aumentei o tamanho da janela
-    jan.configure(background="#002333")  # Configura a cor de fundo da janela
-    jan.resizable(width=False, height=False)  # Impede que a janela seja redimensionada
-    app = TelaGeral(jan)  # Cria uma instância da classe TelaGeral
-    jan.mainloop()  # Inicia o loop principal da interface gráfica
+    root = Tk()  # Cria uma instância da janela principal
+    root.title("CADASTRO - Funcionários(a)")  # Define o título da janela
+    root.geometry("500x500")  # Aumentei o tamanho da janela
+    root.configure(background="#002333")  # Configura a cor de fundo da janela
+    root.resizable(width=False, height=False)  # Impede que a janela seja redimensionada
+    app = TelaGeral(root)  # Cria uma instância da classe TelaGeral
+    root.mainloop()  # Inicia o loop principal da interface gráfica
+ 

@@ -131,6 +131,26 @@ class AbrirProduto_adm:
                 db.removerproduto(idproduto)
                 messagebox.showinfo("Sucesso", "Produto excluído com sucesso!")
 
+        '''def alterarfuncionario(self):
+            idfuncionario = self.ID_funcionarioEntry.get()
+            cpf = self.cpf_funcionarioEntry.get()
+            nome = self.nome_funcionarioEntry.get()
+            telefone = self.telefoneEntry.get()
+            email = self.emailEntry.get()
+            dataDeContratacao = self.data_da_contratacaoEntry.get()
+            cargo = self.cargoEntry.get()
+            salario = self.salarioEntry.get()
+            endereco = self.enderecoEntry.get()
+            
+            # Verifica se todos os campos estão preenchidos
+            if  idfuncionario == "" or cpf == "" or nome == "" or telefone == "" or email == "" or dataDeContratacao == "" or cargo == "" or salario == "" or endereco == "":
+                messagebox.showerror(title="Erro!", message="Todos os campos devem estar preenchidos!")
+            else:
+                db = Database()  # Cria uma instância do banco de dados
+                db.alterarfuncionario(idfuncionario, cpf, nome, telefone, email, dataDeContratacao, cargo, salario, endereco)  # Registra os dados
+                messagebox.showinfo("Sucesso", "Funcionário(a) alterado(a) com sucesso!")'''
+
+
         def RegistrarNoBanco_Produto():
             tipo = self.TipoProdutoEntry.get()
             voltagem = self.VoltagemEntry.get()
@@ -141,24 +161,13 @@ class AbrirProduto_adm:
             fornecedor = self.combo_box_forn.get()
 
             # Dividir a string por espaços
-            partes = fornecedor.split()
+            
 
-            # Separar o número e o texto
-            numeros = [parte for parte in partes if parte.isdigit()]
-            texto_sem_numeros = " ".join([parte for parte in partes if not parte.isdigit()])
-
-            # Exibir os resultados
-            print("Números encontrados:", numeros)
-            print("Texto sem números:", texto_sem_numeros)
-
-            cod_fornecedor = numeros[0]
-
-
-            if "" in [tipo, voltagem, marca, quantidade, preco, data,cod_fornecedor]:
+            if "" in [tipo, voltagem, marca, quantidade, preco, data,fornecedor]:
                 messagebox.showerror(title="Erro no Registro", message="PREENCHA TODOS OS CAMPOS")
             else:
                 db = Database()
-                db.RegistrarNoBanco_Produto(tipo, voltagem, marca, quantidade, preco, data,cod_fornecedor)
+                db.RegistrarNoBanco_Produto(tipo, voltagem, marca, quantidade, preco, data,fornecedor)
                 messagebox.showinfo("Sucesso", "Produto registrado com sucesso!")
                 self.LimparCampos()
 

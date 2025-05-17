@@ -49,10 +49,10 @@ class TeldACASTRO:
                                  command=self.fornecedor)
         self.Fornecedor.pack(pady=8)
 
-        self.Funcionario = Button(self.main_frame, text="Consulta Funcionário", font=self.button_font,
+        self.Funcionario = Button(self.main_frame, text="Produto comprado pelo cliente", font=self.button_font,
                                   bg="#0078D7", fg="white", activebackground="#0063B1",
                                   activeforeground="white", borderwidth=0, width=25, pady=10,
-                                  command=self.funcionario)
+                                  command=self.Produto_cliente)
         self.Funcionario.pack(pady=8)
         
 
@@ -79,7 +79,7 @@ class TeldACASTRO:
         AbrirProduto_cliente(root)
         logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
         LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
-        LogoLabel.place(x=490, y=112) # Posiciona o label no frame esquerdo
+        LogoLabel.place(x=490, y=182) # Posiciona o label no frame esquerdo
 
         root.mainloop()
 
@@ -88,23 +88,20 @@ class TeldACASTRO:
         self.root.destroy()
         from Procura_Fornecedor import Procura_Fornecedor
         root = Tk()
-        root.geometry("800x400")
+        root.geometry("800x500")
         Procura_Fornecedor(root)
         logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
         LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
         LogoLabel.place(x=490, y=150) # Posiciona o label no frame esquerdo
 
         root.mainloop()
-    def funcionario(self):
+
+    def Produto_cliente(self):
         self.root.destroy()
-        from tela_usuario_funcionario import TelaGeral
+        from Produto_cliente import AbrirProduto_cliente
         root = Tk()
         root.geometry("800x400")
-        TelaGeral(root)
-        logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
-        LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
-        LogoLabel.place(x=490, y=120) # Posiciona o label no frame esquerdo
-
+        AbrirProduto_cliente(root)
         root.mainloop()
 
 if __name__ == "__main__":

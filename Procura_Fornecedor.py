@@ -106,6 +106,9 @@ class Procura_Fornecedor():
         limparButton =  ttk.Button(self.main_frame, text="LIMPAR",width=15,command=LimparCampos) #Cria o botão de alterar
         limparButton.place(x=500,y=80)
 
+        limparButton =  ttk.Button(self.main_frame, text="Voltar ao menu",width=15,command=self.voltar_menu) #Cria o botão de alterar
+        limparButton.place(x=370,y=150)
+
         
 
         # def voltar_menu():
@@ -142,6 +145,11 @@ class Procura_Fornecedor():
 
         # Botão de Voltar ao Menu
 
+    def voltar_menu(self):
+        self.root.destroy()
+        from tela_de_usuario import TeldACASTRO
+        root = Tk()
+        TeldACASTRO(root)
 
 
 

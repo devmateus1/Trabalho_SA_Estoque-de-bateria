@@ -95,6 +95,7 @@ class TeldACASTRO:
         LogoLabel.place(x=490, y=150) # Posiciona o label no frame esquerdo
 
         root.mainloop()
+        
     def funcionario(self):
         self.root.destroy()
         from TelaFuncionarios_adm import TelaGeral
