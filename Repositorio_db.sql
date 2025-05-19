@@ -318,8 +318,8 @@ INSERT INTO `item` VALUES
 CREATE TABLE `usuario` (
   `COD_USER` int(11) NOT NULL AUTO_INCREMENT,
   `usuario` varchar(50) NOT NULL,
-  `senha` varchar(50) NOT NULL
-   PRIMARY KEY (`COD_USER`),
+  `senha` varchar(50) NOT NULL,
+   PRIMARY KEY (`COD_USER`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -387,3 +387,20 @@ INSERT INTO `usuario` (`COD_USER`, `usuario`, `senha`) VALUES
 (58, 'user58', 'senha58'),
 (59, 'user59', 'senha59'),
 (60, 'user60', 'senha60');
+
+
+
+
+CREATE TABLE `adm` (
+  `COD_ADM` int(11) NOT NULL AUTO_INCREMENT,
+  `usuario` varchar(50) NOT NULL,
+  `senha` varchar(50) NOT NULL,
+   PRIMARY KEY (`COD_ADM`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `usuario`
+--
+
+INSERT INTO `adm` (`COD_ADM`, `usuario`, `senha`) VALUES
+(1, 'admin1', 'senha1');
