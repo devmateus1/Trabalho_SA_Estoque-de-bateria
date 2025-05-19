@@ -7,14 +7,14 @@ class Abrir_Cliente:
     def __init__(self, root):
         self.root = root
         self.root.title("ADM - Clientes")
-        self.root.geometry("700x500")
+        self.root.geometry("800x400")
         self.root.configure(bg="#002333")
         self.root.resizable(width=False, height=False)
 
         try:
             self.logo = PhotoImage(file="icon/_SLA_.png")
             LogoLabel = Label(self.root, image=self.logo, bg="#002333")
-            LogoLabel.place(x=390, y=140)
+            LogoLabel.place(x=440, y=180)
         except Exception as e:
             print(f"Erro ao carregar imagem: {e}")
 
@@ -39,17 +39,17 @@ class Abrir_Cliente:
         self.EnderecoClienteEntry = ttk.Entry(self.root, width=30)
         self.EnderecoClienteEntry.place(x=150, y=200)
 
-        Label(self.root, text="ID do Cliente:", bg="#002333", fg="white").place(x=10, y=240)
-        self.idclienteEntry = ttk.Entry(self.root, width=30)
-        self.idclienteEntry.place(x=150, y=240)
+        Label(self.root, text="ID do Cliente :", bg="#002333", fg="white").place(x=420, y=80)
+        self.idclienteEntry = ttk.Entry(self.root, width=10)
+        self.idclienteEntry.place(x=500, y=80)
 
         # Botões do CRUD
-        ttk.Button(self.root, text="Cadastrar", width=15, command=self.registrar_cliente).place(x=370, y=80)
-        ttk.Button(self.root, text="Buscar", width=15, command=self.buscar_cliente).place(x=500, y=100)
-        ttk.Button(self.root, text="Alterar", width=15, command=self.alterar_cliente).place(x=250, y=330)
-        ttk.Button(self.root, text="Excluir", width=15, command=self.excluir_cliente).place(x=50, y=370)
-        ttk.Button(self.root, text="Limpar", width=15, command=self.limpar_campos).place(x=500, y=80)
-        ttk.Button(self.root, text="Voltar ao menu", width=15, command=self.voltar_menu).place(x=500, y=180)
+        ttk.Button(self.root, text="Cadastrar", width=15, command=self.registrar_cliente).place(x=50, y=250)
+        ttk.Button(self.root, text="Buscar", width=15, command=self.buscar_cliente).place(x=440, y=120)
+        ttk.Button(self.root, text="Alterar", width=15, command=self.alterar_cliente).place(x=200, y=300)
+        ttk.Button(self.root, text="Excluir", width=15, command=self.excluir_cliente).place(x=50, y=300)
+        ttk.Button(self.root, text="Limpar", width=15, command=self.limpar_campos).place(x=200, y=250)
+        ttk.Button(self.root, text="Voltar ao menu", width=15, command=self.voltar_menu).place(x=580, y=120)
 
     def registrar_cliente(self):
         nome = self.ClienteEntry.get()

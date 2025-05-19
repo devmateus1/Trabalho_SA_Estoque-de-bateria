@@ -110,6 +110,11 @@ class Database:
          query = "SELECT * FROM funcionario WHERE idfuncionario = %s"
          self.cursor.execute(query, (id_funcionario,))
          return self.cursor.fetchone() 
+    
+    def buscar_nome_funcionario(self):
+        self.cursor.execute("SELECT nome, idfuncionario FROM funcionario")
+        resultados = self.cursor.fetchall()
+        return [(nome, idf) for nome, idf in resultados if nome is not None]
 
     
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -171,6 +176,12 @@ class Database:
     def FazerLogin(self, usuario, senha):
         self.cursor.execute("""SELECT * FROM usuario WHERE usuario = %s AND senha = %s""", (usuario, senha))
         self.conn.commit() # Confirma a inseção dos dados
+
+    def buscar_nome_produto(self):
+        self.cursor.execute("SELECT tipo, marca,voltagem, idproduto FROM produto")
+        resultados = self.cursor.fetchall()
+        return [(tipo,marca,voltagem,preco ,idf) for tipo,marca,voltagem ,preco,idf in resultados if tipo is not None]
+
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------CLIENTE----------------------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -193,6 +204,11 @@ class Database:
     def removercliente(self,idcliente):
         self.cursor.execute("DELETE FROM cliente WHERE idcliente=%s", (idcliente,))
         self.conn.commit()
+
+    def buscar_nome_cliente(self):
+        self.cursor.execute("SELECT nome, idcliente FROM cliente")
+        resultados = self.cursor.fetchall()
+        return [(nome, idf) for nome, idf in resultados if nome is not None]
 
 
     
