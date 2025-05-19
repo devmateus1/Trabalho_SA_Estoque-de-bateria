@@ -12,7 +12,7 @@ class TeldACASTRO:
         self.root.geometry("800x400")
         self.root.configure(background="#002333")
         self.root.resizable(False, False)
-        self.center_window(800, 400)
+        self.center_window(500, 450)
 
         # Fontes
         self.title_font = tkFont.Font(family="Helvetica", size=20, weight="bold")
@@ -53,6 +53,13 @@ class TeldACASTRO:
                                   activeforeground="white", borderwidth=0, width=25, pady=10,
                                   command=self.funcionario)
         self.Funcionario.pack(pady=8)
+
+        self.Funcionario = Button(self.main_frame, text="ADM - Cliente", font=self.button_font,
+                                  bg="#0078D7", fg="white", activebackground="#0063B1",
+                                  activeforeground="white", borderwidth=0, width=25, pady=10,
+                                  command=self.CRUD_cliente)
+        self.Funcionario.pack(pady=8)
+
         Button(self.main_frame, text="LOGOUT", width=15, bg="#0078D7", fg="white",
             command=self.voltar_login).pack(pady=20)
         # Rodapé
@@ -109,9 +116,13 @@ class TeldACASTRO:
 
         root.mainloop()
 
-
-
-        TelaGeral(self.main_frame)
+    def CRUD_cliente(self):
+        self.root.destroy()
+        from cadastro_cliente import Abrir_Cliente
+        root = Tk()
+        root.geometry("800x400")
+        Abrir_Cliente(root)
+        root.mainloop()
 
     def voltar_menu(self):
         """Volta ao menu principal"""

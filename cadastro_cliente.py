@@ -1,79 +1,136 @@
-#Importar as biblotecas
-from tkinter import * #IMporta todos os modulos do tkinter
-from tkinter import messagebox #importa o modulo de caixas de de mensagens do tkinter 
-from tkinter import ttk #Importa a classe Database do modulo DataBase
+from tkinter import *
+from tkinter import messagebox
+from tkinter import ttk
 from DataBase import Database
-import tkinter as tk
 
-class Abrir_Fornecedor:
-    def __init__(self,root):
-       
+class Abrir_Cliente:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("ADM - Clientes")
+        self.root.geometry("700x500")
+        self.root.configure(bg="#002333")
+        self.root.resizable(width=False, height=False)
 
-        
+        try:
+            self.logo = PhotoImage(file="icon/_SLA_.png")
+            LogoLabel = Label(self.root, image=self.logo, bg="#002333")
+            LogoLabel.place(x=390, y=140)
+        except Exception as e:
+            print(f"Erro ao carregar imagem: {e}")
 
-        #CRIAR A JANELA
-        
-        #CRIA OS LABELS NECESSARIOS
+        self.criar_widgets()
 
-        tituloLabel = Label(text="CADASTRO DE CLIENTE | ADM :",bg="#002333", fg="white") #Coloca um titulo para a janela
-        tituloLabel.place(x=160,y=10)
+    def criar_widgets(self):
+        Label(self.root, text="CADASTRO DE CLIENTE | ADM:", bg="#002333", fg="white", font=("Arial", 14)).place(x=160, y=10)
 
-        ClienteLabel = Label(text="Nome do Cliente:",bg="#002333", fg="white") #Cria label do fornecedor
-        ClienteLabel.place(x=10,y=80)
-        ClienteEntry=ttk.Entry(width=30) #Cria um campo do cliente
-        ClienteEntry.place(x=150,y=80)   
+        Label(self.root, text="Nome do Cliente:", bg="#002333", fg="white").place(x=10, y=80)
+        self.ClienteEntry = ttk.Entry(self.root, width=30)
+        self.ClienteEntry.place(x=150, y=80)
 
-        CpfClienteLabel = Label(text="CPF do Cliente:",bg="#002333", fg="white") #Cria label do Cpf
-        CpfClienteLabel.place(x=10,y=120)
-        CpfClienteEntry = ttk.Entry(width=30) #Cria um campo do cpf
-        CpfClienteEntry.place(x=150,y=120)
+        Label(self.root, text="CPF do Cliente:", bg="#002333", fg="white").place(x=10, y=120)
+        self.CpfClienteEntry = ttk.Entry(self.root, width=30)
+        self.CpfClienteEntry.place(x=150, y=120)
 
-        TelefoneClienteLabel = Label(text="Telefone do Cliente:",bg="#002333", fg="white") #Cria label do Telefone
-        TelefoneClienteLabel.place(x=10,y=160)
-        TelefoneClienteEntry = ttk.Entry(width=30) #Cria um campo do telefone
-        TelefoneClienteEntry.place(x=150,y=160)
+        Label(self.root, text="Telefone do Cliente:", bg="#002333", fg="white").place(x=10, y=160)
+        self.TelefoneClienteEntry = ttk.Entry(self.root, width=30)
+        self.TelefoneClienteEntry.place(x=150, y=160)
 
-        EnderecoClienteLabel = Label(text="Endereço do Cliente:",bg="#002333", fg="white") #Cria label do endereço
-        EnderecoClienteLabel.place(x=10,y=200)
-        EnderecoClienteEntry = ttk.Entry(width=30) #Cria um campo do endereço
-        EnderecoClienteEntry.place(x=150,y=200)
+        Label(self.root, text="Endereço do Cliente:", bg="#002333", fg="white").place(x=10, y=200)
+        self.EnderecoClienteEntry = ttk.Entry(self.root, width=30)
+        self.EnderecoClienteEntry.place(x=150, y=200)
 
-        def RegistrarNoBancoCliente(): #Registra os dados no banco de dados
-            #Transforma os campos de textos em variaveis
-            NomeCliente=ClienteEntry.get()
-            cpf=CpfClienteEntry.get()
-            telefone=TelefoneClienteEntry.get()
-            endereco=EnderecoClienteEntry.get()
+        Label(self.root, text="ID do Cliente:", bg="#002333", fg="white").place(x=10, y=240)
+        self.idclienteEntry = ttk.Entry(self.root, width=30)
+        self.idclienteEntry.place(x=150, y=240)
 
+        # Botões do CRUD
+        ttk.Button(self.root, text="Cadastrar", width=15, command=self.registrar_cliente).place(x=370, y=80)
+        ttk.Button(self.root, text="Buscar", width=15, command=self.buscar_cliente).place(x=500, y=100)
+        ttk.Button(self.root, text="Alterar", width=15, command=self.alterar_cliente).place(x=250, y=330)
+        ttk.Button(self.root, text="Excluir", width=15, command=self.excluir_cliente).place(x=50, y=370)
+        ttk.Button(self.root, text="Limpar", width=15, command=self.limpar_campos).place(x=500, y=80)
+        ttk.Button(self.root, text="Voltar ao menu", width=15, command=self.voltar_menu).place(x=500, y=180)
 
+    def registrar_cliente(self):
+        nome = self.ClienteEntry.get()
+        cpf = self.CpfClienteEntry.get()
+        telefone = self.TelefoneClienteEntry.get()
+        endereco = self.EnderecoClienteEntry.get()
+        idcliente = self.idclienteEntry.get()
 
-            if NomeCliente == "" or cpf == "" or telefone == "" or endereco == "" : #Verifica se os campos de textos estão vazios
-                messagebox.showerror(title="Erro de Cadastro", message="PREENCHA TODOS OS CAMPOS") #Exibe a mensagem de erro
+        if "" in [nome, cpf, telefone, endereco, idcliente]:
+            messagebox.showerror("Erro", "PREENCHA TODOS OS CAMPOS")
+        else:
+            db = Database()
+            db.RegistrarNoBancoCliente(nome, cpf, telefone, endereco, idcliente)
+            messagebox.showinfo("Sucesso", "Cliente cadastrado com sucesso!")
+            self.limpar_campos()
+
+    def buscar_cliente(self):
+        idcliente = self.idclienteEntry.get()
+        if idcliente == "":
+            messagebox.showerror("Erro", "PREENCHA O CAMPO DE ID")
+        else:
+            db = Database()
+            usuario = db.buscar_cliente(idcliente)
+            if usuario:
+                self.ClienteEntry.delete(0, END)
+                self.CpfClienteEntry.delete(0, END)
+                self.TelefoneClienteEntry.delete(0, END)
+                self.EnderecoClienteEntry.delete(0, END)
+                self.idclienteEntry.delete(0, END)
+
+                self.ClienteEntry.insert(0, usuario[1])
+                self.CpfClienteEntry.insert(0, usuario[2])
+                self.TelefoneClienteEntry.insert(0, usuario[3])
+                self.EnderecoClienteEntry.insert(0, usuario[4])
+                self.idclienteEntry.insert(0, usuario[0])  # ID costuma estar na posição 0
             else:
-                db = Database() #Cria uma instancia da classe Database
-                db.RegistrarNoBancoCliente(NomeCliente,cpf,telefone,endereco) #Chama o metodo para registrar no banco de dados 
-                messagebox.showinfo("Sucesso","Cliente registrado com sucesso!") #Exibe a mensagem de sucesso
-        CadastrarButton =  ttk.Button(text="Cadastrar",width=15,command=RegistrarNoBancoCliente) #Cria o botão de cadastro
-        CadastrarButton.place(x=370,y=80)
+                messagebox.showerror("Erro", "Cliente não encontrado")
+                self.limpar_campos()
 
+    def alterar_cliente(self):
+        nome = self.ClienteEntry.get()
+        cpf = self.CpfClienteEntry.get()
+        telefone = self.TelefoneClienteEntry.get()
+        endereco = self.EnderecoClienteEntry.get()
+        idcliente = self.idclienteEntry.get()
 
-        def LimparCampos():
-            ClienteEntry.delete(0,END) #Limpa o campo de entrada do fornecedor
-            CpfClienteEntry.delete(0,END) #Limpa o campo de entrada do cpf
-            TelefoneClienteEntry.delete(0,END) #Limpa o campo de entrada do telefone
-            EnderecoClienteEntry.delete(0,END) #Limpa o campo de entrada do endereço
-           
-        LimparButton =  ttk.Button(text="Limpar",width=15,command=LimparCampos) #Cria o botão de limpar
-        LimparButton.place(x=500,y=80)
-    
-if __name__=="__main__":
-    jan=Tk() # Cria uma instancia da janela principal
-    jan.title("ADM - Fornecedores") #Define o titulo da janela
-    jan .geometry("700x500") #Define o tamanho da janela
-    jan.configure(bg="#002333") #Configura a cor de fundo da janela
-    jan.resizable(width=False,height=False) #Impede que a janela seja redimensionad
-    logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
-    LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
-    LogoLabel.place(x=390, y=140) # Posiciona a imagem
-    app = Abrir_Fornecedor(jan)
-    jan.mainloop()
+        if "" in [nome, cpf, telefone, endereco, idcliente]:
+            messagebox.showerror("Erro", "PREENCHA TODOS OS CAMPOS")
+        else:
+            db = Database()
+            db.alterarCliente(nome, cpf, telefone, endereco, idcliente)
+            messagebox.showinfo("Sucesso", "Cliente atualizado com sucesso!")
+            self.limpar_campos()
+
+    def excluir_cliente(self):
+        idcliente = self.idclienteEntry.get()
+        if idcliente == "":
+            messagebox.showerror("Erro", "Informe o ID para exclusão")
+        else:
+            confirm = messagebox.askyesno("Confirmação", "Tem certeza que deseja excluir?")
+            if confirm:
+                db = Database()
+                db.excluirCliente(idcliente)
+                messagebox.showinfo("Sucesso", "Cliente excluído com sucesso!")
+                self.limpar_campos()
+
+    def limpar_campos(self):
+        self.ClienteEntry.delete(0, END)
+        self.CpfClienteEntry.delete(0, END)
+        self.TelefoneClienteEntry.delete(0, END)
+        self.EnderecoClienteEntry.delete(0, END)
+        self.idclienteEntry.delete(0, END)
+
+    def voltar_menu(self):
+        self.root.destroy()
+        from tela_ADM import TeldACASTRO
+        root = Tk()
+        TeldACASTRO(root)
+
+# Execução
+if __name__ == "__main__":
+    root = Tk()
+    app = Abrir_Cliente(root)
+    root.mainloop()

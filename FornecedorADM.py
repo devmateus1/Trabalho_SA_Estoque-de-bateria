@@ -2,6 +2,8 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
 from DataBase import Database
+import smtplib
+from email.message import EmailMessage
 
 class FornecedorADM():
     def __init__(self, root):
@@ -67,6 +69,34 @@ class FornecedorADM():
             db = Database()
             db.RegistrarNoBancoFornecedor(fornecedores, cpf, telefone, email, endereco, produto, quantidade)
             messagebox.showinfo("Sucesso", "Fornecedor registrado com sucesso!")
+
+    def enviar_email_confirmacao(self, email, Fornecedor):
+        try:
+            msg = EmailMessage()
+            msg['Subject'] = 'Cadastro Realizado com Sucesso'
+            msg['From'] = 'gustavowendt14@gmail.com'  
+            msg['To'] = email
+            msg.set_content(f"""
+Olá {Fornecedor},
+
+Seu cadastro como funcionário foi realizado com sucesso.
+
+Atenciosamente,
+Equipe Vgm Power
+""")
+
+            servidor_smtp = 'smtp.gmail.com'
+            porta = 465
+            email_remetente = 'gustavowendt14@gmail.com'  
+            senha = 'rpyo nwlp qynn iple'
+
+            with smtplib.SMTP_SSL(servidor_smtp, porta) as smtp:
+                smtp.login(email_remetente, senha)
+                smtp.send_message(msg)
+
+        except Exception as e:
+            messagebox.showerror("Erro ao enviar e-mail", f"Ocorreu um erro ao enviar o e-mail:\n{e}")
+
 
     def alterarFornecedor(self):
         idfornecedor = self.idEntry.get()

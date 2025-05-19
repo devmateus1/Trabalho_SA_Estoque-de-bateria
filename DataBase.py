@@ -39,6 +39,10 @@ class Database:
     #DataBase Fornecedor
         self.conn.commit() #Confirma a criação da tabela
 
+    def RegistrarNoBancoCompra(self,idcompra,idcliente,id_funcionario,data_compra):
+        self.cursor.execute("INSERT INTO compra (idcompra, idcliente, id_funcionario, data_compra) VALUES (%s ,%s, %s, %s)",(idcompra, idcliente, id_funcionario, data_compra)) # Insere os dados do usuario na tabela
+        self.conn.commit() # Confirma a inseção dos dados
+
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------FORNECEDOR-------------------------------------------------------------------------------------------------------------
@@ -171,9 +175,28 @@ class Database:
 #---------------------------------------------------------------CLIENTE----------------------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    def RegistrarNoBancoCliente(self,nomecliente,cpf,telefone,endereco):
-        self.cursor.execute("INSERT INTO cliente (nome, cpf, telefone, endereco) VALUES (%s ,%s, %s, %s)",(nomecliente, cpf, telefone, endereco)) # Insere os dados do usuario na tabela
+    def RegistrarNoBancoCliente(self,nomecliente,cpf,telefone,endereco, idcliente):
+        self.cursor.execute("INSERT INTO cliente (nome, cpf, telefone, endereco, idcliente) VALUES (%s ,%s, %s, %s, %s)",(nomecliente, cpf, telefone, endereco, idcliente)) # Insere os dados do usuario na tabela
         self.conn.commit() # Confirma a inseção dos dados
+
+    def alterarCliente(self,nomecliente,cpf,telefone,endereco, idcliente):
+        self.cursor.execute("UPDATE cliente SET nome=%s, cpf=%s, telefone=%s, endereco=%s WHERE idcliente=%s",
+                            (nomecliente,cpf,telefone,endereco,idcliente)) #Atualiza os dados do usuario com id oferecido
+        self.conn.commit() #Confirma a atualização do dados 
+        self.conn.close()
+
+    def buscar_cliente(self, idcliente):
+        query = "SELECT * FROM cliente WHERE idcliente = %s"
+        self.cursor.execute(query, (idcliente,))
+        return self.cursor.fetchone() 
+    
+    def removercliente(self,idcliente):
+        self.cursor.execute("DELETE FROM cliente WHERE idcliente=%s", (idcliente,))
+        self.conn.commit()
+
+
+    
+
         
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -203,15 +226,24 @@ class login:
 #-------------------------------------------------------------------Busca produto e usuário---------------------------------------------------------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-def buscar_produtos_por_cliente(self, id_cliente):
-    query = """
-        SELECT p.idproduto, p.nome, p.tipo, p.preco
-        FROM cliente cl
-        INNER JOIN compra c ON cl.idcliente = c.idcliente
-        INNER JOIN item i ON c.idCompra = i.idcompra
-        INNER JOIN produto p ON i.idproduto = p.idproduto
-        WHERE cl.idcliente = %s
-    """
-    self.cursor.execute(query, (id_cliente,))
-    return self.cursor.fetchall()  # Retorna todos os produtos comprados pelo cliente
+    def buscar_produtos_por_cliente(self, id_cliente):
+        query = """
+            SELECT p.idproduto, p.nome, p.tipo, p.preco
+            FROM cliente cl
+            INNER JOIN compra c ON cl.idcliente = c.idcliente
+            INNER JOIN item i ON c.idCompra = i.idcompra
+            INNER JOIN produto p ON i.idproduto = p.idproduto
+            WHERE cl.idcliente = %s
+        """
+        self.cursor.execute(query, (id_cliente,))
+        return self.cursor.fetchall()  # Retorna todos os produtos comprados pelo cliente
 
+
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------Compra----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+    
