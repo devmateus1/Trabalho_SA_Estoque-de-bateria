@@ -160,14 +160,21 @@ class AbrirProduto_adm:
             data = self.DataProdutoEntry.get()
             fornecedor = self.combo_box_forn.get()
 
-            # Dividir a string por espaços
-            
-
-            if "" in [tipo, voltagem, marca, quantidade, preco, data,fornecedor]:
+            if "" in [tipo, voltagem, marca, quantidade, preco, data, fornecedor] or fornecedor == "Selecione um fornecedor":
                 messagebox.showerror(title="Erro no Registro", message="PREENCHA TODOS OS CAMPOS")
             else:
+                # Extrai o ID do fornecedor da string do Combobox
+                partes = fornecedor.split()
+                numeros = [parte for parte in partes if parte.isdigit()]
+                
+                if not numeros:
+                    messagebox.showerror("Erro", "Fornecedor inválido selecionado")
+                    return
+                    
+                cod_fornecedor = numeros[0]
+                
                 db = Database()
-                db.RegistrarNoBanco_Produto(tipo, voltagem, marca, quantidade, preco, data,fornecedor)
+                db.RegistrarNoBanco_Produto(tipo, voltagem, marca, quantidade, preco, data, cod_fornecedor)
                 messagebox.showinfo("Sucesso", "Produto registrado com sucesso!")
                 self.LimparCampos()
 
