@@ -12,7 +12,7 @@ class TeldACASTRO:
         self.root.geometry("800x400")
         self.root.configure(background="#002333")
         self.root.resizable(False, False)
-        self.center_window(500, 450)
+        self.center_window(500, 500)
 
         # Fontes
         self.title_font = tkFont.Font(family="Helvetica", size=20, weight="bold")

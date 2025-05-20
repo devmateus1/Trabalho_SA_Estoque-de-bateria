@@ -143,7 +143,32 @@ class TeldACASTRO:
         root.geometry("800x400")
         AbrirProduto_cliente(root)
         root.mainloop()
+    def voltar_login(self):
+        """Fecha a tela atual e abre uma NOVA janela com a tela de login"""
+        self.root.destroy()  # Fecha a tela atual
 
+        # Cria uma NOVA janela
+        login_window = Tk()
+        login_window.title("VGM Systems - Login")
+        login_window.geometry("500x400")
+        login_window.configure(bg="#002333")
+        login_window.resizable(False, False)
+
+        # Centraliza a nova janela
+        self.center_window_on(login_window, 500, 400)
+
+        # Carrega a tela de login nessa nova janela
+        from tela_de_login import LoginSystem  # Substitua 'wig' pelo nome do arquivo da tela de login
+        LoginSystem(login_window)  # Inicia a tela de login
+
+        # Inicia o loop da nova janela
+        login_window.mainloop()
+
+    def center_window_on(self, window, width, height):
+        """Centraliza qualquer janela na tela."""
+        x = (window.winfo_screenwidth() // 2) - (width // 2)
+        y = (window.winfo_screenheight() // 2) - (height // 2)
+        window.geometry(f'{width}x{height}+{x}+{y}')
 
 
 if __name__ == "__main__":
