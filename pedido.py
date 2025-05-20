@@ -24,8 +24,8 @@ class AbrirProduto_adm:
 
 
         Label(self.main_frame, text="QUANTIDADE :", bg="#002333", fg="white").place(x=20, y=200)
-        self.PrecoEntry = ttk.Entry(self.main_frame, width=30)
-        self.PrecoEntry.place(x=120, y=200)
+        self.QtdeEntry = ttk.Entry(self.main_frame, width=30)
+        self.QtdeEntry.place(x=120, y=200)
 
 
 
@@ -142,28 +142,26 @@ class AbrirProduto_adm:
 
 
 
-        def RegistrarNoBanco_Produto():
-            tipo = self.TipoProdutoEntry.get()
-            voltagem = self.VoltagemEntry.get()
-            marca = self.MarcaEntry.get()
-            quantidade = self.QuantidadeEntry.get()
-            preco = self.PrecoEntry.get()
-            data = self.DataProdutoEntry.get()
+        def RegistrarNoBanco_Pedido():
+            cliente= self.combo_box_cliente.get()
+            produto = self.combo_box_prod.get()
+            funcionario = self.combo_box_func.get()
+            quantidade = self.QtdeEntry.get()
             fornecedor = self.combo_box_forn.get()
 
             # Dividir a string por espaços
             
 
-            if "" in [tipo, voltagem, marca, quantidade, preco, data,fornecedor]:
+            if "" in [cliente, produto, funcionario, quantidade, fornecedor]:
                 messagebox.showerror(title="Erro no Registro", message="PREENCHA TODOS OS CAMPOS")
             else:
                 db = Database()
-                db.RegistrarNoBanco_Produto(tipo, voltagem, marca, quantidade, preco, data,fornecedor)
+                db.RegistrarNoBanco_Produto(cliente, produto, funcionario, quantidade, fornecedor)
                 messagebox.showinfo("Sucesso", "Produto registrado com sucesso!")
                 self.LimparCampos()
 
         # Botões
-        Button(self.main_frame, text="CADASTRAR", width=15, command=RegistrarNoBanco_Produto).place(x=80, y=300)
+        Button(self.main_frame, text="CADASTRAR", width=15, command=RegistrarNoBanco_Pedido).place(x=80, y=300)
         Button(self.main_frame, text="LIMPAR", width=15, command=self.LimparCampos).place(x=250, y=300)
         Button(self.main_frame, text="ALTERAR", width=15, command=alterarproduto).place(x=80, y=340)
         Button(self.main_frame, text="EXCLUIR", width=15, command=excluirproduto).place(x=250, y=340)
