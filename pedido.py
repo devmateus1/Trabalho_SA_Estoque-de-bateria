@@ -166,25 +166,29 @@ class AbrirProduto_adm:
         fornecedor = self.combo_box_forn.get()
 
         if "" in [cliente, produto, funcionario, quantidade, fornecedor]:
-            messagebox.showerror("Erro no Registro", "PREENCHA TODOS OS CAMPOS")
+            messagebox.showerror(title="Erro no Registro", message="PREENCHA TODOS OS CAMPOS")
             return
 
-        cod_cliente = self.extrair_id_combobox(cliente)
-        cod_produto = self.extrair_id_combobox(produto)
-        cod_funcionario = self.extrair_id_combobox(funcionario)
-        cod_fornecedor = self.extrair_id_combobox(fornecedor)
+        def extrair_id(texto):
+            partes = texto.split()
+            for parte in reversed(partes):
+                if parte.isdigit():
+                    return int(parte)
+            return None
+
+        cod_cliente = extrair_id(cliente)
+        cod_produto = extrair_id(produto)
+        cod_funcionario = extrair_id(funcionario)
+        cod_fornecedor = extrair_id(fornecedor)
 
         if None in [cod_cliente, cod_produto, cod_funcionario, cod_fornecedor]:
             messagebox.showerror("Erro", "Um ou mais campos possuem valores inválidos.")
             return
 
-        try:
-            self.db.RegistrarNoBanco_Pedido(cod_cliente, cod_produto, cod_funcionario, quantidade, cod_fornecedor)
-            messagebox.showinfo("Sucesso", "Pedido registrado com sucesso!")
-            self.LimparCampos()
-            self.atualizar_comboboxes()
-        except Exception as e:
-            messagebox.showerror("Erro", f"Falha ao registrar pedido: {str(e)}")
+        db = Database()
+        db.RegistrarNoBanco_Pedido(cod_cliente, cod_produto, cod_funcionario, quantidade, cod_fornecedor)
+        messagebox.showinfo("Sucesso", "Pedido registrado com sucesso!")
+        self.LimparCampos()
 
     def LimparCampos(self):
         self.IdProdutoEntry.delete(0, END)

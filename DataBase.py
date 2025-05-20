@@ -45,26 +45,13 @@ class Database:
      # ------------------- COMBOS (corrigidos com texto formatado) -------------------
 
         '''cod_cliente, cod_produto, cod_funcionario, quantidade, cod_fornecedor'''
-    def RegistrarNoBanco_Pedido(self, idcliente, idproduto, idfuncionario, quantidade, idfornecedor):
-        try:
-            self.conectar()  # Certifique-se de que este método conecta ao banco
-            cursor = self.conn.cursor()
-
-            sql = """
-                INSERT INTO compra (idcliente, idproduto, idfuncionario, quantidade, idfornecedor)
-                VALUES (%s, %s, %s, %s, %s)
-            """
-            valores = (idcliente, idproduto, idfuncionario, quantidade, idfornecedor)
-
-            cursor.execute(sql, valores)
-            self.conn.commit()
-
-            cursor.close()
-            self.desconectar()  # Se houver método de desconexão, chame aqui também
-
-        except Exception as e:
-            print("Erro ao registrar pedido:", e)
-            raise e
+    def RegistrarNoBanco_Pedido(self, id_cliente, id_produto, id_funcionario, quantidade, id_fornecedor):
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO compra (cod_cliente, cod_produto, cod_funcionario, quantidade, cod_fornecedor) VALUES (%s, %s, %s, %s, %s)", 
+                      (id_cliente, id_produto, id_funcionario, quantidade, id_fornecedor))
+        conn.commit()
+        conn.close()
 
 
 
