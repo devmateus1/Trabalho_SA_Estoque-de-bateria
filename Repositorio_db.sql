@@ -216,18 +216,18 @@ INSERT INTO `produto` VALUES
 -- Estrutura da tabela `compra`
 --
 DROP TABLE IF EXISTS `compra`;
-CREATE TABLE `compra` (
-  `idcompra` int NOT NULL AUTO_INCREMENT,
-  `idproduto` int NOT NULL,
-  `idfuncionario` int NOT NULL,
-  `QtdeProduto` int NOT NULL,
-  `data_compra` date DEFAULT NULL,
-  PRIMARY KEY (`idcompra`),
-  KEY `fk_item_idproduto` (`idproduto`),
-  KEY `fk_compra_idfuncionario` (`idfuncionario`),
-  CONSTRAINT `fk_compra_idfuncionario` FOREIGN KEY (`idfuncionario`) REFERENCES `funcionario` (`idfuncionario`)on delete cascade,
-  CONSTRAINT `fk_idproduto` FOREIGN KEY (`idproduto`) REFERENCES `produto` (`idproduto`)on delete cascade
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE compra(
+    cod_compra INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    cod_cliente INTEGER NOT NULL,
+    cod_produto INTEGER NOT NULL,
+    cod_funcionario INTEGER NOT NULL,
+    quantidade INTEGER NOT NULL,
+    cod_fornecedor INTEGER NOT NULL,
+    FOREIGN KEY (cod_cliente) REFERENCES cliente(idcliente) ON DELETE RESTRICT ON UPDATE CASCADE,
+    FOREIGN KEY (cod_produto) REFERENCES produto(idproduto) ON DELETE RESTRICT ON UPDATE CASCADE,
+    FOREIGN KEY (cod_funcionario) REFERENCES funcionario(idfuncionario) ON DELETE RESTRICT ON UPDATE CASCADE,
+    FOREIGN KEY (cod_fornecedor) REFERENCES fornecedor(idfornecedor) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB;
 
 
 --
