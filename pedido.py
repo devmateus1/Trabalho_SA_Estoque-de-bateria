@@ -22,13 +22,13 @@ class AbrirPedido_adm:
         Label(self.main_frame, text="CLIENTE :", bg="#002333", fg="white").place(x=20, y=50)
         Label(self.main_frame, text="PRODUTO :", bg="#002333", fg="white").place(x=20, y=100)
         Label(self.main_frame, text="FUNCIONÁRIO :", bg="#002333", fg="white").place(x=20, y=150)
-        Label(self.main_frame, text="QUANTIDADE :", bg="#002333", fg="white").place(x=20, y=200)
+        Label(self.main_frame, text="QUANTIDADE :", bg="#002333", fg="white").place(x=20, y=250)
         Label(self.main_frame, text="ID DA COMPRA :", bg="#002333", fg="white").place(x=400, y=50)
-        Label(self.main_frame, text="FORNECEDOR :", bg="#002333", fg="white").place(x=400, y=130)
+        Label(self.main_frame, text="FORNECEDOR :", bg="#002333", fg="white").place(x=20, y=200)
 
         # Entradas
         self.QtdeEntry = ttk.Entry(self.main_frame, width=30)
-        self.QtdeEntry.place(x=120, y=200)
+        self.QtdeEntry.place(x=120, y=250)
 
         self.IdProdutoEntry = ttk.Entry(self.main_frame, width=30)
         self.IdProdutoEntry.place(x=500, y=50)
@@ -60,7 +60,7 @@ class AbrirPedido_adm:
         funcionario = self.db.buscar_nome_funcionario()
 
         self.combo_box_forn = ttk.Combobox(self.main_frame, values=fornecedores, state="readonly", width=27)
-        self.combo_box_forn.place(x=500, y=130)
+        self.combo_box_forn.place(x=110, y=200)
         self.combo_box_forn.set("Selecione um fornecedor")
 
         self.combo_box_prod = ttk.Combobox(self.main_frame, values=produto, state="readonly", width=40)
