@@ -20,17 +20,14 @@ class AbrirProduto_adm:
 
         Label(self.main_frame, text="PRODUTO :", bg="#002333", fg="white").place(x=20, y=100)
 
-        Label(self.main_frame, text="FUNCIONARIO P/ COMISSÂO :", bg="#002333", fg="white").place(x=8, y=170)
-        self.QuantidadeEntry = ttk.Entry(self.main_frame, width=30)
-        self.QuantidadeEntry.place(x=170, y=170)
+        Label(self.main_frame, text="FUNCIONARIO :", bg="#002333", fg="white").place(x=20, y=150)
 
-        Label(self.main_frame, text="QUANTIDADE :", bg="#002333", fg="white").place(x=45, y=210)
+
+        Label(self.main_frame, text="QUANTIDADE :", bg="#002333", fg="white").place(x=20, y=200)
         self.PrecoEntry = ttk.Entry(self.main_frame, width=30)
-        self.PrecoEntry.place(x=170, y=210)
+        self.PrecoEntry.place(x=120, y=200)
 
-        Label(self.main_frame, text="BUSCAR COMPRA :", bg="#002333", fg="white").place(x=45, y=250)
-        self.DataProdutoEntry = ttk.Entry(self.main_frame, width=30)
-        self.DataProdutoEntry.place(x=170, y=250)
+
 
         Label(self.main_frame, text="ID DO COMPRA :", bg="#002333", fg="white").place(x=400, y=50)
         self.IdProdutoEntry = ttk.Entry(self.main_frame, width=30)
@@ -44,7 +41,7 @@ class AbrirProduto_adm:
         fornecedores = db.buscar_nome_fornecedor()
         produto = db.buscar_nome_produto()
         cliente = db.buscar_nome_cliente()
-        funcionario = db.buscar_nome_funcionario
+        funcionario = db.buscar_nome_funcionario()
 
 
         # Cria a ComboBox de fornecedores
@@ -54,15 +51,15 @@ class AbrirProduto_adm:
 
         self.combo_box_prod = ttk.Combobox(self.main_frame, values=produto, state="readonly", width=40)
         self.combo_box_prod.place(x=100, y=100)
-        self.combo_box_prod.set("Selecione um fornecedor")
+        self.combo_box_prod.set("Selecione um produto")
 
         self.combo_box_cliente = ttk.Combobox(self.main_frame, values=cliente, state="readonly", width=27)
         self.combo_box_cliente.place(x=80, y=50)
-        self.combo_box_cliente.set("Selecione um fornecedor")
+        self.combo_box_cliente.set("Selecione um cliente")
 
         self.combo_box_func = ttk.Combobox(self.main_frame, values=funcionario, state="readonly", width=27)
-        self.combo_box_func.place(x=300, y=170)
-        self.combo_box_func.set("Selecione um fornecedor")
+        self.combo_box_func.place(x=120, y=150)
+        self.combo_box_func.set("Selecione um funcionario")
 
         def buscarproduto():
             idproduto = self.IdProdutoEntry.get()

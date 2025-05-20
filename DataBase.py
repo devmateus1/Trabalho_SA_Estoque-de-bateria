@@ -178,7 +178,7 @@ class Database:
         self.conn.commit() # Confirma a inseção dos dados
 
     def buscar_nome_produto(self):
-        self.cursor.execute("SELECT tipo, marca,voltagem, idproduto FROM produto")
+        self.cursor.execute("SELECT tipo, marca,voltagem,preco, idproduto FROM produto")
         resultados = self.cursor.fetchall()
         return [(tipo,marca,voltagem,preco ,idf) for tipo,marca,voltagem ,preco,idf in resultados if tipo is not None]
 

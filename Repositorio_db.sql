@@ -210,107 +210,26 @@ INSERT INTO `produto` VALUES
 (29,29,'Bateria de Última Geração','12V','Tera',10,550.00,'2023-08-10'),
 (30,30,'Bateria Tecnológica','12V','Peta',8,600.00,'2023-08-15');
 
+
+
 --
 -- Estrutura da tabela `compra`
 --
 DROP TABLE IF EXISTS `compra`;
 CREATE TABLE `compra` (
-  `idCompra` int NOT NULL,
-  `idcliente` int NOT NULL,
-  `idfuncionario` int NOT NULL,
-  `data_compra` date DEFAULT NULL,
-  PRIMARY KEY (`idCompra`),
-  KEY `fk_compra_idcliente` (`idcliente`),
-  KEY `fk_compra_idfuncionario` (`idfuncionario`),
-  CONSTRAINT `fk_compra_idcliente` FOREIGN KEY (`idcliente`) REFERENCES `cliente` (`idcliente`)on delete cascade,
-  CONSTRAINT `fk_compra_idfuncionario` FOREIGN KEY (`idfuncionario`) REFERENCES `funcionario` (`idfuncionario`)on delete cascade
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Inserindo dados na tabela `compra`
---
-INSERT INTO `compra` VALUES
-(1,1,2,'2023-01-05'),
-(2,2,3,'2023-01-10'),
-(3,3,2,'2023-01-15'),
-(4,4,4,'2023-01-20'),
-(5,5,3,'2023-02-01'),
-(6,6,2,'2023-02-05'),
-(7,7,4,'2023-02-10'),
-(8,8,3,'2023-02-15'),
-(9,9,2,'2023-03-01'),
-(10,10,4,'2023-03-05'),
-(11,11,3,'2023-03-10'),
-(12,12,2,'2023-03-15'),
-(13,13,4,'2023-04-01'),
-(14,14,3,'2023-04-05'),
-(15,15,2,'2023-04-10'),
-(16,16,4,'2023-04-15'),
-(17,17,3,'2023-05-01'),
-(18,18,2,'2023-05-05'),
-(19,19,4,'2023-05-10'),
-(20,20,3,'2023-05-15'),
-(21,21,2,'2023-06-01'),
-(22,22,4,'2023-06-05'),
-(23,23,3,'2023-06-10'),
-(24,24,2,'2023-06-15'),
-(25,25,4,'2023-07-01'),
-(26,26,3,'2023-07-05'),
-(27,27,2,'2023-07-10'),
-(28,28,4,'2023-07-15'),
-(29,29,3,'2023-08-01'),
-(30,30,2,'2023-08-05');
-
---
--- Estrutura da tabela `item`
---
-DROP TABLE IF EXISTS `item`;
-CREATE TABLE `item` (
-  `iditem` int NOT NULL,
+  `idcompra` int NOT NULL AUTO_INCREMENT,
   `idproduto` int NOT NULL,
-  `idcompra` int NOT NULL,
+  `idfuncionario` int NOT NULL,
   `QtdeProduto` int NOT NULL,
-  PRIMARY KEY (`iditem`),
+  `data_compra` date DEFAULT NULL,
+  PRIMARY KEY (`idcompra`),
   KEY `fk_item_idproduto` (`idproduto`),
-  KEY `fk_item_idcompra` (`idcompra`),
-  CONSTRAINT `fk_item_idcompra` FOREIGN KEY (`idcompra`) REFERENCES `compra` (`idCompra`)on delete cascade,
-  CONSTRAINT `fk_item_idproduto` FOREIGN KEY (`idproduto`) REFERENCES `produto` (`idproduto`)on delete cascade
+  KEY `fk_compra_idfuncionario` (`idfuncionario`),
+  CONSTRAINT `fk_compra_idfuncionario` FOREIGN KEY (`idfuncionario`) REFERENCES `funcionario` (`idfuncionario`)on delete cascade,
+  CONSTRAINT `fk_idproduto` FOREIGN KEY (`idproduto`) REFERENCES `produto` (`idproduto`)on delete cascade
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Inserindo dados na tabela `item`
---
-INSERT INTO `item` VALUES
-(1,1,1,12),
-(2,2,2,8),
-(3,3,3,5),
-(4,4,4,15),
-(5,5,5,10),
-(6,6,6,20),
-(7,7,7,6),
-(8,8,8,9),
-(9,9,9,7),
-(10,10,10,8),
-(11,11,11,18),
-(12,12,12,10),
-(13,13,13,8),
-(14,14,14,12),
-(15,15,15,9),
-(16,16,16,14),
-(17,17,17,11),
-(18,18,18,7),
-(19,19,19,6),
-(20,20,20,5),
-(21,21,21,22),
-(22,22,22,25),
-(23,23,23,15),
-(24,24,24,8),
-(25,25,25,7),
-(26,26,26,6),
-(27,27,27,9),
-(28,28,28,5),
-(29,29,29,4),
-(30,30,30,3);
+
 --
 -- Estrutura para tabela `usuario`
 --
