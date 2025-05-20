@@ -6,45 +6,59 @@ from DataBase import Database
 class AbrirProduto_adm:
     def __init__(self, root):
         self.root = root
+        self.root.title("USUÁRIO - PRODUTO")
+        self.root.geometry("800x400")
+        self.root.configure(background="#002333")
+        self.root.resizable(width=False, height=False)
+
         self.main_frame = Frame(self.root, bg="#002333")
         self.main_frame.pack(expand=True, fill=BOTH)
 
+        # Widgets da interface
         Cadastrotitulo = Label(self.main_frame, text="COMPRA DE PRODUTO | ADM :", bg="#002333", fg="white")
         Cadastrotitulo.place(x=230, y=10)
 
-        # Labels e Entradas
-
-
+        # Labels
         Label(self.main_frame, text="CLIENTE :", bg="#002333", fg="white").place(x=20, y=50)
-
-
         Label(self.main_frame, text="PRODUTO :", bg="#002333", fg="white").place(x=20, y=100)
-
-        Label(self.main_frame, text="FUNCIONARIO :", bg="#002333", fg="white").place(x=20, y=150)
-
-
+        Label(self.main_frame, text="FUNCIONÁRIO :", bg="#002333", fg="white").place(x=20, y=150)
         Label(self.main_frame, text="QUANTIDADE :", bg="#002333", fg="white").place(x=20, y=200)
+        Label(self.main_frame, text="ID DA COMPRA :", bg="#002333", fg="white").place(x=400, y=50)
+        Label(self.main_frame, text="FORNECEDOR :", bg="#002333", fg="white").place(x=400, y=130)
+
+        # Entradas
         self.QtdeEntry = ttk.Entry(self.main_frame, width=30)
         self.QtdeEntry.place(x=120, y=200)
 
-
-
-        Label(self.main_frame, text="ID DO COMPRA :", bg="#002333", fg="white").place(x=400, y=50)
         self.IdProdutoEntry = ttk.Entry(self.main_frame, width=30)
         self.IdProdutoEntry.place(x=500, y=50)
 
-        # Label da ComboBox
-        Label(self.main_frame, text="Fornecedor:", bg="#002333", fg="white").place(x=400, y=130)
+        # Instancia o banco e atualiza os comboboxes
+        self.db = Database()
+        self.atualizar_comboboxes()
 
-        # Buscar os fornecedores do banco
-        db = Database()
-        fornecedores = db.buscar_nome_fornecedor()
-        produto = db.buscar_nome_produto()
-        cliente = db.buscar_nome_cliente()
-        funcionario = db.buscar_nome_funcionario()
+        # Botões
+        Button(self.main_frame, text="CADASTRAR", width=15, command=self.RegistrarNoBanco_Pedido).place(x=80, y=300)
+        Button(self.main_frame, text="LIMPAR", width=15, command=self.LimparCampos).place(x=250, y=300)
+        Button(self.main_frame, text="ALTERAR", width=15, command=self.alterarproduto).place(x=80, y=340)
+        Button(self.main_frame, text="EXCLUIR", width=15, command=self.excluirproduto).place(x=250, y=340)
+        Button(self.main_frame, text="BUSCAR", width=15, command=self.buscarproduto).place(x=500, y=90)
+        Button(self.main_frame, text="VOLTAR AO MENU", width=15, command=self.juntar_funcoes).place(x=650, y=90)
 
+        # Logo
+        try:
+            self.logo = PhotoImage(file="icon/_SLA_.png")
+            LogoLabel = Label(self.main_frame, image=self.logo, bg="#002333")
+            LogoLabel.place(x=480, y=180)
+        except Exception as e:
+            print("Erro ao carregar a logo:", e)
 
-        # Cria a ComboBox de fornecedores
+    def atualizar_comboboxes(self):
+        fornecedores = self.db.buscar_nome_fornecedor()
+        produto = self.db.buscar_nome_produto()
+        cliente = self.db.buscar_nome_cliente()
+        funcionario = self.db.buscar_nome_funcionario()
+
         self.combo_box_forn = ttk.Combobox(self.main_frame, values=fornecedores, state="readonly", width=27)
         self.combo_box_forn.place(x=500, y=130)
         self.combo_box_forn.set("Selecione um fornecedor")
@@ -59,130 +73,132 @@ class AbrirProduto_adm:
 
         self.combo_box_func = ttk.Combobox(self.main_frame, values=funcionario, state="readonly", width=27)
         self.combo_box_func.place(x=120, y=150)
-        self.combo_box_func.set("Selecione um funcionario")
+        self.combo_box_func.set("Selecione um funcionário")
 
-        def buscarproduto():
-            idproduto = self.IdProdutoEntry.get()
-            if idproduto == "":
-                messagebox.showerror(title="Erro", message="PREENCHA O CAMPO DE ID")
-            else:
-                db = Database()
-                usuario = db.buscar_produto(idproduto)
-                if usuario:
-                    self.TipoProdutoEntry.delete(0, END)
-                    self.VoltagemEntry.delete(0, END)
-                    self.MarcaEntry.delete(0, END)
-                    self.QuantidadeEntry.delete(0, END)
-                    self.PrecoEntry.delete(0, END)
-                    self.DataProdutoEntry.delete(0, END)
-                    # Assumindo que a consulta retorna os campos na seguinte ordem:
-                    # produto: [tipo, voltagem, marca, quantidade, preco, data, idfornecedor]
-                    # fornecedor: [nome_fornecedor]
-                    tipo_produto = usuario[2]  # Produto: tipo
-                    voltagem = usuario[3]  # Produto: voltagem
-                    marca = usuario[4]  # Produto: marca
-                    quantidade = usuario[5]  # Produto: quantidade
-                    preco = usuario[6]  # Produto: preco
-                    data = usuario[7]  # Produto: data
-                     # Fornecedor: idfornecedor
-                    nome_fornecedor = usuario[9]  # Fornecedor: nome do fornecedor
+    def buscarproduto(self):
+        id_pedido = self.IdProdutoEntry.get()
 
-                    # Preenchendo os campos com os dados encontrados
-                    self.TipoProdutoEntry.insert(0, tipo_produto)
-                    self.VoltagemEntry.insert(0, voltagem)
-                    self.MarcaEntry.insert(0, marca)
-                    self.QuantidadeEntry.insert(0, quantidade)
-                    self.PrecoEntry.insert(0, preco)
-                    self.DataProdutoEntry.insert(0, data)
-                    self.combo_box_forn.set(nome_fornecedor)  # Nome do fornecedor
-                else:
-                    messagebox.showerror("Erro", "Produto não encontrado")
-                    self.LimparCampos()
+        if not id_pedido:
+            messagebox.showerror("Erro", "Por favor, insira um ID para buscar.")
+            return
 
-        def alterarproduto():
-            idproduto = self.IdProdutoEntry.get()
-            tipo = self.TipoProdutoEntry.get()
-            voltagem = self.VoltagemEntry.get()
-            marca = self.MarcaEntry.get()
-            quantidade = self.QuantidadeEntry.get()
-            preco = self.PrecoEntry.get()
-            data = self.DataProdutoEntry.get()
-            fornecedor = self.combo_box_forn.get()
+        try:
+            dados = self.db.buscar_pedido_por_id(id_pedido)
 
-            # Dividir a string por espaços
-            partes = fornecedor.split()
+            if not dados:
+                messagebox.showinfo("Informação", "Nenhum pedido encontrado com este ID.")
+                return
 
-            # Separar o número e o texto
-            numeros = [parte for parte in partes if parte.isdigit()]
-            texto_sem_numeros = " ".join([parte for parte in partes if not parte.isdigit()])
+            self.combo_box_cliente.set(self.formatar_combobox(dados[1], dados[0]))
+            self.combo_box_prod.set(self.formatar_combobox(dados[3], dados[2]))
+            self.combo_box_func.set(self.formatar_combobox(dados[5], dados[4]))
+            self.combo_box_forn.set(self.formatar_combobox(dados[7], dados[6]))
 
-            # Exibir os resultados
-            print("Números encontrados:", numeros)
-            print("Texto sem números:", texto_sem_numeros)
+            self.QtdeEntry.delete(0, END)
+            self.QtdeEntry.insert(0, str(dados[8]))
 
-            cod_fornecedor = numeros[0]
+        except Exception as e:
+            messagebox.showerror("Erro", f"Erro ao buscar pedido: {str(e)}")
 
+    def formatar_combobox(self, nome, id_item):
+        return f"{nome} (ID: {id_item})"
 
-            if "" in [idproduto, tipo, voltagem, marca, quantidade, preco, data,cod_fornecedor]:
-                messagebox.showerror(title="Erro de Atualização", message="PREENCHA TODOS OS CAMPOS")
-            else:
-                db = Database()
-                db.alterarproduto(idproduto, tipo, voltagem, marca, quantidade, preco, data,cod_fornecedor)
-                messagebox.showinfo("Sucesso", "Produto atualizado com sucesso!")
+    def extrair_id_combobox(self, texto_combobox):
+        try:
+            inicio = texto_combobox.find("(ID: ") + 5
+            fim = texto_combobox.find(")", inicio)
+            if inicio > 4 and fim > inicio:
+                return int(texto_combobox[inicio:fim])
+            return None
+        except:
+            return None
 
-        def excluirproduto():
-            idproduto = self.IdProdutoEntry.get()
-            if idproduto == "":
-                messagebox.showerror(title="Erro de Busca", message="PREENCHA O CAMPO DE ID")
-            else:
-                db = Database()
-                db.removerproduto(idproduto)
-                messagebox.showinfo("Sucesso", "Produto excluído com sucesso!")
+    def alterarproduto(self):
+        id_pedido = self.IdProdutoEntry.get()
+        cliente = self.combo_box_cliente.get()
+        produto = self.combo_box_prod.get()
+        funcionario = self.combo_box_func.get()
+        quantidade = self.QtdeEntry.get()
+        fornecedor = self.combo_box_forn.get()
 
+        if "" in [id_pedido, cliente, produto, funcionario, quantidade, fornecedor]:
+            messagebox.showerror("Erro no Registro", "PREENCHA TODOS OS CAMPOS")
+            return
 
+        cod_cliente = self.extrair_id_combobox(cliente)
+        cod_produto = self.extrair_id_combobox(produto)
+        cod_funcionario = self.extrair_id_combobox(funcionario)
+        cod_fornecedor = self.extrair_id_combobox(fornecedor)
 
+        if None in [cod_cliente, cod_produto, cod_funcionario, cod_fornecedor]:
+            messagebox.showerror("Erro", "Um ou mais campos possuem valores inválidos.")
+            return
 
-        def RegistrarNoBanco_Pedido():
-            cliente= self.combo_box_cliente.get()
-            produto = self.combo_box_prod.get()
-            funcionario = self.combo_box_func.get()
-            quantidade = self.QtdeEntry.get()
-            fornecedor = self.combo_box_forn.get()
+        try:
+            self.db.alterar_pedido(id_pedido, cod_cliente, cod_produto, cod_funcionario, quantidade, cod_fornecedor)
+            messagebox.showinfo("Sucesso", "Pedido alterado com sucesso!")
+            self.LimparCampos()
+            self.atualizar_comboboxes()
+        except Exception as e:
+            messagebox.showerror("Erro", f"Falha ao alterar pedido: {str(e)}")
 
-            # Dividir a string por espaços
-            
+    def excluirproduto(self):
+        id_pedido = self.IdProdutoEntry.get()
 
-            if "" in [cliente, produto, funcionario, quantidade, fornecedor]:
-                messagebox.showerror(title="Erro no Registro", message="PREENCHA TODOS OS CAMPOS")
-            else:
-                db = Database()
-                db.RegistrarNoBanco_Produto(cliente, produto, funcionario, quantidade, fornecedor)
-                messagebox.showinfo("Sucesso", "Produto registrado com sucesso!")
+        if not id_pedido:
+            messagebox.showerror("Erro", "Por favor, insira um ID para excluir.")
+            return
+
+        if messagebox.askyesno("Confirmação", "Tem certeza que deseja excluir este pedido?"):
+            try:
+                self.db.excluir_pedido(id_pedido)
+                messagebox.showinfo("Sucesso", "Pedido excluído com sucesso!")
                 self.LimparCampos()
+                self.atualizar_comboboxes()
+            except Exception as e:
+                messagebox.showerror("Erro", f"Falha ao excluir pedido: {str(e)}")
 
-        # Botões
-        Button(self.main_frame, text="CADASTRAR", width=15, command=RegistrarNoBanco_Pedido).place(x=80, y=300)
-        Button(self.main_frame, text="LIMPAR", width=15, command=self.LimparCampos).place(x=250, y=300)
-        Button(self.main_frame, text="ALTERAR", width=15, command=alterarproduto).place(x=80, y=340)
-        Button(self.main_frame, text="EXCLUIR", width=15, command=excluirproduto).place(x=250, y=340)
-        Button(self.main_frame, text="BUSCAR", width=15, command=buscarproduto).place(x=500, y=90)
-        Button(self.main_frame, text="Voltar ao menu", width=15, command=self.juntar_funcoes).place(x=650, y=90)
+    def RegistrarNoBanco_Pedido(self):
+        cliente = self.combo_box_cliente.get()
+        produto = self.combo_box_prod.get()
+        funcionario = self.combo_box_func.get()
+        quantidade = self.QtdeEntry.get()
+        fornecedor = self.combo_box_forn.get()
+
+        if "" in [cliente, produto, funcionario, quantidade, fornecedor]:
+            messagebox.showerror("Erro no Registro", "PREENCHA TODOS OS CAMPOS")
+            return
+
+        cod_cliente = self.extrair_id_combobox(cliente)
+        cod_produto = self.extrair_id_combobox(produto)
+        cod_funcionario = self.extrair_id_combobox(funcionario)
+        cod_fornecedor = self.extrair_id_combobox(fornecedor)
+
+        if None in [cod_cliente, cod_produto, cod_funcionario, cod_fornecedor]:
+            messagebox.showerror("Erro", "Um ou mais campos possuem valores inválidos.")
+            return
+
+        try:
+            self.db.RegistrarNoBanco_Pedido(cod_cliente, cod_produto, cod_funcionario, quantidade, cod_fornecedor)
+            messagebox.showinfo("Sucesso", "Pedido registrado com sucesso!")
+            self.LimparCampos()
+            self.atualizar_comboboxes()
+        except Exception as e:
+            messagebox.showerror("Erro", f"Falha ao registrar pedido: {str(e)}")
 
     def LimparCampos(self):
-        self.TipoProdutoEntry.delete(0, END)
-        self.VoltagemEntry.delete(0, END)
-        self.MarcaEntry.delete(0, END)
-        self.QuantidadeEntry.delete(0, END)
-        self.PrecoEntry.delete(0, END)
-        self.DataProdutoEntry.delete(0, END)
         self.IdProdutoEntry.delete(0, END)
+        self.QtdeEntry.delete(0, END)
         self.combo_box_forn.set("Selecione um fornecedor")
+        self.combo_box_prod.set("Selecione um produto")
+        self.combo_box_cliente.set("Selecione um cliente")
+        self.combo_box_func.set("Selecione um funcionário")
 
     def voltar_menu(self):
         self.root.destroy()
         from tela_ADM import TeldACASTRO
-        root = Tk()
-        TeldACASTRO(root)
+        novo_root = Tk()
+        TeldACASTRO(novo_root)
 
     def juntar_funcoes(self):
         self.LimparCampos()
@@ -190,12 +206,5 @@ class AbrirProduto_adm:
 
 if __name__ == "__main__":
     jan = Tk()
-    jan.title("USUARIO - PRODUTO")
-    jan.geometry("800x400")
-    jan.configure(background="#002333")
-    jan.resizable(width=False, height=False)
     app = AbrirProduto_adm(jan)
-    logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
-    LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
-    LogoLabel.place(x=480, y=180) # Posiciona o label no frame esquerdo
     jan.mainloop()

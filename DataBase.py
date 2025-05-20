@@ -38,10 +38,83 @@ class Database:
         );''')
     #DataBase Fornecedor
         self.conn.commit() #Confirma a criação da tabela
+#-------------------------------------------------------------------------------------------------------------------------#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------PEDIDO-------------------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    def RegistrarNoBancoCompra(self,idcompra,idcliente,id_funcionario,data_compra):
-        self.cursor.execute("INSERT INTO compra (idcompra, idcliente, id_funcionario, data_compra) VALUES (%s ,%s, %s, %s)",(idcompra, idcliente, id_funcionario, data_compra)) # Insere os dados do usuario na tabela
-        self.conn.commit() # Confirma a inseção dos dados
+     # ------------------- COMBOS (corrigidos com texto formatado) -------------------
+
+        '''cod_cliente, cod_produto, cod_funcionario, quantidade, cod_fornecedor'''
+    def RegistrarNoBanco_Pedido(self, idcliente, idproduto, idfuncionario, quantidade, idfornecedor):
+        try:
+            self.conectar()  # Certifique-se de que este método conecta ao banco
+            cursor = self.conn.cursor()
+
+            sql = """
+                INSERT INTO compra (idcliente, idproduto, idfuncionario, quantidade, idfornecedor)
+                VALUES (%s, %s, %s, %s, %s)
+            """
+            valores = (idcliente, idproduto, idfuncionario, quantidade, idfornecedor)
+
+            cursor.execute(sql, valores)
+            self.conn.commit()
+
+            cursor.close()
+            self.desconectar()  # Se houver método de desconexão, chame aqui também
+
+        except Exception as e:
+            print("Erro ao registrar pedido:", e)
+            raise e
+
+
+
+    def buscar_pedido_por_id(self, id_compra):
+        query = """
+            SELECT cl.idcliente, cl.nome,
+                pr.idproduto, pr.tipo,
+                f.idfuncionario, f.nome,
+                fr.idfornecedor, fr.fornecedores,
+                co.quantidade
+            FROM compra co
+            JOIN cliente cl ON cl.idcliente = co.cod_cliente
+            JOIN produto pr ON pr.idproduto = co.cod_produto
+            JOIN funcionario f ON f.idfuncionario = co.cod_funcionario
+            JOIN fornecedor fr ON fr.idfornecedor = co.cod_fornecedor
+            WHERE co.cod_compra = %s
+        """
+        self.cursor.execute(query, (id_compra,))
+        return self.cursor.fetchone()
+
+
+
+
+    def alterar_pedido(self, id_pedido, id_cliente, id_produto, id_funcionario, quantidade, id_fornecedor):
+        query = """
+        UPDATE compra 
+        SET cod_cliente = %s,
+            cod_produto = %s,
+            cod_funcionario = %s,
+            quantidade = %s,
+            cod_fornecedor = %s
+        WHERE cod_compra = %s
+        """
+        self.cursor.execute(query, (id_cliente, id_produto, id_funcionario, quantidade, id_fornecedor, id_pedido))
+        self.conn.commit()
+
+    def excluir_pedido(self, id_pedido):
+        """Remove um pedido do banco de dados"""
+        query = "DELETE FROM compra WHERE cod_compra = %s"
+        try:
+            self.cursor.execute(query, (id_pedido,))
+            self.conn.commit()
+            return True
+        except Exception as e:
+            self.conn.rollback()
+            print(f"Erro ao excluir pedido: {e}")
+            return False
+
+
+
 
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

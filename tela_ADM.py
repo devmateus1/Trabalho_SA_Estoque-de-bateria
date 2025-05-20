@@ -60,6 +60,12 @@ class TeldACASTRO:
                                   command=self.CRUD_cliente)
         self.Funcionario.pack(pady=8)
 
+        self.Funcionario = Button(self.main_frame, text="ADM - Fazer pedido", font=self.button_font,
+                                  bg="#0078D7", fg="white", activebackground="#0063B1",
+                                  activeforeground="white", borderwidth=0, width=25, pady=10,
+                                  command=self.pedido)
+        self.Funcionario.pack(pady=8)
+
         Button(self.main_frame, text="LOGOUT", width=15, bg="#0078D7", fg="white",
             command=self.voltar_login).pack(pady=20)
         # Rodapé
@@ -122,6 +128,14 @@ class TeldACASTRO:
         root = Tk()
         root.geometry("800x400")
         Abrir_Cliente(root)
+        root.mainloop()
+
+    def pedido(self):
+        self.root.destroy()
+        from pedido import AbrirPedido_adm
+        root = Tk()
+        root.geometry("800x400")
+        AbrirPedido_adm(root)
         root.mainloop()
 
     def voltar_menu(self):
