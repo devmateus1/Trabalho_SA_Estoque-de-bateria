@@ -3,7 +3,7 @@ from tkinter import messagebox
 from tkinter import ttk
 from DataBase import Database
 
-class AbrirProduto_adm:
+class AbrirPedido_adm:
     def __init__(self, root):
         self.root = root
         self.root.title("USUÁRIO - PRODUTO")
@@ -210,5 +210,5 @@ class AbrirProduto_adm:
 
 if __name__ == "__main__":
     jan = Tk()
-    app = AbrirProduto_adm(jan)
+    app = AbrirPedido_adm(jan)
     jan.mainloop()
