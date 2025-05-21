@@ -223,15 +223,26 @@ class Database:
             self.conn.rollback()  # Desfaz a transação em caso de erro
             print(f"Ocorreu um erro: {e}")
 
-    def alterarproduto(self, idproduto, tipo, voltagem, marca, quantidade, preco, data,cod_fornecedor):
-        conn = get_connection()
-        cursor = conn.cursor()
-        cursor.execute("UPDATE produto SET tipo=%s, voltagem=%s, marca=%s, quantidade=%s, preco=%s, data=%s, idfornecedor=%s WHERE idproduto=%s", 
-                       (tipo, voltagem, marca, quantidade, preco, data, cod_fornecedor,idproduto))  # Inserir dados
-        conn.commit()  # Confirmar a inserção
-        conn.close()
-        cursor.close()
-        
+    def alterarproduto(self, idproduto, tipo, voltagem, marca, quantidade, preco, data, cod_fornecedor):
+        try:
+            query = """
+                UPDATE produto 
+                SET tipo = %s,
+                    voltagem = %s,
+                    marca = %s,
+                    quantidade = %s,
+                    preco = %s,
+                    data = %s,
+                    idfornecedor = %s
+                WHERE idproduto = %s
+            """
+            valores = (tipo, voltagem, marca, quantidade, preco, data, cod_fornecedor, idproduto)
+            self.cursor.execute(query, valores)
+            self.conn.commit()
+        except Exception as e:
+            self.conn.rollback()
+            print(f"Erro ao alterar produto: {e}")
+
     #Fazer login
     def FazerLogin(self, usuario, senha):
         self.cursor.execute("""SELECT * FROM usuario WHERE usuario = %s AND senha = %s""", (usuario, senha))
