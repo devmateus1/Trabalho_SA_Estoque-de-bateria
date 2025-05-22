@@ -243,6 +243,13 @@ class Database:
             self.conn.rollback()
             print(f"Erro ao alterar produto: {e}")
 
+    def alterar_quantidade_produto(self, idproduto, nova_qtde):
+        cursor = self.conn.cursor()
+        sql = "UPDATE produto SET quantidade = %s WHERE idproduto = %s"
+        cursor.execute(sql, (nova_qtde, idproduto))
+        self.conn.commit()
+
+
     #Fazer login
     def FazerLogin(self, usuario, senha):
         self.cursor.execute("""SELECT * FROM usuario WHERE usuario = %s AND senha = %s""", (usuario, senha))
