@@ -87,13 +87,13 @@ class TeldACASTRO:
         self.root.destroy()
         from Produto_adm import AbrirProduto_adm
         root = Tk()
-        root.geometry("800x400")
+        root.geometry("800x500")
         AbrirProduto_adm(root)
         logo = PhotoImage(file="icon/_SLA_.png") # Carrega a imagem do logo
         LogoLabel = Label(image=logo, bg="#002333") # Cria um label para a imagem do logo
         LogoLabel.place(x=490, y=180) # Posiciona o label no frame esquerdo
         # Centraliza a janela principal também
-        self.center_window(root, 800, 600)
+        self.center_window(root, 800, 500)
 
         root.mainloop()
 

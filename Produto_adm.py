@@ -40,6 +40,10 @@ class AbrirProduto_adm:
         self.IdProdutoEntry = ttk.Entry(self.main_frame, width=30)
         self.IdProdutoEntry.place(x=500, y=50)
 
+        Label(self.main_frame, text="Digite a quantidade que quer sub/somar :", bg="#002333", fg="white").place(x=30, y=400)
+        self.ManipularEntry = ttk.Entry(self.main_frame, width=30)
+        self.ManipularEntry.place(x=250, y=400)
+
         Label(self.main_frame, text="Fornecedor:", bg="#002333", fg="white").place(x=400, y=130)
         db = Database()
         fornecedores = db.buscar_nome_fornecedor()
@@ -54,6 +58,54 @@ class AbrirProduto_adm:
         Button(self.main_frame, text="EXCLUIR", width=15, command=self.excluirproduto).place(x=250, y=340)
         Button(self.main_frame, text="BUSCAR", width=15, command=self.buscarproduto).place(x=500, y=90)
         Button(self.main_frame, text="Voltar ao menu", width=15, command=self.juntar_funcoes).place(x=650, y=90)
+        Button(self.main_frame, text="Acresentar", width=15, command=self.acresentar).place(x=230, y=450)
+        Button(self.main_frame, text="Reduzir", width=15, command=self.reduzir).place(x=350, y=450)
+
+    def atualizar_quantidade(self, nova_quantidade):
+        idproduto = self.IdProdutoEntry.get()
+        if idproduto == "":
+            messagebox.showerror("Erro", "Informe o ID do produto.")
+            return
+
+        try:
+            db = Database()
+            db.alterar_quantidade_produto(idproduto, nova_quantidade)
+            messagebox.showinfo("Sucesso", "Quantidade atualizada com sucesso!")
+            self.QuantidadeEntry.delete(0, END)
+            self.QuantidadeEntry.insert(0, str(nova_quantidade))
+            self.ManipularEntry.delete(0, END)
+        except Exception as e:
+            messagebox.showerror("Erro", f"Erro ao atualizar quantidade: {str(e)}")
+
+    def acresentar(self):
+        try:
+            atual = int(self.QuantidadeEntry.get())
+            adicionar = int(self.ManipularEntry.get())
+            nova_qtde = atual + adicionar
+            self.atualizar_quantidade(nova_qtde)
+        except ValueError:
+            messagebox.showerror("Erro", "Os campos devem conter números inteiros.")
+
+    def reduzir(self):
+        try:
+            atual = int(self.QuantidadeEntry.get())
+            reduzir = int(self.ManipularEntry.get())
+
+            if reduzir > atual:
+                messagebox.showerror("Erro", "Não é possível reduzir mais do que o estoque atual.")
+                return
+
+            nova_qtde = atual - reduzir
+            self.atualizar_quantidade(nova_qtde)
+        except ValueError:
+            messagebox.showerror("Erro", "Os campos devem conter números inteiros.")
+
+
+
+
+
+
+
 
     def LimparCampos(self):
         self.TipoProdutoEntry.delete(0, END)
@@ -180,7 +232,7 @@ class AbrirProduto_adm:
 if __name__ == "__main__":
     jan = Tk()
     jan.title("USUARIO - PRODUTO")
-    jan.geometry("800x400")
+    jan.geometry("800x500")
     jan.configure(background="#002333")
     jan.resizable(width=False, height=False)
     app = AbrirProduto_adm(jan)

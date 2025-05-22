@@ -174,28 +174,75 @@ class LoginSystem:
             if verify_adm:
                 messagebox.showinfo(title="INFO LOGIN", message="Acesso Confirmado, Bem-vindo administrador!")
                 from tela_ADM import TeldACASTRO
-                self.root.destroy()  # Fecha a tela atual, se estiver dentro de uma classe
+                self.root.destroy()
                 root_menu = Tk()
                 TeldACASTRO(root_menu)
                 root_menu.mainloop()
-                return
+                return  # PARA AQUI!
 
-            # Se não for admin, verifica na tabela 'usuario'
+            # Verifica na tabela 'usuario'
             db.cursor.execute("SELECT * FROM usuario WHERE usuario = %s AND senha = %s", (usuario, senha))
             verify_user = db.cursor.fetchone()
 
             if verify_user:
                 messagebox.showinfo(title="INFO LOGIN", message="Acesso Confirmado, Bem-vindo usuário!")
-                from tela_de_usuario import TeldACASTRO  # Corrigido o nome
+                from tela_de_usuario import TeldACASTRO
                 self.root.destroy()
                 root_menu = Tk()
                 TeldACASTRO(root_menu)
                 root_menu.mainloop()
-            else:
-                messagebox.showinfo(title="INFO LOGIN", message="Acesso Negado. Verifique se está cadastrado no sistema!")
+                return  # PARA AQUI!
+
+            # Verifica na tabela 'loginrh'
+            db.cursor.execute("SELECT * FROM loginrh WHERE login = %s AND senha = %s", (usuario, senha))
+            verify_rh = db.cursor.fetchone()
+
+            if verify_rh:
+                messagebox.showinfo(title="INFO LOGIN", message="Acesso Confirmado, Bem-vindo agente de RH!")
+                self.root.destroy()
+                from crudfuncRH import TelaGeral
+                root = Tk()
+                root.geometry("800x400")
+                TelaGeral(root)
+                root.logo = PhotoImage(file="icon/_SLA_.png")
+                LogoLabel = Label(root, image=root.logo, bg="#002333")
+                LogoLabel.place(x=490, y=150)
+                root.mainloop()
+                return  # PARA AQUI!
+
+            # Verifica na tabela 'loginatendente'
+            db.cursor.execute("SELECT * FROM loginatendente WHERE login = %s AND senha = %s", (usuario, senha))
+            verify_atendente = db.cursor.fetchone()
+
+            if verify_atendente:
+                messagebox.showinfo(title="INFO LOGIN", message="Acesso Confirmado, Bem-vindo atendente!")
+                self.root.destroy()
+                from tela_atendente import TeldACASTRO
+                root = Tk()
+                root.geometry("800x200")
+                TeldACASTRO(root)
+                root.mainloop()
+                return  # PARA AQUI!
+            
+            db.cursor.execute("SELECT * FROM loginlogistica WHERE login = %s AND senha = %s", (usuario, senha))
+            verify_log = db.cursor.fetchone()
+
+            if verify_log:
+                messagebox.showinfo(title="INFO LOGIN", message="Acesso Confirmado, Bem-vindo controlador logístico!")
+                self.root.destroy()
+                from tela_logistica import TeldACASTRO
+                root = Tk()
+                root.geometry("800x200")
+                TeldACASTRO(root)
+                root.mainloop()
+                return  # PARA AQUI!
+
+            # Se nenhum login for validado
+            messagebox.showinfo(title="INFO LOGIN", message="Acesso Negado. Verifique se está cadastrado no sistema!")
 
         except Exception as e:
             messagebox.showerror(title="Erro", message=f"Ocorreu um erro: {str(e)}")
+
 
 
 

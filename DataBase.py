@@ -252,6 +252,14 @@ class Database:
         self.cursor.execute("SELECT tipo, marca,voltagem,preco, idproduto FROM produto")
         resultados = self.cursor.fetchall()
         return [(tipo,marca,voltagem,preco ,idf) for tipo,marca,voltagem ,preco,idf in resultados if tipo is not None]
+    
+    def alterar_quantidade_produto(self, idproduto, nova_quantidade):
+        cursor = self.conn.cursor()
+        sql = "UPDATE produto SET quantidade = %s WHERE idproduto = %s"
+        cursor.execute(sql, (nova_quantidade, idproduto))
+        self.conn.commit()
+
+
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------CLIENTE----------------------------------------------------------------------------------------------------------------
@@ -291,22 +299,27 @@ class Database:
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
      
-class login:
+import mysql.connector
+
+class Login:
     def __init__(self):
-        # Conectar ao banco de dados (exemplo com psycopg2, adapte conforme necessário)
-        self.connection =mysql.connector.connect(
-            host="localhost",
-            database="trabalho_sa",
-            user="root",
-            password=""
-        )
-        self.cursor = self.connection.cursor()  # Criação do cursor
-    
+        try:
+            self.connection = mysql.connector.connect(
+                host="localhost",
+                database="trabalho_sa",
+                user="root",
+                password=""
+            )
+            self.cursor = self.connection.cursor()
+        except mysql.connector.Error as err:
+            print(f"Erro ao conectar ao banco de dados: {err}")
+            self.connection = None
+            self.cursor = None
+
     def __del__(self):
-        # Fechar a conexão com o banco de dados ao destruir o objeto
-        if self.cursor:
+        if hasattr(self, 'cursor') and self.cursor:
             self.cursor.close()
-        if self.connection:
+        if hasattr(self, 'connection') and self.connection:
             self.connection.close()
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
