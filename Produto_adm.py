@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
-from DataBase import Database
+#from DataBase import Database
 
 class AbrirProduto_adm:
     def __init__(self, root):
@@ -45,11 +45,11 @@ class AbrirProduto_adm:
         self.ManipularEntry.place(x=250, y=400)
 
         Label(self.main_frame, text="Fornecedor:", bg="#002333", fg="white").place(x=400, y=130)
-        db = Database()
-        fornecedores = db.buscar_nome_fornecedor()
-        self.combo_box_forn = ttk.Combobox(self.main_frame, values=fornecedores, state="readonly", width=27)
-        self.combo_box_forn.place(x=500, y=130)
-        self.combo_box_forn.set("Selecione um fornecedor")
+        #db = Database()
+        #fornecedores = db.buscar_nome_fornecedor()
+       # self.combo_box_forn = ttk.Combobox(self.main_frame, values=fornecedores, state="readonly", width=27)
+        #self.combo_box_forn.place(x=500, y=130)
+       # self.combo_box_forn.set("Selecione um fornecedor")
 
         # Botões
         Button(self.main_frame, text="CADASTRAR", width=15, command=self.RegistrarNoBanco_Produto).place(x=80, y=300)
